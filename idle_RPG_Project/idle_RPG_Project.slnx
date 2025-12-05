@@ -1,0 +1,5 @@
+﻿<Solution>
+  <Project Path="CAH.UnityGoogleSheets.csproj" />
+  <Project Path="CAH.UnityGoogleSheets.Editor.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+</Solution>
