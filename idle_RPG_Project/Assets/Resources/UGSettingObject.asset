@@ -15,8 +15,8 @@ MonoBehaviour:
   ScriptURL: https://script.google.com/macros/s/AKfycbwPVEKuayTx69um7pljRCoS6sGGbVcEzO9YG0eyzQWMkBeXZEv1Umlu9IIoXpellkmnFQ/exec
   ScriptPassword: default
   GoogleFolderID: 1EylJezhxG-hGY-6ffsclFDVIkMytVsH0
-  GenerateCodePath: Assets/UGS.Generated/Scripts/
-  DataPath: Assets/UGS.Generated/Resources/
+  GenerateCodePath: Assets/02_Data/UnityGoogleSheet/Scripts
+  DataPath: Assets/02_Data/UnityGoogleSheet/Resources
   RuntimeDataPath: UGS/UGS.Data/
   CDN_URL: 
   base64: 0
