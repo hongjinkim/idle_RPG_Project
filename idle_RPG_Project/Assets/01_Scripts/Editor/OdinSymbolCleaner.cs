@@ -1,6 +1,7 @@
-using UnityEngine;
-using UnityEditor;
 using System.Linq;
+using UnityEditor;
+using UnityEditor.Build;
+using UnityEngine;
 
 [InitializeOnLoad]
 public class OdinSymbolCleaner
@@ -9,18 +10,14 @@ public class OdinSymbolCleaner
     {
         EditorApplication.delayCall += RemoveOdinSymbols;
     }
+
     private static void RemoveOdinSymbols()
     {
-        bool odinInstalled = UnityEditor.AssetDatabase.FindAssets("OdinInspector").Length > 0;
+        bool odinInstalled = AssetDatabase.FindAssets("OdinInspector").Length > 0;
         if (odinInstalled)
-        {
             return;
-        }
 
-        var currentSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
-        var symbolsList = currentSymbols.Split(';').ToList();
-        bool symbolsChanged = false;
-        string[] odinSymbols = new string[]
+        string[] odinSymbols =
         {
             "ODIN_INSPECTOR",
             "ODIN_INSPECTOR_3",
@@ -36,20 +33,38 @@ public class OdinSymbolCleaner
             "ODIN_INSPECTOR_13",
             "ODIN_INSPECTOR_14"
         };
-        foreach (var symbol in odinSymbols)
+
+
+        var allTargets = System.Enum.GetValues(typeof(NamedBuildTarget)).Cast<NamedBuildTarget>();
+
+        foreach (var target in allTargets)
         {
-            if (symbolsList.Contains(symbol))
+            try
             {
-                symbolsList.Remove(symbol);
-                symbolsChanged = true;
+                string symbols = PlayerSettings.GetScriptingDefineSymbols(target);
+                if (string.IsNullOrEmpty(symbols))
+                    continue;
+
+                var list = symbols.Split(';').ToList();
+                bool changed = false;
+
+                foreach (string os in odinSymbols)
+                {
+                    if (list.Remove(os))
+                        changed = true;
+                }
+
+                if (changed)
+                {
+                    string newSymbols = string.Join(";", list);
+                    PlayerSettings.SetScriptingDefineSymbols(target, newSymbols);
+                    Debug.Log($"[OdinSymbolCleaner] Removed Odin symbols from {target.TargetName}");
+                }
+            }
+            catch
+            {
+                // 지원되지 않는 플랫폼은 무시
             }
         }
-        if (symbolsChanged)
-        {
-            string newSymbols = string.Join(";", symbolsList);
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, newSymbols);
-            Debug.Log("Odin Inspector symbols removed from scripting define symbols.");
-        }
     }
-
 }
