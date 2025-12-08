@@ -38,36 +38,43 @@ public abstract class CharacterBase : MonoBehaviour
     {
         if (State == EntityState.Dead) return;
 
-        // 1. 타겟이 없거나 죽었으면 새로 찾기
-        if (target == null || target.State == EntityState.Dead || !target.gameObject.activeSelf)
-        {
-            FindTarget();
-            if (target == null)
-            {
-                State = EntityState.Idle; // 적이 없으면 대기 (혹은 이동)
-                return;
-            }
-        }
+        // 1. 타겟 유효성 체크 및 갱신
+        CheckTarget();
 
-        // 2. 거리 체크
-        float distSqr = (target.transform.position - transform.position).sqrMagnitude;
+        // 2. 행동 결정
+        float distSqr = (target != null) ? (target.transform.position - transform.position).sqrMagnitude : float.MaxValue;
         float rangeSqr = attackRange * attackRange;
 
-        if (distSqr <= rangeSqr)
+        if (target != null && distSqr <= rangeSqr)
         {
-            // 공격 사거리 안
+            // 사거리 안 -> 공격
             State = EntityState.Attack;
             ProcessAttack();
         }
         else
         {
-            // 사거리 밖 -> 이동
+            // 사거리 밖 or 타겟 없음 -> 이동
             State = EntityState.Move;
-            MoveToTarget(deltaTime);
+            MoveForward(deltaTime);
         }
     }
 
     // --- 행동 로직 (자식 클래스에서 오버라이드 가능) ---
+    protected virtual void CheckTarget()
+    {
+        // 타겟이 죽거나 비활성화되면 null 처리
+        if (target != null && (target.State == EntityState.Dead || !target.gameObject.activeSelf))
+        {
+            target = null;
+        }
+
+        // 타겟이 없을 때만 새로 찾기 시도 (Slayer는 가장 가까운 적, Monster는 Slayer)
+        if (target == null) FindTarget();
+    }
+    protected virtual void MoveForward(float deltaTime)
+    {
+        // 자식 클래스에서 override (슬레이어: 오른쪽, 몬스터: 왼쪽)
+    }
     protected abstract void FindTarget(); // 아군/적군 검색 로직이 다르므로 abstract
 
     protected virtual void MoveToTarget(float deltaTime)
