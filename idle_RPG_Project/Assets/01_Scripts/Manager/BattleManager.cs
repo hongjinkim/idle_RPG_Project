@@ -10,6 +10,8 @@ public class BattleManager : BaseManager
 
     [ShowInInspector, ReadOnly]
     private List<Enemy> _enemies = new();
+    [ShowInInspector]
+    public int EnemyCount => _enemies.Count;
 
     protected override async UniTask OnInitialize()
     {

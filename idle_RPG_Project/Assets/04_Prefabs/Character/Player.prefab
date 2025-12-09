@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6711304727946213634}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.91286, y: -0.55617, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37,6 +37,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1170720248812563185
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -82,6 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.12135102, g: 0.1995726, b: 0.9528302, a: 1}
   m_FlipX: 0
@@ -91,7 +93,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3763143274353274730
 MonoBehaviour:
@@ -105,6 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7843b4f01b994bd4f9ec7131b598381a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  _animator: {fileID: 0}
+  _spriteRenderer: {fileID: 0}
   attackRange: 5
   moveSpeed: 3
   attackInterval: 1
