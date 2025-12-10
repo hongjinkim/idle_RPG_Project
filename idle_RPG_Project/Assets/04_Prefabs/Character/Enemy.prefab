@@ -111,7 +111,7 @@ MonoBehaviour:
   attackSpeed: 1
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   attackOffset: {x: 1, y: 0.5}
   attackRadius: 1.5
   maxTargetCount: 3
