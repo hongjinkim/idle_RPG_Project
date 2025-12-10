@@ -69,7 +69,8 @@ namespace Sirenix.OdinInspector
     public class GUIColorAttribute : MockAttribute { public GUIColorAttribute(float r, float g, float b, float a = 1f) : base() { } }
     public class ColorPaletteAttribute : MockAttribute { public ColorPaletteAttribute(string name = null) : base() { } }
     public class PreviewFieldAttribute : MockAttribute { public PreviewFieldAttribute(float height = 0, ObjectFieldAlignment alignment = ObjectFieldAlignment.Left) : base() { } }
-    
+    public class ProgressBarAttribute : MockAttribute { public ProgressBarAttribute(double min, string colorMemberName = null) : base() { } }
+
     // =========================================================================
     // 5. 값 및 유효성 (Values & Validation)
     // =========================================================================

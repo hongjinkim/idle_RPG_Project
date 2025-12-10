@@ -134,13 +134,10 @@ public abstract class CharacterBase : MonoBehaviour
 
         // 애니메이션 트리거 (이벤트로 데미지 줌)
         if (_animator != null) _animator.SetTrigger("Attack");
-        Debug.Log($"{name} attacks {target.name} for {Atk.ToFormattedString(ENumberFormatType.Standard)} Damage!");
-        // 실제 데미지 전달
-        //target.TakeDamage(Atk);
     }
 
     // 애니메이션 이벤트에서 호출될 함수
-    public virtual void OnAttackHitEvent()
+    public virtual void OnAttackEvent()
     {
         Vector2 origin = GetAttackOrigin();
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(origin, attackRadius, enemyLayer);
@@ -184,6 +181,18 @@ public abstract class CharacterBase : MonoBehaviour
 
         // BattleManager에게 죽었다고 알리는 로직은 Event로 처리
         MainSystem.Instance.Battle.OnCharacterDead(this);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // 잘 보이게 빨간색으로 설정
+        Gizmos.color = Color.red;
+
+        // 위 함수를 통해 계산된 '진짜 공격 중심점' 가져오기
+        Vector2 origin = GetAttackOrigin();
+
+        // 그 위치에 공격 반경만큼 원 그리기
+        Gizmos.DrawWireSphere(origin, attackRadius);
     }
 
 }

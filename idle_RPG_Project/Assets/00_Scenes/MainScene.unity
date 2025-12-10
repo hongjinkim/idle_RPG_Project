@@ -434,6 +434,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1170720248812563185, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5599415161465153615, guid: 289e81cce0acb4b45900b5052cc4c6f0, type: 3}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: attackRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: attackInterval
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6711304727946213634, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
       propertyPath: m_Name
       value: Player

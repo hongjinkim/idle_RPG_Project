@@ -15,7 +15,18 @@ public class BattleManager : BaseManager
 
     protected override async UniTask OnInitialize()
     {
+        
         await UniTask.Delay(500);
+    }
+    private void Awake()
+    {
+        // ¾À¿¡¼­ Player °´Ã¼ Ã£±â
+        Player = FindFirstObjectByType<Player>();
+        if (Player == null)
+        {
+            Debug.LogError("BattleManager: Player object not found in the scene!");
+        }
+
     }
 
     private void Update()
