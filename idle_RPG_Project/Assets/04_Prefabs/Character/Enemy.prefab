@@ -37,6 +37,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7390071680800022112
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -79,9 +80,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1227660469
+  m_SortingLayer: 1
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.9529412, g: 0.12156861, b: 0.2149959, a: 1}
   m_FlipX: 0
@@ -91,7 +93,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5380612273377479201
 MonoBehaviour:
@@ -107,7 +108,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   attackRange: 1
   moveSpeed: 5
-  attackInterval: 1
+  attackSpeed: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attackOffset: {x: 1, y: 0.5}
+  attackRadius: 1.5
+  maxTargetCount: 3
+  baseMoveSpeed: 5
+  attackAnimLength: 0.25
+  detectRange: 8
+  wanderRadius: 3
+  wanderWaitTime: 2
+  wanderMoveSpeed: 1.5
 --- !u!61 &5522530437166440070
 BoxCollider2D:
   m_ObjectHideFlags: 0

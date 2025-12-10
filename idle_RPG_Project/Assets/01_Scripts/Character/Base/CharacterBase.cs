@@ -15,7 +15,7 @@ public abstract class CharacterBase : MonoBehaviour
     [ShowInInspector] public BigInteger Atk { get; protected set; }
     [SerializeField] protected float attackRange = 2.0f;
     [SerializeField] protected float moveSpeed = 5.0f;
-    [SerializeField] protected float attackInterval = 1.0f; // 공격 속도 (초)
+    [SerializeField] protected float attackSpeed = 1.0f; // 공격 속도 (초 당 공격 횟수)
 
 
     [Title("상태 & 비주얼")]
@@ -27,6 +27,9 @@ public abstract class CharacterBase : MonoBehaviour
     [SerializeField] private float attackRadius = 1.5f; // 실제 타격 범위
     [SerializeField] private int maxTargetCount = 3;
 
+    [Title("애니메이션")]
+    [SerializeField] protected float baseMoveSpeed = 5.0f;
+    [SerializeField] protected float attackAnimLength = 0.25f;
 
     protected Animator _animator;
     protected SpriteRenderer _spriteRenderer;
@@ -94,12 +97,23 @@ public abstract class CharacterBase : MonoBehaviour
 
         float rangeSqr = attackRange * attackRange;
 
+        float currentInterval = 1.0f / Mathf.Max(0.01f, attackSpeed); // 0 나누기 방지
+        bool isCooldownReady = (Time.time - lastAttackTime >= currentInterval);
+
         // A. 사거리 안 -> 공격
         if (target != null && distSqr <= rangeSqr)
         {
-            State = EntityState.Attack;
-            UpdateAnimation(Vector2.zero); // 멈춤
-            ProcessAttack();
+            if (isCooldownReady)
+            {
+                State = EntityState.Attack;
+                UpdateAnimation(Vector2.zero); // 멈춤
+                ProcessAttack();
+            }
+            else
+            {
+                State = EntityState.Idle;
+                UpdateAnimation(Vector2.zero); // 멈춤
+            }
         }
         // B. 사거리 밖 -> 이동 (타겟이 없으면 각자 방식대로 이동)
         else
@@ -107,6 +121,8 @@ public abstract class CharacterBase : MonoBehaviour
             State = EntityState.Move;
             MoveToTarget(deltaTime);
         }
+
+        SyncAnimationSpeed();
     }
 
     // --- 행동 로직 (자식 클래스에서 오버라이드 가능) ---
@@ -127,13 +143,11 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected virtual void ProcessAttack()
     {
-        // 쿨타임 체크
-        if (Time.time - lastAttackTime < attackInterval) return;
-
         lastAttackTime = Time.time;
-
+        
         // 애니메이션 트리거 (이벤트로 데미지 줌)
         if (_animator != null) _animator.SetTrigger("Attack");
+        Debug.Log($"{gameObject.name} attacks {target} with {Atk} damage");
     }
 
     // 애니메이션 이벤트에서 호출될 함수
@@ -181,6 +195,27 @@ public abstract class CharacterBase : MonoBehaviour
 
         // BattleManager에게 죽었다고 알리는 로직은 Event로 처리
         MainSystem.Instance.Battle.OnCharacterDead(this);
+    }
+
+    protected void SyncAnimationSpeed()
+    {
+        if (_animator == null) return;
+
+        // 1. 이동 속도 (변화 없음)
+        float moveMultiplier = moveSpeed / baseMoveSpeed;
+        if (moveMultiplier < 0.1f) moveMultiplier = 1f;
+        _animator.SetFloat("AnimMoveSpeed", moveMultiplier);
+
+        // 2. ★ 공격 속도 배율 계산
+        // 공식: 현재공속 * 애니메이션길이
+        // 설명: 1초짜리 애니를 공속 2.0(0.5초 쿨)에 맞추려면 2배속으로 재생해야 함.
+        //       (1.0 * 2.0 = 2.0배속)
+        float attackMultiplier = attackSpeed * attackAnimLength;
+
+        // 너무 느리게 재생되는 것 방지 (최소 1배속 유지 등 정책 결정 필요)
+        if (attackMultiplier < 1.0f) attackMultiplier = 1.0f;
+
+        _animator.SetFloat("AnimAttackSpeed", attackMultiplier);
     }
 
     private void OnDrawGizmosSelected()
