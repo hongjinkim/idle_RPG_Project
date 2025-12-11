@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.Timeline;
@@ -35,6 +36,8 @@ public abstract class CharacterBase : MonoBehaviour
     protected CharacterBase target;
     protected float lastAttackTime;
     protected float _busyTimer = 0f;
+
+    private float _lastHitEventTime = -1f;
 
     private void Awake()
     {
@@ -128,7 +131,7 @@ public abstract class CharacterBase : MonoBehaviour
             }
         }
         // B. 사거리 밖 -> 이동 (타겟이 없으면 각자 방식대로 이동)
-        else
+        else if(_busyTimer <=0)
         {
             State = EntityState.Move;
             MoveToTarget(deltaTime);
@@ -164,17 +167,32 @@ public abstract class CharacterBase : MonoBehaviour
     // 애니메이션 이벤트에서 호출될 함수
     public virtual void OnAttackEvent()
     {
+        // 1. 마지막 공격 이벤트로부터 0.1초도 안 지났으면 무시 (버그 차단)
+        // (프레임 단위 중복, 애니메이션 튀는 현상 방지)
+        if (Time.time - _lastHitEventTime < 0.1f) return;
+
+        _lastHitEventTime = Time.time; // 시간 갱신
+
         Vector2 origin = GetAttackOrigin();
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(origin, attackRange, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(origin, attackRange * 0.5f, enemyLayer);
+
+        // 중복 방지용 리스트
+        HashSet<CharacterBase> uniqueEnemies = new HashSet<CharacterBase>();
 
         int count = 0;
         foreach (var hit in hitEnemies)
         {
             if (count >= maxTargetCount) break;
 
-            Enemy enemy = hit.GetComponent<Enemy>();
-            if (enemy != null && enemy.gameObject.activeSelf)
+            CharacterBase enemy = hit.GetComponent<CharacterBase>();
+
+            // 유효한 적이고, 아직 때린 목록에 없다면
+            if (enemy != null && enemy.gameObject.activeSelf && !uniqueEnemies.Contains(enemy))
             {
+                // 때린 목록에 추가
+                uniqueEnemies.Add(enemy);
+
+                // 데미지 적용
                 enemy.TakeDamage(Atk);
                 count++;
             }
@@ -189,7 +207,6 @@ public abstract class CharacterBase : MonoBehaviour
 
     public virtual void TakeDamage(BigInteger damage)
     {
-        Debug.Log($"{gameObject.name} took {damage} damage.");
         CurrentHp -= damage;
 
         // (나중에 여기에 피격 이펙트/데미지 텍스트 추가)
