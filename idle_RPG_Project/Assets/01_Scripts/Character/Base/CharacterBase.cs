@@ -20,11 +20,10 @@ public abstract class CharacterBase : MonoBehaviour
 
     [Title("상태 & 비주얼")]
     [ShowInInspector, ReadOnly] public EntityState State { get; protected set; } = EntityState.Idle;
+    protected Vector2 faceDir => (target.transform.position - transform.position).normalized;
 
     [Title("공격 관련")]
-    [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private Vector2 attackOffset = new Vector2(1.0f, 0.5f); // 공격 중심점 오프셋
-    [SerializeField] private float attackRadius = 1.5f; // 실제 타격 범위
+    [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] private int maxTargetCount = 3;
 
     [Title("애니메이션")]
@@ -35,6 +34,7 @@ public abstract class CharacterBase : MonoBehaviour
     protected SpriteRenderer _spriteRenderer;
     protected CharacterBase target;
     protected float lastAttackTime;
+    protected float _busyTimer = 0f;
 
     private void Awake()
     {
@@ -65,17 +65,15 @@ public abstract class CharacterBase : MonoBehaviour
 
         if (isMoving)
         {
-            // 2. Blend Tree 파라미터 전달
-            Vector2 normalizedDir = moveDir.normalized;
 
-            _animator.SetFloat("DirX", normalizedDir.x);
-            _animator.SetFloat("DirY", normalizedDir.y);
+            _animator.SetFloat("DirX", faceDir.x);
+            _animator.SetFloat("DirY", faceDir.y);
 
             // 3. 좌우 반전 (Flip) 처리
             // 오른쪽(X > 0)이면 Flip 끔, 왼쪽(X < 0)이면 Flip 켬
-            if (normalizedDir.x > 0.01f)
+            if (faceDir.x > 0.01f)
                 _spriteRenderer.flipX = false;
-            else if (normalizedDir.x < -0.01f)
+            else if (faceDir.x < -0.01f)
                 _spriteRenderer.flipX = true;
         }
     }
@@ -84,6 +82,19 @@ public abstract class CharacterBase : MonoBehaviour
     public virtual void Tick(float deltaTime)
     {
         if (State == EntityState.Dead) return;
+
+        // 1. 행동 불가 상태인지 체크
+        if (_busyTimer > 0)
+        {
+            _busyTimer -= deltaTime;
+
+            // 공격 중에는 이동 애니메이션 파라미터를 끔
+            if (_animator != null)
+            {
+                _animator.SetBool("IsMoving", false);
+            }
+            return;
+        }
 
         // 1. 타겟 유효성 검사 및 갱신
         CheckTarget();
@@ -108,6 +119,7 @@ public abstract class CharacterBase : MonoBehaviour
                 State = EntityState.Attack;
                 UpdateAnimation(Vector2.zero); // 멈춤
                 ProcessAttack();
+                _busyTimer = attackAnimLength / attackSpeed;
             }
             else
             {
@@ -147,14 +159,13 @@ public abstract class CharacterBase : MonoBehaviour
         
         // 애니메이션 트리거 (이벤트로 데미지 줌)
         if (_animator != null) _animator.SetTrigger("Attack");
-        Debug.Log($"{gameObject.name} attacks {target} with {Atk} damage");
     }
 
     // 애니메이션 이벤트에서 호출될 함수
     public virtual void OnAttackEvent()
     {
         Vector2 origin = GetAttackOrigin();
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(origin, attackRadius, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(origin, attackRange, enemyLayer);
 
         int count = 0;
         foreach (var hit in hitEnemies)
@@ -169,14 +180,16 @@ public abstract class CharacterBase : MonoBehaviour
             }
         }
     }
-    private Vector2 GetAttackOrigin()
+    protected Vector2 GetAttackOrigin()
     {
-        float facingDir = _spriteRenderer.flipX ? -1 : 1;
-        return (Vector2)transform.position + new Vector2(attackOffset.x * facingDir, attackOffset.y);
+        if (_spriteRenderer == null)
+            return (Vector2)transform.position;
+        return (Vector2)transform.position + faceDir * (attackRange * 0.5f);
     }
 
     public virtual void TakeDamage(BigInteger damage)
     {
+        Debug.Log($"{gameObject.name} took {damage} damage.");
         CurrentHp -= damage;
 
         // (나중에 여기에 피격 이펙트/데미지 텍스트 추가)
@@ -227,7 +240,7 @@ public abstract class CharacterBase : MonoBehaviour
         Vector2 origin = GetAttackOrigin();
 
         // 그 위치에 공격 반경만큼 원 그리기
-        Gizmos.DrawWireSphere(origin, attackRadius);
+        Gizmos.DrawWireSphere(origin, attackRange * 0.5f);
     }
 
 }

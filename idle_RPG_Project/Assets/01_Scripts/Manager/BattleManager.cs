@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class BattleManager : BaseManager
 {
     [Title("Main Character")]
-    [ShowInInspector] public Player Player { get; private set; }
+    [ShowInInspector] public Player PlayerCharacter { get; private set; }
 
     [ShowInInspector, ReadOnly]
     private List<Enemy> _enemies = new();
@@ -21,8 +21,8 @@ public class BattleManager : BaseManager
     private void Awake()
     {
         // 씬에서 Player 객체 찾기
-        Player = FindFirstObjectByType<Player>();
-        if (Player == null)
+        PlayerCharacter = FindFirstObjectByType<Player>();
+        if (PlayerCharacter == null)
         {
             Debug.LogError("BattleManager: Player object not found in the scene!");
         }
@@ -32,12 +32,12 @@ public class BattleManager : BaseManager
     private void Update()
     {
         if (!IsInitialized) return;
-        if (Player == null) return;
+        if (PlayerCharacter == null) return;
 
         float dt = Time.deltaTime;
 
         // 1. 플레이어 행동
-        Player.Tick(dt);
+        PlayerCharacter.Tick(dt);
 
         // 2. 몬스터들 행동 (역순 루프: 도중에 죽어서 리스트에서 빠질 수 있으므로)
         for (int i = _enemies.Count - 1; i >= 0; i--)

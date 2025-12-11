@@ -65,7 +65,7 @@ public class EnemySpawner : BaseManager
     private void SpawnEnemy()
     {
         // 플레이어가 없거나 죽었으면 생성 중단
-        if (Main.Battle.Player == null || Main.Battle.Player.State == EntityState.Dead) return;
+        if (Main.Battle.PlayerCharacter == null || Main.Battle.PlayerCharacter.State == EntityState.Dead) return;
 
         // 1. 랜덤 방향 벡터 구하기 (길이 1인 원의 테두리 좌표)
         Vector2 randomDir = Random.insideUnitCircle.normalized;
@@ -74,14 +74,14 @@ public class EnemySpawner : BaseManager
         float randomDist = Random.Range(minSpawnRadius, maxSpawnRadius);
 
         // 3. 최종 생성 위치 계산 (플레이어 위치 기준)
-        Vector2 playerPos = Main.Battle.Player.transform.position;
+        Vector2 playerPos = Main.Battle.PlayerCharacter.transform.position;
         Vector2 spawnPos = playerPos + (Vector2)(randomDir * randomDist);
 
         // 4. 생성 및 초기화
         Enemy newEnemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
 
         // 스탯 설정 (나중에는 스테이지 데이터에 따라 다르게 설정)
-        newEnemy.Setup(100, 10);
+        newEnemy.Setup(200, 10);
 
         // 매니저에 등록
         Main.Battle.RegisterEnemy(newEnemy);
@@ -89,12 +89,12 @@ public class EnemySpawner : BaseManager
 
     private void OnDrawGizmosSelected()
     {
-        if (Application.isPlaying && Main.Battle.Player != null)
+        if (Application.isPlaying && Main.Battle.PlayerCharacter != null)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(Main.Battle.Player.transform.position, minSpawnRadius);
+            Gizmos.DrawWireSphere(Main.Battle.PlayerCharacter.transform.position, minSpawnRadius);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(Main.Battle.Player.transform.position, maxSpawnRadius);
+            Gizmos.DrawWireSphere(Main.Battle.PlayerCharacter.transform.position, maxSpawnRadius);
         }
     }
 }

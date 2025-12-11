@@ -12,6 +12,7 @@ public class MainSystem : MonoBehaviour
     public BattleManager Battle { get; private set; }
     public UIManager UI { get; private set; }
     public EventManager Event { get; private set; }
+    public CameraController Camera { get; private set; }
 
     // 모든 매니저를 담아둘 리스트 (일괄 관리용)
     [ShowInInspector, ReadOnly]
