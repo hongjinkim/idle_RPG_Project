@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Build;
 
 
 public class DefineSymbolManager
@@ -11,7 +12,8 @@ public class DefineSymbolManager
     /// <param name="symbols"></param>
     public static void AddDefineSymbols(params string[] symbols)
     {
-        string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+        
+        string definesString = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup));
         List<string> allDefines = definesString.Split(';').ToList();
         if (allDefines.Count == 0)
         {
@@ -20,8 +22,8 @@ public class DefineSymbolManager
         }
         allDefines.AddRange(symbols.Except(allDefines));
 
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(
-        EditorUserBuildSettings.selectedBuildTargetGroup,
+        PlayerSettings.SetScriptingDefineSymbols(
+        NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup),
         string.Join(";", allDefines.ToArray()));
     }
     /// <summary>
@@ -31,7 +33,7 @@ public class DefineSymbolManager
     /// <returns></returns>
     public static bool IsUsed(string symbol)
     {
-        string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+        string definesString = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup));
         List<string> allDefines = definesString.Split(';').ToList();
         var result = allDefines.Any(x => x == symbol);
         return result;
@@ -42,7 +44,7 @@ public class DefineSymbolManager
     /// <param name="symbols"></param>
     public static void RemoveDefineSymbol(params string[] symbols)
     {
-        string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+        string definesString = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup));
         List<string> allDefines = definesString.Split(';').ToList();
         List<string> newDefines = new List<string>();
         if (allDefines.Count == 0)
@@ -59,8 +61,8 @@ public class DefineSymbolManager
         }
 
 
-        PlayerSettings.SetScriptingDefineSymbolsForGroup(
-        EditorUserBuildSettings.selectedBuildTargetGroup,
+        PlayerSettings.SetScriptingDefineSymbols(
+        NamedBuildTarget.FromBuildTargetGroup(EditorUserBuildSettings.selectedBuildTargetGroup),
         string.Join(";", newDefines.ToArray()));
     }
 }
