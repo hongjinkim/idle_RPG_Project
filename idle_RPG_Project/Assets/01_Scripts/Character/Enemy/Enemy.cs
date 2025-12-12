@@ -17,6 +17,14 @@ public class Enemy: CharacterBase
     private float _waitTimer;
     private bool _isWaiting = false;
 
+    private Poolable poolable;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        poolable = GetComponent<Poolable>();
+    }
+
     // 초기화 시 배회 타이머 리셋
     public override void Setup(System.Numerics.BigInteger hp, System.Numerics.BigInteger atk)
     {
@@ -140,6 +148,14 @@ public class Enemy: CharacterBase
             target = MainSystem.Instance.Battle.PlayerCharacter;
             _isWaiting = false; // 대기 취소
         }
+    }
+
+    protected override void Die()
+    {
+        if (State == EntityState.Dead) return;
+        State = EntityState.Dead;
+        MainSystem.Instance.Battle.OnCharacterDead(this);
+        poolable?.Release();
     }
 
     private void OnDrawGizmosSelected()

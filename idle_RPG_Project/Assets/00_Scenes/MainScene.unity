@@ -469,8 +469,8 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.3921569, g: 0.5843138, b: 0.9294118, a: 1}
-  m_Intensity: 0.5
+  m_Color: {r: 0.6901961, g: 0.7686275, b: 0.8705883, a: 1}
+  m_Intensity: 0.3
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000b59c2c49
@@ -555,6 +555,52 @@ Transform:
   - {fileID: 198842073}
   m_Father: {fileID: 934824119}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &858342219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 858342220}
+  - component: {fileID: 858342221}
+  m_Layer: 0
+  m_Name: Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &858342220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858342219}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 989507998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &858342221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858342219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ce3db1e67df16418848e34759e72ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
+  _gameObj: {fileID: 4762107130967777674, guid: c73274febb5125d41a7991a83f3b9fa5, type: 3}
+  PoolType: 0
 --- !u!1001 &903153173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -566,6 +612,10 @@ PrefabInstance:
     - target: {fileID: 6711304727946213634, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7056842180213753013, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: m_Intensity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8969805327459099353, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -712,7 +762,7 @@ GameObject:
   - component: {fileID: 989507998}
   - component: {fileID: 989507999}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: EnemyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -730,7 +780,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 858342220}
   m_Father: {fileID: 838270860}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &989507999
@@ -745,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8131e60d00396044fa2afaf7c9042fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  enemyPrefab: {fileID: 5380612273377479201, guid: c73274febb5125d41a7991a83f3b9fa5, type: 3}
+  m_Pools: []
   spawnInterval: 2
   maxEnemyCount: 100
   initialSpawnCount: 10

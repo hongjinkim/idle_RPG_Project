@@ -39,7 +39,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     private float _lastHitEventTime = -1f;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         // 컴포넌트 캐싱
         _animator = GetComponent<Animator>();
@@ -207,6 +207,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     public virtual void TakeDamage(BigInteger damage)
     {
+        if (State == EntityState.Dead) return;
         CurrentHp -= damage;
 
         // (나중에 여기에 피격 이펙트/데미지 텍스트 추가)
@@ -220,6 +221,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected virtual void Die()
     {
+        if (State == EntityState.Dead) return;
         State = EntityState.Dead;
         gameObject.SetActive(false);
 

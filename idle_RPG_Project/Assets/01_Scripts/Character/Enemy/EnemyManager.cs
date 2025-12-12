@@ -2,10 +2,15 @@ using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using System.Threading;
 using UnityEngine;
-public class EnemySpawner : BaseManager
+
+public enum EPoolType
+{
+    Enemy
+    
+}
+public class EnemyManager : PoolManager<EnemyManager, EPoolType>
 {
     [Title("Settings")]
-    [SerializeField] private Enemy enemyPrefab; // 프리팹 연결
     [SerializeField] private float spawnInterval = 1.0f; // 젠 시간
     [SerializeField, MinValue(1)] private int maxEnemyCount = 100;
     [SerializeField, MinValue(0)] private int initialSpawnCount = 10;
@@ -19,10 +24,10 @@ public class EnemySpawner : BaseManager
     [ShowInInspector, ReadOnly] private bool _isSpawning = false;
 
     [ShowInInspector, ProgressBar(0, "maxEnemyCount")]
-    private int CurrentCount => Main.Battle != null ? Main.Battle.EnemyCount : 0;
 
     protected override async UniTask OnInitialize()
     {
+        await base.OnInitialize();
         if (initialSpawnCount > 0)
         {
             for (int i = 0; i < initialSpawnCount; i++)
@@ -67,24 +72,24 @@ public class EnemySpawner : BaseManager
         // 플레이어가 없거나 죽었으면 생성 중단
         if (Main.Battle.PlayerCharacter == null || Main.Battle.PlayerCharacter.State == EntityState.Dead) return;
 
-        // 1. 랜덤 방향 벡터 구하기 (길이 1인 원의 테두리 좌표)
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
-        // 2. 랜덤 거리 구하기 (최소 ~ 최대 사이)
         float randomDist = Random.Range(minSpawnRadius, maxSpawnRadius);
 
-        // 3. 최종 생성 위치 계산 (플레이어 위치 기준)
         Vector2 playerPos = Main.Battle.PlayerCharacter.transform.position;
         Vector2 spawnPos = playerPos + (Vector2)(randomDir * randomDist);
 
-        // 4. 생성 및 초기화
-        Enemy newEnemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+        GameObject enemyObj = Pop(EPoolType.Enemy, spawnPos);
 
-        // 스탯 설정 (나중에는 스테이지 데이터에 따라 다르게 설정)
-        newEnemy.Setup(200, 10);
+        if (enemyObj != null)
+        {
+            Enemy newEnemy = enemyObj.GetComponent<Enemy>();
 
-        // 매니저에 등록
-        Main.Battle.RegisterEnemy(newEnemy);
+            newEnemy.Setup(100, 10);
+
+            // 배틀 매니저에 등록 (카운팅용)
+            Main.Battle.RegisterEnemy(newEnemy);
+        }
     }
 
     private void OnDrawGizmosSelected()

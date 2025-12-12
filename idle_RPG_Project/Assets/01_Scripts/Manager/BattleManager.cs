@@ -15,10 +15,10 @@ public class BattleManager : BaseManager
 
     protected override async UniTask OnInitialize()
     {
-        
-        await UniTask.Delay(500);
+        Initialize();
+        await UniTask.CompletedTask;
     }
-    private void Awake()
+    private void Initialize()
     {
         // ¾À¿¡¼­ Player °´Ã¼ Ã£±â
         PlayerCharacter = FindFirstObjectByType<Player>();

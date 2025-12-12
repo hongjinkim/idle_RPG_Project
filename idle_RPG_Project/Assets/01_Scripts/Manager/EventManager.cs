@@ -5,6 +5,6 @@ public class EventManager : BaseManager
 {
     protected override async UniTask OnInitialize()
     {
-        await UniTask.Delay(500);
+        await UniTask.CompletedTask;
     }
 }

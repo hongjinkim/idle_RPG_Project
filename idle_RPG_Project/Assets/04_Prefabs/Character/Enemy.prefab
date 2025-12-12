@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5380612273377479201}
   - component: {fileID: 5522530437166440070}
   - component: {fileID: 6672954589626439144}
+  - component: {fileID: -429936465684447516}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -112,8 +113,6 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackOffset: {x: 1, y: 0.5}
-  attackRadius: 1.5
   maxTargetCount: 3
   baseMoveSpeed: 5
   attackAnimLength: 0.25
@@ -194,3 +193,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-429936465684447516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4762107130967777674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8293df57314196349b627854aaa1cebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Poolable
