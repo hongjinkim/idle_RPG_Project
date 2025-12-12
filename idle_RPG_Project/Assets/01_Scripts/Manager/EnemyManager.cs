@@ -3,11 +3,6 @@ using Sirenix.OdinInspector;
 using System.Threading;
 using UnityEngine;
 
-public enum EPoolType
-{
-    Enemy
-    
-}
 public class EnemyManager : PoolManager<EnemyManager, EPoolType>
 {
     [Title("Settings")]
