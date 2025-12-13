@@ -3,17 +3,15 @@ using Sirenix.OdinInspector;
 using System.Threading;
 using UnityEngine;
 
-public class EnemyManager : PoolManager<EnemyManager, EPoolType>
+public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
 {
     [Title("Settings")]
     [SerializeField] private float spawnInterval = 1.0f; // 젠 시간
     [SerializeField, MinValue(1)] private int maxEnemyCount = 100;
     [SerializeField, MinValue(0)] private int initialSpawnCount = 10;
 
-    [Title("Radius Settings")]
-    [InfoBox("최소 반경은 카메라 화면 대각선 길이보다 커야 화면 밖에서 생성됩니다.")]
-    [SerializeField] private float minSpawnRadius = 10.0f; // 화면 밖 (최소 거리)
-    [SerializeField] private float maxSpawnRadius = 14.0f; // 최대 거리
+    private float minSpawnRadius; // 화면 밖 (최소 거리)
+    private float maxSpawnRadius; // 최대 거리
 
     [Title("Debug")]
     [ShowInInspector, ReadOnly] private bool _isSpawning = false;
@@ -23,6 +21,11 @@ public class EnemyManager : PoolManager<EnemyManager, EPoolType>
     protected override async UniTask OnInitialize()
     {
         await base.OnInitialize();
+
+        // 배틀 매니저에서 반경 정보 가져오기
+        minSpawnRadius = Main.Battle.minSpawnRadius;
+        maxSpawnRadius = Main.Battle.maxSpawnRadius;
+
         if (initialSpawnCount > 0)
         {
             for (int i = 0; i < initialSpawnCount; i++)
@@ -87,14 +90,5 @@ public class EnemyManager : PoolManager<EnemyManager, EPoolType>
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        if (Application.isPlaying && Main.Battle.PlayerCharacter != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(Main.Battle.PlayerCharacter.transform.position, minSpawnRadius);
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(Main.Battle.PlayerCharacter.transform.position, maxSpawnRadius);
-        }
-    }
+    
 }

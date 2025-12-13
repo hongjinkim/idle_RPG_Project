@@ -178,7 +178,6 @@ public class Player: CharacterBase
             //대시 거리가 타겟과의 거리보다 크면 대시 거리를 조정
             dist = Mathf.Max(0, distToTarget - 0.05f);
         }
-        Debug.Log($"Distance to Target: {distToTarget}, Adjusted Dash Distance: {dist}");
 
         Vector2 targetPos = _rigidbody.position + (faceDir * dist);
 

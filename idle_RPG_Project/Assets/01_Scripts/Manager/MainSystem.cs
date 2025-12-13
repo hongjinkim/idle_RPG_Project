@@ -10,7 +10,7 @@ public class MainSystem : MonoBehaviour
 
     // 구체적인 접근이 필요할 땐 프로퍼티 유지
     public BattleManager Battle { get; private set; }
-    public EnemyManager Enemy { get; private set; }
+    public EnemyPoolManager Enemy { get; private set; }
     public FXManager FX { get; private set; }
     public UIManager UI { get; private set; }
     public EventManager Event { get; private set; }
@@ -36,7 +36,7 @@ public class MainSystem : MonoBehaviour
         // 2. 자주 쓰는 매니저는 프로퍼티에 캐싱 (편의성)
         // (GetComponent는 무거우니 처음에 한 번만)
         Battle = GetManager<BattleManager>();
-        Enemy = GetManager<EnemyManager>();
+        Enemy = GetManager<EnemyPoolManager>();
         FX = GetManager<FXManager>();
         UI = GetManager<UIManager>();
         Event = GetManager<EventManager>();

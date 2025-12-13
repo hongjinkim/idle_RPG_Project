@@ -27,6 +27,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     [Title("상태 & 비주얼")]
     [ShowInInspector, ReadOnly] public EntityState State { get; protected set; } = EntityState.Idle;
+    [ShowInInspector] protected CharacterBase target;
     protected Vector2 faceDir => (target.transform.position - transform.position).normalized;
 
     [Title("공격/피격 관련")]
@@ -43,7 +44,6 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected Animator _animator;
     protected SpriteRenderer _spriteRenderer;
-    protected CharacterBase target;
     protected float lastAttackTime;
     protected float _busyTimer = 0f;
 
@@ -66,6 +66,7 @@ public abstract class CharacterBase : MonoBehaviour
         Atk = atk;
         State = EntityState.Idle;
         gameObject.SetActive(true);
+        target = null;
     }
 
     // --- 애니메이션 통합 로직 ---
@@ -290,7 +291,9 @@ public abstract class CharacterBase : MonoBehaviour
     {
         if (State == EntityState.Dead) return;
         State = EntityState.Dead;
+        target = null;
         gameObject.SetActive(false);
+        
 
         // BattleManager에게 죽었다고 알리는 로직은 Event로 처리
         MainSystem.Instance.Battle.OnCharacterDead(this);

@@ -526,11 +526,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 198842073}
+  - {fileID: 970993690}
   - {fileID: 1915622316}
   - {fileID: 989507998}
   - {fileID: 1687770837}
-  - {fileID: 970993690}
-  - {fileID: 198842073}
   m_Father: {fileID: 934824119}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &858342219
@@ -587,46 +587,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: attackRange
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: combo.Array.data[0].dashDistance
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: combo.Array.data[1].dashDistance
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: combo.Array.data[2].dashDistance
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: combo.Array.data[0].knockbackDistance
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: combo.Array.data[0].knockbackDuration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: combo.Array.data[1].knockbackDistance
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: combo.Array.data[1].knockbackDuration
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: combo.Array.data[2].knockbackDistance
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: combo.Array.data[2].knockbackDuration
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 6711304727946213634, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
       propertyPath: m_Name
       value: Player
@@ -776,7 +736,7 @@ GameObject:
   - component: {fileID: 989507998}
   - component: {fileID: 989507999}
   m_Layer: 0
-  m_Name: EnemyManager
+  m_Name: EnemyPoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -791,7 +751,7 @@ Transform:
   m_GameObject: {fileID: 989507997}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -807,15 +767,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 989507997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8131e60d00396044fa2afaf7c9042fac, type: 3}
+  m_Script: {fileID: 11500000, guid: 652bb56c46fdcc2478b3705e9f82938d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   m_Pools: []
-  spawnInterval: 2
+  spawnInterval: 1
   maxEnemyCount: 100
   initialSpawnCount: 10
-  minSpawnRadius: 10
-  maxSpawnRadius: 14
 --- !u!1 &1335682103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,6 +1038,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999df47879435d34da0c37df07750814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
+  minSpawnRadius: 10
+  maxSpawnRadius: 14
+  repositionDistance: 20
 --- !u!1 &2100349558
 GameObject:
   m_ObjectHideFlags: 0
