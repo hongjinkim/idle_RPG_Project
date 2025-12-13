@@ -1,3 +1,4 @@
+using DataTable;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Numerics;
@@ -192,7 +193,10 @@ public abstract class CharacterBase : MonoBehaviour
                 // 때린 목록에 추가
                 uniqueEnemies.Add(enemy);
 
-                // 데미지 적용
+                // 데미지 적용. 추후 계산식 처리 후 실질적 데미지 적용
+                
+
+                
                 enemy.TakeDamage(Atk);
                 count++;
             }
@@ -211,6 +215,12 @@ public abstract class CharacterBase : MonoBehaviour
         CurrentHp -= damage;
 
         // (나중에 여기에 피격 이펙트/데미지 텍스트 추가)
+        // 이펙트 적용
+        MainSystem.Instance.FX.DamageTextEffect(transform.position, new AttackInfo
+        {
+            Damage = damage,
+            AttackType = EAttackType.Normal
+        });
 
         if (CurrentHp <= 0)
         {

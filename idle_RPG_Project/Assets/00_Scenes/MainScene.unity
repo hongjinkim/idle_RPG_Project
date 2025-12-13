@@ -345,7 +345,7 @@ Camera:
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
@@ -365,7 +365,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 34
+  field of view: 92.309
   orthographic: 1
   orthographic size: 10.8
   m_Depth: -1
@@ -528,9 +528,9 @@ Transform:
   m_Children:
   - {fileID: 1915622316}
   - {fileID: 989507998}
+  - {fileID: 1687770837}
   - {fileID: 970993690}
   - {fileID: 198842073}
-  - {fileID: 1687770837}
   m_Father: {fileID: 934824119}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &858342219
@@ -832,8 +832,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 10.8
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -918,7 +918,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1647555357}
   - component: {fileID: 1647555358}
-  - component: {fileID: 1647555359}
   m_Layer: 0
   m_Name: DamageText
   m_TagString: Untagged
@@ -953,25 +952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c340388b3366e24fbef3d455d76faee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageTextPool
-  _gameObj: {fileID: 1922606083316573995, guid: dbf31230eabbaa242b63549b37c50a42, type: 3}
+  _gameObj: {fileID: 2633708889201702246, guid: dbf31230eabbaa242b63549b37c50a42, type: 3}
   PoolType: 1
---- !u!111 &1647555359
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1647555356}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: f70bd22cc8c12164798d71f2a9b56b90, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!1 &1687770836
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,6 +963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1687770837}
+  - component: {fileID: 1687770838}
   m_Layer: 0
   m_Name: FXManager
   m_TagString: Untagged
@@ -1004,6 +987,19 @@ Transform:
   - {fileID: 1647555357}
   m_Father: {fileID: 838270860}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1687770838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687770836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206984d879114cd45a2efe8f777e1e5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FXManager
+  m_Pools: []
 --- !u!1 &1915622315
 GameObject:
   m_ObjectHideFlags: 0
