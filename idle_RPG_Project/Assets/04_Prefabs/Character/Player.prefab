@@ -5121,17 +5121,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7843b4f01b994bd4f9ec7131b598381a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  attackRange: 1
+  attackRange: 1.5
   moveSpeed: 3
   attackSpeed: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  attackOffset: {x: 0.5, y: 0.5}
-  attackRadius: 1
   maxTargetCount: 3
+  canKnockback: 0
   baseMoveSpeed: 3
   attackAnimLength: 0.25
+  combo:
+  - dashDistance: 0.8
+    dashDuration: 0.1
+    dashEase: 6
+    knockbackDistance: 0.5
+    knockbackDuration: 0.2
+    damageMultiplier: 1
+  - dashDistance: 0.6
+    dashDuration: 0.1
+    dashEase: 6
+    knockbackDistance: 0.8
+    knockbackDuration: 0.2
+    damageMultiplier: 1.1
+  - dashDistance: 1.5
+    dashDuration: 0.2
+    dashEase: 18
+    knockbackDistance: 1.2
+    knockbackDuration: 0.4
+    damageMultiplier: 1.5
   comboResetTime: 2
 --- !u!61 &5994865269770776902
 BoxCollider2D:
@@ -5187,14 +5205,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6711304727946213634}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -5205,7 +5223,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &3741901518270853733
 Animator:
   serializedVersion: 7

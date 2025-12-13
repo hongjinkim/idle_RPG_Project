@@ -587,13 +587,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: attackRange
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: combo.Array.data[0].dashDistance
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: combo.Array.data[1].dashDistance
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: combo.Array.data[2].dashDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: combo.Array.data[0].knockbackDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: combo.Array.data[0].knockbackDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: combo.Array.data[1].knockbackDistance
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: combo.Array.data[1].knockbackDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: combo.Array.data[2].knockbackDistance
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763143274353274730, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
+      propertyPath: combo.Array.data[2].knockbackDuration
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6711304727946213634, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7056842180213753013, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
-      propertyPath: m_Intensity
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8969805327459099353, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
       propertyPath: m_LocalPosition.x

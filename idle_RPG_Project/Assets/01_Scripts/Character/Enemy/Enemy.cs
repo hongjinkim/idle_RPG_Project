@@ -138,9 +138,9 @@ public class Enemy: CharacterBase
         UpdateAnimation(moveDir);
     }
 
-    public override void TakeDamage(System.Numerics.BigInteger damage)
+    public override void TakeDamage(AttackInfo info)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(info);
 
         // 맞으면 배회 멈추고 즉시 플레이어 쳐다봄
         if (target == null && CurrentHp > 0)

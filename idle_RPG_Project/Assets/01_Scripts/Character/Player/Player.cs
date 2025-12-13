@@ -1,7 +1,29 @@
-﻿using Sirenix.OdinInspector;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using Sirenix.OdinInspector;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.AdaptivePerformance.Provider.AdaptivePerformanceSubsystemDescriptor;
 
+[Serializable]
+public struct AttackCombo
+{
+    [Header("Movement (Self)")]
+    public float dashDistance;  // 내가 전진할 거리
+    public float dashDuration;  // 전진하는 시간 (짧을수록 빠름)
+    public Ease dashEase;      // 전진 이징
+
+    [Header("Knockback (Enemy)")]
+    public float knockbackDistance;    // 적이 밀려날 거리
+    public float knockbackDuration; // 적이 밀려나는 시간
+
+    [Header("Damage")]
+    public float damageMultiplier; // 공격력 배율
+}
 
 public class Player: CharacterBase
 {
@@ -9,8 +31,10 @@ public class Player: CharacterBase
     private float StopDistance => attackRange * 0.8f;
 
     [Title("Combo Settings")]
+    [SerializeField] private List<AttackCombo> combo = new List<AttackCombo>();
     [SerializeField] protected float comboResetTime = 2.0f;
     protected int _comboIndex = 0; // 현재 콤보 순서 (0, 1, 2)
+    private Tween _dashTween;
 
     private void Start()
     {
@@ -115,7 +139,11 @@ public class Player: CharacterBase
     // ★ Player 전용 공격 로직 (3단 콤보)
     protected override void ProcessAttack()
     {
+        UpdateAnimation(faceDir);
+
         lastAttackTime = Time.time;
+
+        AttackCombo currentCombo = combo[_comboIndex];
 
         if (_animator != null)
         {
@@ -124,9 +152,69 @@ public class Player: CharacterBase
             // 2. 공격 신호 보내기 (DoAttack)
             _animator.SetTrigger("Attack");
 
-            // 3. 다음 콤보 준비 (0 -> 1 -> 2 -> 0)
+            //3. 대시 이동 처리
+            Dash(currentCombo).Forget();
+
+            // 4. 다음 콤보 준비 (0 -> 1 -> 2 -> 0)
             _comboIndex = (_comboIndex + 1) % 3;
         }
+    }
+
+    private async UniTaskVoid Dash(AttackCombo combo)
+    {
+        
+        // 1. 이전 트윈 안전하게 중단
+        if (_dashTween != null && _dashTween.IsActive())
+        {
+            _dashTween.Kill();
+        }
+
+        float dist = combo.dashDistance;
+        
+
+        float distToTarget = Vector2.Distance(transform.position, target.transform.position);
+        if (combo.dashDistance > distToTarget)
+        {
+            //대시 거리가 타겟과의 거리보다 크면 대시 거리를 조정
+            dist = Mathf.Max(0, distToTarget - 0.05f);
+        }
+        Debug.Log($"Distance to Target: {distToTarget}, Adjusted Dash Distance: {dist}");
+
+        Vector2 targetPos = _rigidbody.position + (faceDir * dist);
+
+        // 2. DOTween 실행
+        _dashTween = _rigidbody.DOMove(targetPos, combo.dashDuration)
+            .SetEase(combo.dashEase)
+            .SetUpdate(UpdateType.Fixed); // 물리 업데이트 동기화
+
+        // Tween 자체를 await 하지 말고, 확장 메서드를 통해 안전하게 대기
+        try
+        {
+            await UniTask.Delay(
+            System.TimeSpan.FromSeconds(combo.dashDuration),
+            delayTiming: PlayerLoopTiming.FixedUpdate,
+            cancellationToken: this.GetCancellationTokenOnDestroy()
+        );
+        }
+        catch (System.OperationCanceledException)
+        {
+            // 캔슬되거나 오브젝트가 파괴되었을 때 무시 (혹은 로직 처리)
+        }
+    }
+
+    protected override AttackInfo MakeAttackInfo()
+    {
+        return new AttackInfo
+        {
+            Attacker = this,
+            Damage = Atk,
+            AttackType = EAttackType.Normal,
+            Knockback = new knockbackInfo
+            {
+                Distance = combo[_comboIndex].knockbackDistance,
+                Duration = combo[_comboIndex].knockbackDuration
+            }
+        };
     }
 
     private bool CheckEnemyInAttackRange()

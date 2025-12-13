@@ -1,10 +1,15 @@
+using Cysharp.Threading.Tasks;
 using DataTable;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
 using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 // 유닛의 상태 정의
 public enum EntityState { Idle, Move, Attack, Dead }
@@ -24,9 +29,13 @@ public abstract class CharacterBase : MonoBehaviour
     [ShowInInspector, ReadOnly] public EntityState State { get; protected set; } = EntityState.Idle;
     protected Vector2 faceDir => (target.transform.position - transform.position).normalized;
 
-    [Title("공격 관련")]
+    [Title("공격/피격 관련")]
     [SerializeField] protected LayerMask enemyLayer;
     [SerializeField] private int maxTargetCount = 3;
+    [SerializeField] protected bool canKnockback = false;
+    protected bool _isKnockbacked = false;
+    private Tween _knockbackTween;
+    protected Rigidbody2D _rigidbody;
 
     [Title("애니메이션")]
     [SerializeField] protected float baseMoveSpeed = 5.0f;
@@ -45,6 +54,7 @@ public abstract class CharacterBase : MonoBehaviour
         // 컴포넌트 캐싱
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _rigidbody = GetComponent<Rigidbody2D>();
 
     }
 
@@ -86,6 +96,7 @@ public abstract class CharacterBase : MonoBehaviour
     public virtual void Tick(float deltaTime)
     {
         if (State == EntityState.Dead) return;
+        if(_isKnockbacked) return;
 
         // 1. 행동 불가 상태인지 체크
         if (_busyTimer > 0)
@@ -194,14 +205,28 @@ public abstract class CharacterBase : MonoBehaviour
                 uniqueEnemies.Add(enemy);
 
                 // 데미지 적용. 추후 계산식 처리 후 실질적 데미지 적용
-                
+                enemy.TakeDamage(MakeAttackInfo());
 
-                
-                enemy.TakeDamage(Atk);
                 count++;
             }
         }
     }
+
+    protected virtual AttackInfo MakeAttackInfo()
+    {
+        return new AttackInfo
+        {
+            Attacker = this,
+            Damage = Atk,
+            AttackType = EAttackType.Normal,
+            Knockback = new knockbackInfo
+            {
+                Distance = 0f,
+                Duration = 0f
+            }
+        };
+    }
+
     protected Vector2 GetAttackOrigin()
     {
         if (_spriteRenderer == null)
@@ -209,24 +234,56 @@ public abstract class CharacterBase : MonoBehaviour
         return (Vector2)transform.position + faceDir * (attackRange * 0.5f);
     }
 
-    public virtual void TakeDamage(BigInteger damage)
+    public virtual void TakeDamage(AttackInfo info)
     {
         if (State == EntityState.Dead) return;
-        CurrentHp -= damage;
+        CurrentHp -= info.Damage;
 
         // (나중에 여기에 피격 이펙트/데미지 텍스트 추가)
         // 이펙트 적용
         MainSystem.Instance.FX.DamageTextEffect(transform.position, new AttackInfo
         {
-            Damage = damage,
+            Attacker = this,
+            Damage = info.Damage,
             AttackType = EAttackType.Normal
         });
+        // 넉백 적용
+        if (info.Knockback.Distance > 0)
+        {
+            Knockback(info.Attacker.transform.position, info.Knockback.Distance, info.Knockback.Duration);
+        }
 
         if (CurrentHp <= 0)
         {
             CurrentHp = 0;
             Die();
         }
+    }
+
+    protected void Knockback(Vector3 attackerPos, float distance, float duration)
+    {
+        if (!canKnockback || State == EntityState.Dead) return;
+
+        if (_knockbackTween != null && _knockbackTween.IsActive()) _knockbackTween.Kill();
+
+        _isKnockbacked = true;
+        if (_animator != null) _animator.SetTrigger("Hit");
+
+        // 넉백 방향 및 목표 위치 계산
+        Vector2 dir = (transform.position - attackerPos).normalized;
+        if (dir == Vector2.zero) dir = Vector2.right; // 겹침 방지
+
+        Vector2 targetPos = (Vector2)transform.position + (dir * distance);
+
+        _knockbackTween = _rigidbody.DOMove(targetPos, duration)
+            .SetEase(Ease.OutQuad)
+            .SetUpdate(UpdateType.Fixed)
+            .OnComplete(() =>
+            {
+                _isKnockbacked = false;
+                // 죽지 않았으면 Idle로 복귀
+                if (State != EntityState.Dead) State = EntityState.Idle;
+            });
     }
 
     protected virtual void Die()
