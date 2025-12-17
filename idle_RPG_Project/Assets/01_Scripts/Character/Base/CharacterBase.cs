@@ -28,7 +28,10 @@ public abstract class CharacterBase : MonoBehaviour
     [Title("상태 & 비주얼")]
     [ShowInInspector, ReadOnly] public EntityState State { get; protected set; } = EntityState.Idle;
     [ShowInInspector] protected CharacterBase target;
-    protected Vector2 faceDir => (target.transform.position - transform.position).normalized;
+    protected HPBar _hpBar;
+    protected Vector2 targetDir =>
+        (target == null) ? Vector2.right :
+        (target.transform.position - transform.position).normalized;
 
     [Title("공격/피격 관련")]
     [SerializeField] protected LayerMask enemyLayer;
@@ -46,6 +49,7 @@ public abstract class CharacterBase : MonoBehaviour
     protected SpriteRenderer _spriteRenderer;
     protected float lastAttackTime;
     protected float _busyTimer = 0f;
+    private Poolable _poolable;
 
     private float _lastHitEventTime = -1f;
 
@@ -55,7 +59,7 @@ public abstract class CharacterBase : MonoBehaviour
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
-
+        _poolable = GetComponent<Poolable>();
     }
 
     // --- 초기화 ---
@@ -81,14 +85,14 @@ public abstract class CharacterBase : MonoBehaviour
         if (isMoving)
         {
 
-            _animator.SetFloat("DirX", faceDir.x);
-            _animator.SetFloat("DirY", faceDir.y);
+            _animator.SetFloat("DirX", targetDir.x);
+            _animator.SetFloat("DirY", targetDir.y);
 
             // 3. 좌우 반전 (Flip) 처리
             // 오른쪽(X > 0)이면 Flip 끔, 왼쪽(X < 0)이면 Flip 켬
-            if (faceDir.x > 0.01f)
+            if (targetDir.x > 0.01f)
                 _spriteRenderer.flipX = false;
-            else if (faceDir.x < -0.01f)
+            else if (targetDir.x < -0.01f)
                 _spriteRenderer.flipX = true;
         }
     }
@@ -232,7 +236,7 @@ public abstract class CharacterBase : MonoBehaviour
     {
         if (_spriteRenderer == null)
             return (Vector2)transform.position;
-        return (Vector2)transform.position + faceDir * (attackRange * 0.5f);
+        return (Vector2)transform.position + targetDir * (attackRange * 0.5f);
     }
 
     public virtual void TakeDamage(AttackInfo info)
@@ -242,12 +246,17 @@ public abstract class CharacterBase : MonoBehaviour
 
         // (나중에 여기에 피격 이펙트/데미지 텍스트 추가)
         // 이펙트 적용
-        MainSystem.Instance.FX.DamageTextEffect(transform.position, new AttackInfo
+        MainSystem.Instance.FX.GetDamageText(transform.position, new AttackInfo
         {
             Attacker = this,
             Damage = info.Damage,
             AttackType = EAttackType.Normal
         });
+        // HP바 갱신
+        if (_hpBar != null)
+        {
+            _hpBar.SetHP(CurrentHp, MaxHp);
+        }
         // 넉백 적용
         if (info.Knockback.Distance > 0)
         {
@@ -293,7 +302,14 @@ public abstract class CharacterBase : MonoBehaviour
         State = EntityState.Dead;
         target = null;
         gameObject.SetActive(false);
-        
+
+        // HP바 반납
+        if (_hpBar != null)
+        {
+            MainSystem.Instance.FX.ReturnHpBar(_hpBar);
+        }
+
+        _poolable?.Release();
 
         // BattleManager에게 죽었다고 알리는 로직은 Event로 처리
         MainSystem.Instance.Battle.OnCharacterDead(this);
@@ -320,7 +336,7 @@ public abstract class CharacterBase : MonoBehaviour
         _animator.SetFloat("AnimAttackSpeed", attackMultiplier);
     }
 
-    private void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         // 잘 보이게 빨간색으로 설정
         Gizmos.color = Color.red;

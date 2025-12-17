@@ -1,6 +1,7 @@
 public enum EPoolType
 {
     Enemy,
-    DamageText
+    DamageText,
+    HpBar,
 
 }

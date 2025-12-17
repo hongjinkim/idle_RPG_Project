@@ -1,7 +1,9 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using System.Numerics;
+using Vector3 = UnityEngine.Vector3;
+using Vector2 = UnityEngine.Vector2;
 
 
 public class Enemy: CharacterBase
@@ -17,18 +19,12 @@ public class Enemy: CharacterBase
     private float _waitTimer;
     private bool _isWaiting = false;
 
-    private Poolable poolable;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        poolable = GetComponent<Poolable>();
-    }
 
     // 초기화 시 배회 타이머 리셋
-    public override void Setup(System.Numerics.BigInteger hp, System.Numerics.BigInteger atk)
+    public override void Setup(BigInteger hp, BigInteger atk)
     {
         base.Setup(hp, atk);
+        _hpBar = MainSystem.Instance.FX.GetHpBar(transform, CurrentHp, MaxHp, false);
         _waitTimer = 0;
         SetNewWanderTarget(); // 태어나자마자 갈 곳 정하기
     }
@@ -150,19 +146,9 @@ public class Enemy: CharacterBase
         }
     }
 
-    protected override void Die()
+    protected override void OnDrawGizmosSelected()
     {
-        if (State == EntityState.Dead) return;
-        State = EntityState.Dead;
-        MainSystem.Instance.Battle.OnCharacterDead(this);
-        poolable?.Release();
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        // 감지 범위 (노랑)
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectRange);
+        base.OnDrawGizmosSelected();
 
         // 배회 목표지점 (초록 선) - 디버깅용
         if (target == null && !_isWaiting)

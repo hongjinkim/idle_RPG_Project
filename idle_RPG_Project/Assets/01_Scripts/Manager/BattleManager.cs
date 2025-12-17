@@ -134,7 +134,6 @@ public class BattleManager : BaseManager
         {
             UnregisterEnemy(enemy);
             // 여기서 골드 획득, 점수 증가 로직 호출
-            Debug.Log("Monster Defeated!");
         }
         else if (character is Player)
         {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2755046742220520945}
   - component: {fileID: 1515894335258075012}
   - component: {fileID: 2410045437254563310}
-  - component: {fileID: 3957924584443153871}
+  - component: {fileID: 7963909019961725850}
   m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
@@ -217,7 +217,7 @@ MonoBehaviour:
   enemyMt: {fileID: 2100000, guid: d08c0b4b201f06746b3d966113252711, type: 2}
   normalMt: {fileID: 2100000, guid: d08c0b4b201f06746b3d966113252711, type: 2}
   criticalMt: {fileID: 2100000, guid: e64dd62a52664d44e956d8c32a525ab7, type: 2}
---- !u!114 &3957924584443153871
+--- !u!114 &7963909019961725850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

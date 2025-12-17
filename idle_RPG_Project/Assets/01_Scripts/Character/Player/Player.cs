@@ -39,6 +39,7 @@ public class Player: CharacterBase
     private void Start()
     {
         Setup(1000, 50);
+        _hpBar = MainSystem.Instance.FX.GetHpBar(transform, CurrentHp, MaxHp, true);
     }
 
     protected override void FindTarget()
@@ -139,7 +140,7 @@ public class Player: CharacterBase
     // ★ Player 전용 공격 로직 (3단 콤보)
     protected override void ProcessAttack()
     {
-        UpdateAnimation(faceDir);
+        UpdateAnimation(targetDir);
 
         lastAttackTime = Time.time;
 
@@ -179,7 +180,7 @@ public class Player: CharacterBase
             dist = Mathf.Max(0, distToTarget - 0.05f);
         }
 
-        Vector2 targetPos = _rigidbody.position + (faceDir * dist);
+        Vector2 targetPos = _rigidbody.position + (targetDir * dist);
 
         // 2. DOTween 실행
         _dashTween = _rigidbody.DOMove(targetPos, combo.dashDuration)
