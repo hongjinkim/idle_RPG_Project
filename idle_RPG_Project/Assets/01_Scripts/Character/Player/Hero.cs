@@ -25,7 +25,7 @@ public struct AttackCombo
     public float damageMultiplier; // 공격력 배율
 }
 
-public class Player: CharacterBase
+public class Hero: CharacterBase
 {
     // 적에게 너무 딱 붙지 않게 하는 거리 (사거리의 80% 정도까지만 접근)
     private float StopDistance => attackRange * 0.8f;

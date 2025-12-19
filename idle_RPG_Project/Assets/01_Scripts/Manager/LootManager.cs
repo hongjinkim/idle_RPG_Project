@@ -7,7 +7,6 @@ public class LootManager : BaseManager
 {
     [Title("Loot System")]
     [SerializeField] private List<LootItemDataSO> lootItemDataList; // 드랍 아이템 데이터 리스트
-    [UnityEngine.Range(0, 100)][SerializeField] private float ticketDropRate = 5f; // 뽑기권 드랍 확률 (%)
     private Dictionary<ELootType, LootItemDataSO> _lootDataDict = new();
 
     protected override async UniTask OnInitialize()

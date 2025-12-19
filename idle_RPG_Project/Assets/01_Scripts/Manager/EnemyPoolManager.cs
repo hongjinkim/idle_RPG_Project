@@ -68,13 +68,13 @@ public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
     private void SpawnEnemy()
     {
         // 플레이어가 없거나 죽었으면 생성 중단
-        if (Main.Battle.PlayerCharacter == null || Main.Battle.PlayerCharacter.State == EntityState.Dead) return;
+        if (Main.Battle.PlayerHero == null || Main.Battle.PlayerHero.State == EntityState.Dead) return;
 
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
         float randomDist = Random.Range(minSpawnRadius, maxSpawnRadius);
 
-        Vector2 playerPos = Main.Battle.PlayerCharacter.transform.position;
+        Vector2 playerPos = Main.Battle.PlayerHero.transform.position;
         Vector2 spawnPos = playerPos + (Vector2)(randomDir * randomDist);
 
         GameObject enemyObj = Pop(EPoolType.Enemy, spawnPos);

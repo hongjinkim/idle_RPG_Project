@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class BattleManager : BaseManager
 {
     [Title("Main Character")]
-    [ShowInInspector] public Player PlayerCharacter { get; private set; }
-    private Transform _playerTransform => PlayerCharacter != null ? PlayerCharacter.transform : null;
+    [ShowInInspector] public Hero PlayerHero { get; private set; }
+    private Transform _heroTransform => PlayerHero != null ? PlayerHero.transform : null;
 
     [Title("Radius Settings")]
     [InfoBox("최소 반경은 카메라 화면 대각선 길이보다 커야 화면 밖에서 생성됩니다.")]
@@ -30,8 +30,8 @@ public class BattleManager : BaseManager
     private void Initialize()
     {
         // 씬에서 Player 객체 찾기
-        PlayerCharacter = FindFirstObjectByType<Player>();
-        if (PlayerCharacter == null)
+        PlayerHero = FindFirstObjectByType<Hero>();
+        if (PlayerHero == null)
         {
             Debug.LogError("BattleManager: Player object not found in the scene!");
         }
@@ -42,12 +42,12 @@ public class BattleManager : BaseManager
     private void Update()
     {
         if (!IsInitialized) return;
-        if (PlayerCharacter == null) return;
+        if (PlayerHero == null) return;
 
         float dt = Time.deltaTime;
 
         // 1. 플레이어 행동
-        PlayerCharacter.Tick(dt);
+        PlayerHero.Tick(dt);
 
         // 2. 몬스터들 행동 (역순 루프: 도중에 죽어서 리스트에서 빠질 수 있으므로)
         for (int i = _enemies.Count - 1; i >= 0; i--)
@@ -102,13 +102,13 @@ public class BattleManager : BaseManager
         if (enemy == null) return;
 
         // 플레이어가 없거나 죽었으면 생성 중단
-        if (PlayerCharacter == null || PlayerCharacter.State == EntityState.Dead) return;
+        if (PlayerHero == null || PlayerHero.State == EntityState.Dead) return;
 
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
         float randomDist = Random.Range(minSpawnRadius, maxSpawnRadius);
 
-        Vector2 playerPos = PlayerCharacter.transform.position;
+        Vector2 playerPos = PlayerHero.transform.position;
         Vector2 spawnPos = playerPos + (Vector2)(randomDir * randomDist);
 
         enemy.transform.position = spawnPos;
@@ -136,9 +136,9 @@ public class BattleManager : BaseManager
         {
             UnregisterEnemy(enemy);
             // 여기서 골드 획득, 점수 증가 로직 호출
-            MainSystem.Instance.Loot.SpawnLoot(ELootType.Gold,enemy.dropGold, enemy.transform.position, _playerTransform);
+            MainSystem.Instance.Loot.SpawnLoot(ELootType.Gold,enemy.dropGold, enemy.transform.position, _heroTransform);
         }
-        else if (character is Player)
+        else if (character is Hero)
         {
             // 플레이어 사망 처리 로직
             Debug.Log("Player Defeated! Game Over.");
@@ -148,14 +148,14 @@ public class BattleManager : BaseManager
 
     private void OnDrawGizmosSelected()
     {
-        if (Application.isPlaying && PlayerCharacter != null)
+        if (Application.isPlaying && PlayerHero != null)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(PlayerCharacter.transform.position, minSpawnRadius);
+            Gizmos.DrawWireSphere(PlayerHero.transform.position, minSpawnRadius);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(PlayerCharacter.transform.position, maxSpawnRadius);
+            Gizmos.DrawWireSphere(PlayerHero.transform.position, maxSpawnRadius);
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(PlayerCharacter.transform.position, repositionDistance);
+            Gizmos.DrawWireSphere(PlayerHero.transform.position, repositionDistance);
         }
     }
 }

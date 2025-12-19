@@ -35,7 +35,7 @@ public class Enemy: CharacterBase
 
     protected override void FindTarget()
     {
-        Player player = MainSystem.Instance.Battle.PlayerCharacter;
+        Hero player = MainSystem.Instance.Battle.PlayerHero;
         if (player == null || !player.gameObject.activeSelf) return;
 
         // 플레이어가 감지 범위 안에 들어왔는지 체크
@@ -144,7 +144,7 @@ public class Enemy: CharacterBase
         // 맞으면 배회 멈추고 즉시 플레이어 쳐다봄
         if (target == null && CurrentHp > 0)
         {
-            target = MainSystem.Instance.Battle.PlayerCharacter;
+            target = MainSystem.Instance.Battle.PlayerHero;
             _isWaiting = false; // 대기 취소
         }
     }
