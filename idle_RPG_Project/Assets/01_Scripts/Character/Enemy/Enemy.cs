@@ -14,10 +14,13 @@ public class Enemy: CharacterBase
     [SerializeField] private float wanderWaitTime = 2.0f; // 이동 후 대기 시간
     [SerializeField] private float wanderMoveSpeed = 1.5f; // 배회 시 이동 속도 (추격보다 느리게)
 
+    public int dropGold = 10;
+
     // 내부 변수
     private Vector3 _wanderTarget;
     private float _waitTimer;
     private bool _isWaiting = false;
+    
 
 
     // 초기화 시 배회 타이머 리셋

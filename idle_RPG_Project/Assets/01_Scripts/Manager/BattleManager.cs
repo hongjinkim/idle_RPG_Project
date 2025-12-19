@@ -7,6 +7,7 @@ public class BattleManager : BaseManager
 {
     [Title("Main Character")]
     [ShowInInspector] public Player PlayerCharacter { get; private set; }
+    private Transform _playerTransform => PlayerCharacter != null ? PlayerCharacter.transform : null;
 
     [Title("Radius Settings")]
     [InfoBox("최소 반경은 카메라 화면 대각선 길이보다 커야 화면 밖에서 생성됩니다.")]
@@ -35,6 +36,7 @@ public class BattleManager : BaseManager
             Debug.LogError("BattleManager: Player object not found in the scene!");
         }
         _repositionDistSqr = repositionDistance * repositionDistance;
+        
     }
 
     private void Update()
@@ -134,6 +136,7 @@ public class BattleManager : BaseManager
         {
             UnregisterEnemy(enemy);
             // 여기서 골드 획득, 점수 증가 로직 호출
+            MainSystem.Instance.Loot.SpawnLoot(ELootType.Gold,enemy.dropGold, enemy.transform.position, _playerTransform);
         }
         else if (character is Player)
         {
@@ -141,6 +144,7 @@ public class BattleManager : BaseManager
             Debug.Log("Player Defeated! Game Over.");
         }
     }
+    
 
     private void OnDrawGizmosSelected()
     {

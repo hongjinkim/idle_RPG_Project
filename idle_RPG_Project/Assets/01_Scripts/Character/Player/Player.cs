@@ -177,7 +177,7 @@ public class Player: CharacterBase
         if (combo.dashDistance > distToTarget)
         {
             //대시 거리가 타겟과의 거리보다 크면 대시 거리를 조정
-            dist = Mathf.Max(0, distToTarget - 0.05f);
+            dist = Mathf.Max(0, distToTarget - 0.02f);
         }
 
         Vector2 targetPos = _rigidbody.position + (targetDir * dist);

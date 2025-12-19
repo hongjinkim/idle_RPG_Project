@@ -93,6 +93,12 @@ public class FXManager : PoolManager<FXManager, EPoolType>
         return hpBar;
     }
 
+    public GameObject GetLootItem(Vector3 position)
+    {
+        var obj = Pop(EPoolType.LootItem, position);
+        return obj;
+    }
+
     public void ReturnHpBar(HPBar hpBar)
     {
         if (_activeBars.ContainsKey(hpBar))

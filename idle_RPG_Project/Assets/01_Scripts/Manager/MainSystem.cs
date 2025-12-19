@@ -14,6 +14,7 @@ public class MainSystem : MonoBehaviour
     public FXManager FX { get; private set; }
     public UIManager UI { get; private set; }
     public EventManager Event { get; private set; }
+    public LootManager Loot { get; private set; }
 
     // 모든 매니저를 담아둘 리스트 (일괄 관리용)
     [ShowInInspector, ReadOnly]
@@ -40,6 +41,7 @@ public class MainSystem : MonoBehaviour
         FX = GetManager<FXManager>();
         UI = GetManager<UIManager>();
         Event = GetManager<EventManager>();
+        Loot = GetManager<LootManager>();
 
         // 3. 찾은 모든 매니저 일괄 초기화 (순서는 Unity Inspector 순서 따름)
         foreach (var manager in _allManagers)
