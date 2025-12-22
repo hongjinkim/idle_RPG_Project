@@ -12,10 +12,12 @@
     {
         [Header("State", order = 0)]
         [SerializeField]
-        private bool blockTab = false;
+        protected bool blockTab = false;
 
         [SerializeField]
-        private bool selected = false;
+        protected bool selected = false;
+        [SerializeField]
+        protected bool canToggle = false;
 
         [Header("Event", order = 2)]
         public UpdateDataEvent onUpdateData = new UpdateDataEvent();
@@ -90,20 +92,27 @@
         }
         public void Select()
         {
-            TabGroup group = GetGroup();
-            if (group != null)
+            if (blockTab == true)
             {
-                group.Select(this);
+                OnBlocked();
+                return;
+            }
+
+            if (IsSelected() && canToggle)
+            {
+                SetValue(false);
             }
             else
             {
-                if (blockTab == true)
+                TabGroup group = GetGroup();
+                if (group != null)
                 {
-                    OnBlocked();
-                    return;
+                    group.Select(this);
                 }
-
-                SetValue(true);
+                else
+                {
+                    SetValue(true);
+                }
             }
         }
 
