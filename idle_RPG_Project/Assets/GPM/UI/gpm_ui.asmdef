@@ -2,7 +2,8 @@
     "name": "gpm_ui",
     "references": [
         "gpm_common",
-        "gpm_cachestorage"
+        "gpm_cachestorage",
+        "DOTween.Modules"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

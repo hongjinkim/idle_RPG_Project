@@ -24,7 +24,7 @@ namespace Gpm.Ui.Internal
         }
 
         public Tab GetTab()
-        {
+       {
             return tab;
         }
 

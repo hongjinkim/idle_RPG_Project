@@ -98,9 +98,15 @@
                 return;
             }
 
-            if (IsSelected() && canToggle)
+            if (IsSelected())
             {
-                SetValue(false);
+                if(canToggle)
+                {
+                    SetValue(false);
+                    NotifyPage();
+
+                }
+                
             }
             else
             {
