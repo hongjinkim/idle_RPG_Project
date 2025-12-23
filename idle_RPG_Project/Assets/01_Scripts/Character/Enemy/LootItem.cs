@@ -114,9 +114,8 @@ public class LootItem : MonoBehaviour
         // 획득 사운드 재생 (EffectManager 등 활용)
         // EffectManager.Instance.PlaySound("LootCollect");
 
-        // 실제 재화 증가 처리 (추후 구현할 Inventory/GameManager에 요청)
-        Debug.Log($"획득! 종류: {_lootType}, 수량: {_amount}");
-        // Example: GameManager.Instance.AddCurrency(lootType, amount);
+        // 실제 재화 증가 처리
+        MainSystem.Instance.Player.ChangeGold(_amount);
 
         // 획득 시 약간 작아지면서 사라지는 연출
         transform.DOScale(0, 0.2f).SetEase(Ease.InBack).OnComplete(ReturnToPool);

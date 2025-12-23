@@ -7,7 +7,7 @@ public class PlayerData
     public int Level { get; set; }
     public int Experience { get; set; }
     public int Gold { get; set; }
-    public int Gems { get; set; }
+    public int Gem { get; set; }
 
     public PlayerData()
     {
@@ -15,6 +15,6 @@ public class PlayerData
         Level = 1;
         Experience = 0;
         Gold = 100;
-        Gems = 10;
+        Gem = 10;
     }
 }
