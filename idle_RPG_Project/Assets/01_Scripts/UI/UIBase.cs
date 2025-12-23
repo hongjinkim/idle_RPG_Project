@@ -18,7 +18,7 @@ public abstract class UIBase : MonoBehaviour
     }
 
     // 자식들이 무조건 구현해야 하는 함수들
-    protected abstract void BindEvents();
+    public abstract void BindEvents();
     protected abstract void UnbindEvents();
-    protected abstract void RefreshUI();
+    public abstract void RefreshUI();
 }

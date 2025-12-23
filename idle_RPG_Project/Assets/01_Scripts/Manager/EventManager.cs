@@ -1,57 +1,49 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
 public enum EEventType
 {
-    // ÇÃ·¹ÀÌ¾î °ü·Ã
-    PlayerHealthChanged,    // Ã¼·Â º¯°æ 
-    PlayerExpChanged,       // °æÇèÄ¡ º¯°æ
-    PlayerLevelUp,          // ·¹º§
+    // í”Œë ˆì´ì–´ ê´€ë ¨
+    PlayerHealthChanged,    // ì²´ë ¥ ë³€ê²½ 
+    PlayerExpChanged,       // ê²½í—˜ì¹˜ ë³€ê²½
+    PlayerLevelUp,          // ë ˆë²¨
 
-    // ÀçÈ­ °ü·Ã
-    GoldChanged,            // °ñµå È¹µæ
-    GemChanged,             // º¸¼® È¹µæ
+    // ì¬í™” ê´€ë ¨
+    GoldChanged,            // ê³¨ë“œ íšë“
+    GemChanged,             // ë³´ì„ íšë“
 
-    // °ÔÀÓ »óÅÂ
-    GameStateChanged,       // °ÔÀÓ ¿À¹ö, ÀÏ½ÃÁ¤Áö µî
-    BossAppeared            // º¸½º µîÀå
+    // ê²Œì„ ìƒíƒœ
+    GameStateChanged,       // ê²Œì„ ì˜¤ë²„, ì¼ì‹œì •ì§€ ë“±
+    BossAppeared            // ë³´ìŠ¤ ë“±ì¥
 }
-
 public class EventManager : BaseManager
 {
-    // ÀÌº¥Æ® ÀúÀå¼Ò (ÀÌº¥Æ® Å¸ÀÔ, ½ÇÇàÇÒ ÇÔ¼öµé)
-    // object ÆÄ¶ó¹ÌÅÍ¸¦ ¹Ş´Â ActionÀ» ÀúÀå
-    private Dictionary<EEventType, Action<object>> _eventDictionary;
+    private Dictionary<EEventType, Action<object>> _eventDictionary = new Dictionary<EEventType, Action<object>>();
 
     protected override async UniTask OnInitialize()
     {
         await UniTask.CompletedTask;
     }
-
-    // 1. ÀÌº¥Æ® µè±â ½ÃÀÛ (±¸µ¶)
+    // ... StartListening, StopListening, TriggerEvent ê¸°ì¡´ ì½”ë“œëŠ” ê·¸ëŒ€ë¡œ ìœ ì§€ ...
     public void StartListening(EEventType eventType, Action<object> listener)
     {
         if (_eventDictionary.TryGetValue(eventType, out Action<object> thisEvent))
         {
-            // ÀÌ¹Ì ÀÖÀ¸¸é Ãß°¡
             thisEvent += listener;
             _eventDictionary[eventType] = thisEvent;
         }
         else
         {
-            // ¾øÀ¸¸é »õ·Î »ı¼º
             thisEvent += listener;
             _eventDictionary.Add(eventType, thisEvent);
         }
     }
 
-    // 2. ÀÌº¥Æ® µè±â Áß´Ü (±¸µ¶ Ãë¼Ò) - ¡Ú ¸Ş¸ğ¸® ´©¼ö ¹æÁö À§ÇØ ÇÊ¼ö
     public void StopListening(EEventType eventType, Action<object> listener)
     {
         if (_eventDictionary == null) return;
-
         if (_eventDictionary.TryGetValue(eventType, out Action<object> thisEvent))
         {
             thisEvent -= listener;
@@ -59,7 +51,6 @@ public class EventManager : BaseManager
         }
     }
 
-    // 3. ÀÌº¥Æ® ¹ß»ı ½ÃÅ°±â (¹æ¼Û)
     public void TriggerEvent(EEventType eventType, object param = null)
     {
         if (_eventDictionary.TryGetValue(eventType, out Action<object> thisEvent))
@@ -67,4 +58,6 @@ public class EventManager : BaseManager
             thisEvent?.Invoke(param);
         }
     }
+
+    
 }

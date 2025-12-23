@@ -1,15 +1,17 @@
 using DG.Tweening;
 using System.Collections;
+using System.Numerics;
 using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UI;
+using Vector3 = UnityEngine.Vector3;
 
 
 public class LootItem : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private ELootType _lootType;
-    private int _amount = 1; // 재화량
+    private BigInteger _amount = 100000; // 재화량
     [SerializeField] private float spreadForce = 2; // 처음에 튀는 힘
     [SerializeField] private float suckDelay = 0.5f; // 빨려가기 전 대기 시간
     [SerializeField] private float suckAcceleration = 15f; // 빨려가는 가속도
@@ -23,7 +25,7 @@ public class LootItem : MonoBehaviour
     private Poolable _pool;
 
     public ELootType LootType => _lootType;
-    public int Amount => _amount;
+    public BigInteger Amount => _amount;
 
     private void Awake()
     {
@@ -31,7 +33,7 @@ public class LootItem : MonoBehaviour
             _pool = GetComponent<Poolable>();
     }
 
-    public void Initialize(LootItemDataSO data, int amount, Vector3 startPos, Transform target)
+    public void Initialize(LootItemDataSO data, BigInteger amount, Vector3 startPos, Transform target)
     {
         // 1. 데이터 설정
         _lootType = data.type;

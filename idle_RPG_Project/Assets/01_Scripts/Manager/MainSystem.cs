@@ -9,13 +9,13 @@ public class MainSystem : MonoBehaviour
     public static MainSystem Instance { get; private set; }
 
     // 구체적인 접근이 필요할 땐 프로퍼티 유지
+    public EventManager Event { get; private set; }
     public DataManager Data { get; private set; }
     public PlayerManager Player { get; private set; }
     public BattleManager Battle { get; private set; }
     public EnemyPoolManager Enemy { get; private set; }
     public FXManager FX { get; private set; }
     public UIManager UI { get; private set; }
-    public EventManager Event { get; private set; }
     public LootManager Loot { get; private set; }
 
     // 모든 매니저를 담아둘 리스트 (일괄 관리용)
@@ -38,13 +38,13 @@ public class MainSystem : MonoBehaviour
 
         // 2. 자주 쓰는 매니저는 프로퍼티에 캐싱 (편의성)
         // (GetComponent는 무거우니 처음에 한 번만)
+        Event = GetManager<EventManager>();
         Battle = GetManager<BattleManager>();
         Data = GetManager<DataManager>();
         Player = GetManager<PlayerManager>();
         Enemy = GetManager<EnemyPoolManager>();
         FX = GetManager<FXManager>();
         UI = GetManager<UIManager>();
-        Event = GetManager<EventManager>();
         Loot = GetManager<LootManager>();
 
         // 3. 찾은 모든 매니저 일괄 초기화 (순서는 Unity Inspector 순서 따름)
