@@ -2,13 +2,15 @@ using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using System.Threading;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
 {
     [Title("Settings")]
     [SerializeField] private float spawnInterval = 1.0f; // 젠 시간
-    [SerializeField, MinValue(1)] private int maxEnemyCount = 100;
-    [SerializeField, MinValue(0)] private int initialSpawnCount = 10;
+    [SerializeField] private int maxEnemyCount = 100;
+    [SerializeField] private int initialSpawnCount = 10;
+    public List<int> EnemyIDList = new List<int>(); // 스폰 가능한 적 ID 리스트
 
     private float minSpawnRadius; // 화면 밖 (최소 거리)
     private float maxSpawnRadius; // 최대 거리
@@ -16,15 +18,14 @@ public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
     [Title("Debug")]
     [ShowInInspector, ReadOnly] private bool _isSpawning = false;
 
-    [ShowInInspector, ProgressBar(0, "maxEnemyCount")]
 
     protected override async UniTask OnInitialize()
     {
         await base.OnInitialize();
 
         // 배틀 매니저에서 반경 정보 가져오기
-        minSpawnRadius = Main.Battle.minSpawnRadius;
-        maxSpawnRadius = Main.Battle.maxSpawnRadius;
+        minSpawnRadius = MainSystem.Battle.minSpawnRadius;
+        maxSpawnRadius = MainSystem.Battle.maxSpawnRadius;
 
         if (initialSpawnCount > 0)
         {
@@ -56,7 +57,7 @@ public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
     {
         while (_isSpawning)
         {
-            if (Main.Battle.EnemyCount < maxEnemyCount)
+            if (MainSystem.Battle.EnemyCount < maxEnemyCount)
             {
                 SpawnEnemy();
             }
@@ -68,13 +69,13 @@ public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
     private void SpawnEnemy()
     {
         // 플레이어가 없거나 죽었으면 생성 중단
-        if (Main.Battle.PlayerHero == null || Main.Battle.PlayerHero.State == EntityState.Dead) return;
+        if (MainSystem.Battle.PlayerHero == null || MainSystem.Battle.PlayerHero.Stat.State == ECharacterState.Dead) return;
 
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
         float randomDist = Random.Range(minSpawnRadius, maxSpawnRadius);
 
-        Vector2 playerPos = Main.Battle.PlayerHero.transform.position;
+        Vector2 playerPos = MainSystem.Battle.PlayerHero.transform.position;
         Vector2 spawnPos = playerPos + (Vector2)(randomDir * randomDist);
 
         GameObject enemyObj = Pop(EPoolType.Enemy, spawnPos);
@@ -83,10 +84,12 @@ public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
         {
             Enemy newEnemy = enemyObj.GetComponent<Enemy>();
 
-            newEnemy.Setup(100, 10);
+            var id = EnemyIDList[Random.Range(0, EnemyIDList.Count)];
+
+            newEnemy.Setup(id);
 
             // 배틀 매니저에 등록 (카운팅용)
-            Main.Battle.RegisterEnemy(newEnemy);
+            MainSystem.Battle.RegisterEnemy(newEnemy);
         }
     }
 

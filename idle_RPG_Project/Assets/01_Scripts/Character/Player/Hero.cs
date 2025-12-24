@@ -28,7 +28,7 @@ public struct AttackCombo
 public class Hero: CharacterBase
 {
     // 적에게 너무 딱 붙지 않게 하는 거리 (사거리의 80% 정도까지만 접근)
-    private float StopDistance => attackRange * 0.8f;
+    private float StopDistance => Stat.Value.attackRange * 0.8f;
 
     [Title("Combo Settings")]
     [SerializeField] private List<AttackCombo> combo = new List<AttackCombo>();
@@ -36,33 +36,29 @@ public class Hero: CharacterBase
     protected int _comboIndex = 0; // 현재 콤보 순서 (0, 1, 2)
     private Tween _dashTween;
 
-    private void Start()
-    {
-        Setup(1000, 50);
-        _hpBar = MainSystem.Instance.FX.GetHpBar(transform, CurrentHp, MaxHp, true);
-    }
+    protected override bool hpBarAlwaysVisible => true;
 
     protected override void FindTarget()
     {
         // BattleManager에게 가장 가까운 몬스터를 찾아달라고 요청
-        target = MainSystem.Instance.Battle.GetNearestEnemy(transform.position);
+        Target = MainSystem.Battle.GetNearestEnemy(transform.position);
     }
 
     protected override void MoveToTarget(float deltaTime)
     {
         Vector2 moveDir = Vector2.zero;
 
-        if (target != null)
+        if (Target != null)
         {
             // 1. 타겟 방향 계산 (Target - Me)
-            Vector2 diff = target.transform.position - transform.position;
+            Vector2 diff = Target.transform.position - transform.position;
             float distSqr = diff.sqrMagnitude;
 
             // 2. 너무 멀면 접근, 공격 사거리 안쪽이면 멈춤 (카이팅 방지 및 제자리 공격)
             if (distSqr > StopDistance * StopDistance)
             {
                 moveDir = diff.normalized;
-                transform.Translate(moveDir * moveSpeed * deltaTime);
+                transform.Translate(moveDir * Stat.Value.moveSpeed * deltaTime);
             }
             else
             {
@@ -75,7 +71,7 @@ public class Hero: CharacterBase
         {
             // 타겟(적)이 아예 없으면? -> 제자리 대기 (Idle)
             moveDir = Vector3.zero;
-            State = EntityState.Idle;
+            Stat.SetState(ECharacterState.Idle);
         }
 
         // 애니메이션 갱신
@@ -85,7 +81,7 @@ public class Hero: CharacterBase
     // Player는 부모의 Tick을 쓰지 않고 자체 로직
     public override void Tick(float deltaTime)
     {
-        if (State == EntityState.Dead) return;
+        if (Stat.State == ECharacterState.Dead) return;
 
         // [Lock 로직] (부모와 동일)
         if (_busyTimer > 0)
@@ -96,7 +92,7 @@ public class Hero: CharacterBase
         }
 
         // 쿨타임 계산
-        float cooldown = 1.0f / Mathf.Max(0.01f, attackSpeed);
+        float cooldown = 1.0f / Mathf.Max(0.01f, Stat.Value.attackSpeed);
 
         // 쿨타임이 찼고, 공격할 준비가 되었을 때
         if (Time.time - lastAttackTime >= cooldown)
@@ -111,11 +107,11 @@ public class Hero: CharacterBase
                 }
 
                 // 상태 변경
-                State = EntityState.Attack;
+                Stat.SetState(ECharacterState.Attack);
                 UpdateAnimation(Vector3.zero);
 
                 // 락 걸기
-                _busyTimer = attackAnimLength / attackSpeed;
+                _busyTimer = attackAnimLength / Stat.Value.attackSpeed;
 
                 // 공격 실행 (오버라이드한 함수 호출)
                 ProcessAttack();
@@ -173,7 +169,7 @@ public class Hero: CharacterBase
         float dist = combo.dashDistance;
         
 
-        float distToTarget = Vector2.Distance(transform.position, target.transform.position);
+        float distToTarget = Vector2.Distance(transform.position, Target.transform.position);
         if (combo.dashDistance > distToTarget)
         {
             //대시 거리가 타겟과의 거리보다 크면 대시 거리를 조정
@@ -207,9 +203,9 @@ public class Hero: CharacterBase
         return new AttackInfo
         {
             Attacker = this,
-            Damage = Atk,
+            Damage = Stat.Value.Atk,
             AttackType = EAttackType.Normal,
-            Knockback = new knockbackInfo
+            Knockback = new KnockbackInfo
             {
                 Distance = combo[_comboIndex].knockbackDistance,
                 Duration = combo[_comboIndex].knockbackDuration
@@ -220,6 +216,6 @@ public class Hero: CharacterBase
     private bool CheckEnemyInAttackRange()
     {
         Vector2 origin = GetAttackOrigin();
-        return Physics2D.OverlapCircle(origin, attackRange, enemyLayer);
+        return Physics2D.OverlapCircle(origin, Stat.Value.attackRange, enemyLayer);
     }
 }

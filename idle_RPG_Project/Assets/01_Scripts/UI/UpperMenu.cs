@@ -10,15 +10,15 @@ public class UpperMenu : UIBase
 
     public override void BindEvents()
     {
-        MainSystem.Instance.Event.StartListening(EEventType.GoldChanged, RefreshGoldText);
+        MainSystem.Event.StartListening(EEventType.GoldUpdated, RefreshGoldText);
     }
     protected override void UnbindEvents()
     {
-        MainSystem.Instance.Event.StopListening(EEventType.GoldChanged, RefreshGoldText);
+        MainSystem.Event.StopListening(EEventType.GoldUpdated, RefreshGoldText);
     }
     public override void RefreshUI()
     {
-        RefreshGoldText(MainSystem.Instance.Player.playerData.Gold);
+        RefreshGoldText(MainSystem.Player.playerData.Value.Gold);
     }
 
     private void RefreshGoldText(object data)

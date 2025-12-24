@@ -27,25 +27,17 @@ public class HPBar : MonoBehaviour
         _poolable = GetComponent<Poolable>();
     }
 
-    public void Initialize(BigInteger currentHp, BigInteger maxHp, bool alwaysVisible)
+    public void Initialize(bool alwaysVisible)
     {
         _isAlwaysVisible = alwaysVisible;
 
-        float ratio = (float)currentHp / (float)maxHp;
-
         // 초기화: 둘 다 꽉 채움
-        frontHpImage.fillAmount = ratio;
-        backHpImage.fillAmount = ratio;
+        frontHpImage.fillAmount = 1f;
+        backHpImage.fillAmount = 1f;
 
         if (_isAlwaysVisible)
         {
             canvasGroup.alpha = 1f; // 항상 보임
-        }
-        else
-        {
-            // 최대 체력이면 숨김, 아니면 보임
-            bool isFullHp = ratio >= 0.99f;
-            canvasGroup.alpha = isFullHp ? 0f : 1f;
         }
 
         gameObject.SetActive(true);

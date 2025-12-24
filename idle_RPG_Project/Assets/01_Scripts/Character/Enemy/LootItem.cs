@@ -117,7 +117,7 @@ public class LootItem : MonoBehaviour
         // EffectManager.Instance.PlaySound("LootCollect");
 
         // 실제 재화 증가 처리
-        MainSystem.Instance.Player.ChangeGold(_amount);
+        MainSystem.Player.playerData.Value.UpdateGold(_amount);
 
         // 획득 시 약간 작아지면서 사라지는 연출
         transform.DOScale(0, 0.2f).SetEase(Ease.InBack).OnComplete(ReturnToPool);

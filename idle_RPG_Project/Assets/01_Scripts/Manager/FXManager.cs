@@ -80,12 +80,12 @@ public class FXManager : PoolManager<FXManager, EPoolType>
         return obj;
     }
 
-    public HPBar GetHpBar(Transform targetTransform, BigInteger currentHp, BigInteger maxHp, bool isAlwaysVisible)
+    public HPBar GetHpBar(Transform targetTransform, bool isAlwaysVisible)
     {
         var obj = Pop(EPoolType.HpBar);
         var hpBar = obj.GetComponentInChildren<HPBar>();
 
-        hpBar.Initialize(currentHp, maxHp, isAlwaysVisible);
+        hpBar.Initialize(isAlwaysVisible);
         _activeBars.Add(hpBar, targetTransform);
 
         UpdatePosition(hpBar, targetTransform.position + HpBarOffset);

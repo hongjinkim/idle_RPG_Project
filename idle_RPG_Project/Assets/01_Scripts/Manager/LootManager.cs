@@ -37,7 +37,7 @@ public class LootManager : BaseManager
         if (target == null) return;
 
         // 1. 풀에서 껍데기 가져오기
-        LootItem item = MainSystem.Instance.FX.Pop(EPoolType.LootItem, spawnPosition).GetComponent<LootItem>();
+        LootItem item = MainSystem.FX.Pop(EPoolType.LootItem, spawnPosition).GetComponent<LootItem>();
 
         // 2. 데이터(SO) 주입해서 변신시키기
         item.Initialize(_lootDataDict[type], amount, spawnPosition, target);

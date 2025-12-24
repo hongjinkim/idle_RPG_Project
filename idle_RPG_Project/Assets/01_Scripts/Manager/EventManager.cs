@@ -11,8 +11,8 @@ public enum EEventType
     PlayerLevelUp,          // 레벨
 
     // 재화 관련
-    GoldChanged,            // 골드 획득
-    GemChanged,             // 보석 획득
+    GoldUpdated,            // 골드 획득
+    GemUpdated,             // 보석 획득
 
     // 게임 상태
     GameStateChanged,       // 게임 오버, 일시정지 등

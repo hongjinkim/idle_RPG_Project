@@ -9,14 +9,14 @@ public class MainSystem : MonoBehaviour
     public static MainSystem Instance { get; private set; }
 
     // 구체적인 접근이 필요할 땐 프로퍼티 유지
-    public EventManager Event { get; private set; }
-    public DataManager Data { get; private set; }
-    public PlayerManager Player { get; private set; }
-    public BattleManager Battle { get; private set; }
-    public EnemyPoolManager Enemy { get; private set; }
-    public FXManager FX { get; private set; }
-    public UIManager UI { get; private set; }
-    public LootManager Loot { get; private set; }
+    public static EventManager Event { get; private set; }
+    public static DataManager Data { get; private set; }
+    public static PlayerManager Player { get; private set; }
+    public static BattleManager Battle { get; private set; }
+    public static EnemyPoolManager Enemy { get; private set; }
+    public static FXManager FX { get; private set; }
+    public static UIManager UI { get; private set; }
+    public static LootManager Loot { get; private set; }
 
     // 모든 매니저를 담아둘 리스트 (일괄 관리용)
     [ShowInInspector, ReadOnly]
@@ -63,4 +63,14 @@ public class MainSystem : MonoBehaviour
         var mgr = _allManagers.FirstOrDefault(m => m is T);
         return mgr as T;
     }
+    // 에디터에서 게임 중지 시 static 참조 해제 (메모리 누수 방지용 안전장치)
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Event = null; Data = null; Player = null; Battle = null;
+            Enemy = null; FX = null; UI = null; Loot = null;
+        }
+    }
+
 }

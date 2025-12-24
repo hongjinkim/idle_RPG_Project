@@ -6,9 +6,9 @@
   <Project Path="gpm_cachestorage.csproj" />
   <Project Path="gpm_ui_sample.csproj" />
   <Project Path="gpm_ui.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="DOTween.Modules.csproj" />
   <Project Path="gpm_ui_editor.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="CAH.UnityGoogleSheets.Editor.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
 </Solution>

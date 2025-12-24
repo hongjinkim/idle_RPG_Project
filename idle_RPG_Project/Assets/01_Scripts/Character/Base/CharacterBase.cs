@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using DataTable;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading;
@@ -12,26 +13,32 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 // 유닛의 상태 정의
-public enum EntityState { Idle, Move, Attack, Dead }
+public enum ECharacterState { Idle, Move, Attack, Dead }
+[Serializable]
+public class CharacterStat
+{
+    public CharacterValue Value;
+    public ECharacterState State { get; protected set; }
 
+    public void SetState(ECharacterState newState)
+    {
+        State = newState;
+    }
+}
 public abstract class CharacterBase : MonoBehaviour
 {
-    [Title("스탯")]
-    [ShowInInspector] public BigInteger MaxHp { get; protected set; }
-    [ShowInInspector] public BigInteger CurrentHp { get; protected set; }
-    [ShowInInspector] public BigInteger Atk { get; protected set; }
-    [SerializeField] protected float attackRange = 2.0f;
-    [SerializeField] protected float moveSpeed = 5.0f;
-    [SerializeField] protected float attackSpeed = 1.0f; // 공격 속도 (초 당 공격 횟수)
+    [Header("캐릭터 상태")]
+    [ReadOnly] public string ID;
+    public CharacterStat Stat = new CharacterStat();
+    [SerializeField] public CharacterBase Target;
 
 
-    [Title("상태 & 비주얼")]
-    [ShowInInspector, ReadOnly] public EntityState State { get; protected set; } = EntityState.Idle;
-    [ShowInInspector] protected CharacterBase target;
     protected HPBar _hpBar;
+    protected virtual bool hpBarAlwaysVisible => false;
+
     protected Vector2 targetDir =>
-        (target == null) ? Vector2.right :
-        (target.transform.position - transform.position).normalized;
+        (Target == null) ? Vector2.right :
+        (Target.transform.position - transform.position).normalized;
 
     [Title("공격/피격 관련")]
     [SerializeField] protected LayerMask enemyLayer;
@@ -63,14 +70,14 @@ public abstract class CharacterBase : MonoBehaviour
     }
 
     // --- 초기화 ---
-    public virtual void Setup(BigInteger hp, BigInteger atk)
+    public virtual void Setup(int id)
     {
-        MaxHp = hp;
-        CurrentHp = hp;
-        Atk = atk;
-        State = EntityState.Idle;
-        gameObject.SetActive(true);
-        target = null;
+        // 플레이어/몬스터 각자 초기화 로직 오버라이드
+    }
+
+    protected virtual void OnEnable()
+    {
+        _hpBar = MainSystem.FX.GetHpBar(transform, hpBarAlwaysVisible);
     }
 
     // --- 애니메이션 통합 로직 ---
@@ -100,7 +107,7 @@ public abstract class CharacterBase : MonoBehaviour
     // --- 메인 로직 (BattleManager가 매 프레임 호출) ---
     public virtual void Tick(float deltaTime)
     {
-        if (State == EntityState.Dead) return;
+        if (Stat.State == ECharacterState.Dead) return;
         if(_isKnockbacked) return;
 
         // 1. 행동 불가 상태인지 체크
@@ -121,36 +128,36 @@ public abstract class CharacterBase : MonoBehaviour
 
         // 2. 거리 계산 및 행동 결정
         float distSqr = float.MaxValue;
-        if (target != null && target.gameObject.activeSelf)
+        if (Target != null && Target.gameObject.activeSelf)
         {
-            distSqr = (target.transform.position - transform.position).sqrMagnitude;
+            distSqr = (Target.transform.position - transform.position).sqrMagnitude;
         }
 
-        float rangeSqr = attackRange * attackRange;
+        float rangeSqr = Stat.Value.attackRange * Stat.Value.attackRange;
 
-        float currentInterval = 1.0f / Mathf.Max(0.01f, attackSpeed); // 0 나누기 방지
+        float currentInterval = 1.0f / Mathf.Max(0.01f, Stat.Value.attackSpeed); // 0 나누기 방지
         bool isCooldownReady = (Time.time - lastAttackTime >= currentInterval);
 
         // A. 사거리 안 -> 공격
-        if (target != null && distSqr <= rangeSqr)
+        if (Target != null && distSqr <= rangeSqr)
         {
             if (isCooldownReady)
             {
-                State = EntityState.Attack;
+                Stat.SetState(ECharacterState.Attack);
                 UpdateAnimation(Vector2.zero); // 멈춤
                 ProcessAttack();
-                _busyTimer = attackAnimLength / attackSpeed;
+                _busyTimer = attackAnimLength / Stat.Value.attackSpeed;
             }
             else
             {
-                State = EntityState.Idle;
+                Stat.SetState(ECharacterState.Idle);
                 UpdateAnimation(Vector2.zero); // 멈춤
             }
         }
         // B. 사거리 밖 -> 이동 (타겟이 없으면 각자 방식대로 이동)
         else if(_busyTimer <=0)
         {
-            State = EntityState.Move;
+            Stat.SetState(ECharacterState.Move);
             MoveToTarget(deltaTime);
         }
 
@@ -161,13 +168,13 @@ public abstract class CharacterBase : MonoBehaviour
     protected virtual void CheckTarget()
     {
         // 타겟이 죽거나 비활성화되면 null 처리
-        if (target != null && (target.State == EntityState.Dead || !target.gameObject.activeSelf))
+        if (Target != null && (Target.Stat.State == ECharacterState.Dead || !Target.gameObject.activeSelf))
         {
-            target = null;
+            Target = null;
         }
 
         // 타겟이 없을 때만 새로 찾기 시도 (Slayer는 가장 가까운 적, Monster는 Slayer)
-        if (target == null) FindTarget();
+        if (Target == null) FindTarget();
     }
 
     protected abstract void FindTarget(); // 아군/적군 검색 로직이 다르므로 abstract
@@ -191,7 +198,7 @@ public abstract class CharacterBase : MonoBehaviour
         _lastHitEventTime = Time.time; // 시간 갱신
 
         Vector2 origin = GetAttackOrigin();
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(origin, attackRange * 0.5f, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(origin, Stat.Value.attackRange * 0.5f, enemyLayer);
 
         // 중복 방지용 리스트
         HashSet<CharacterBase> uniqueEnemies = new HashSet<CharacterBase>();
@@ -222,9 +229,9 @@ public abstract class CharacterBase : MonoBehaviour
         return new AttackInfo
         {
             Attacker = this,
-            Damage = Atk,
+            Damage = Stat.Value.Atk,
             AttackType = EAttackType.Normal,
-            Knockback = new knockbackInfo
+            Knockback = new KnockbackInfo
             {
                 Distance = 0f,
                 Duration = 0f
@@ -236,17 +243,17 @@ public abstract class CharacterBase : MonoBehaviour
     {
         if (_spriteRenderer == null)
             return (Vector2)transform.position;
-        return (Vector2)transform.position + targetDir * (attackRange * 0.5f);
+        return (Vector2)transform.position + targetDir * (Stat.Value.attackRange * 0.5f);
     }
 
     public virtual void TakeDamage(AttackInfo info)
     {
-        if (State == EntityState.Dead) return;
-        CurrentHp -= info.Damage;
+        if (Stat.State == ECharacterState.Dead) return;
+        Stat.Value.CurrentHp -= info.Damage;
 
         // (나중에 여기에 피격 이펙트/데미지 텍스트 추가)
         // 이펙트 적용
-        MainSystem.Instance.FX.GetDamageText(transform.position, new AttackInfo
+        MainSystem.FX.GetDamageText(transform.position, new AttackInfo
         {
             Attacker = this,
             Damage = info.Damage,
@@ -255,7 +262,7 @@ public abstract class CharacterBase : MonoBehaviour
         // HP바 갱신
         if (_hpBar != null)
         {
-            _hpBar.SetHP(CurrentHp, MaxHp);
+            _hpBar.SetHP(Stat.Value.CurrentHp, Stat.Value.MaxHp);
         }
         // 넉백 적용
         if (info.Knockback.Distance > 0)
@@ -263,16 +270,16 @@ public abstract class CharacterBase : MonoBehaviour
             Knockback(info.Attacker.transform.position, info.Knockback.Distance, info.Knockback.Duration);
         }
 
-        if (CurrentHp <= 0)
+        if (Stat.Value.CurrentHp <= 0)
         {
-            CurrentHp = 0;
+            Stat.Value.CurrentHp = 0;
             Die();
         }
     }
 
     protected void Knockback(Vector3 attackerPos, float distance, float duration)
     {
-        if (!canKnockback || State == EntityState.Dead) return;
+        if (!canKnockback || Stat.State == ECharacterState.Dead) return;
 
         if (_knockbackTween != null && _knockbackTween.IsActive()) _knockbackTween.Kill();
 
@@ -292,27 +299,27 @@ public abstract class CharacterBase : MonoBehaviour
             {
                 _isKnockbacked = false;
                 // 죽지 않았으면 Idle로 복귀
-                if (State != EntityState.Dead) State = EntityState.Idle;
+                if (Stat.State != ECharacterState.Dead) Stat.SetState(ECharacterState.Idle);
             });
     }
 
     protected virtual void Die()
     {
-        if (State == EntityState.Dead) return;
-        State = EntityState.Dead;
-        target = null;
+        if (Stat.State == ECharacterState.Dead) return;
+        Stat.SetState(ECharacterState.Dead);
+        Target = null;
         gameObject.SetActive(false);
 
         // HP바 반납
         if (_hpBar != null)
         {
-            MainSystem.Instance.FX.ReturnHpBar(_hpBar);
+            MainSystem.FX.ReturnHpBar(_hpBar);
         }
 
         _poolable?.Release();
 
         // BattleManager에게 죽었다고 알리는 로직은 Event로 처리
-        MainSystem.Instance.Battle.OnCharacterDead(this);
+        MainSystem.Battle.OnCharacterDead(this);
     }
 
     protected void SyncAnimationSpeed()
@@ -320,7 +327,7 @@ public abstract class CharacterBase : MonoBehaviour
         if (_animator == null) return;
 
         // 1. 이동 속도 (변화 없음)
-        float moveMultiplier = moveSpeed / baseMoveSpeed;
+        float moveMultiplier = Stat.Value.moveSpeed / baseMoveSpeed;
         if (moveMultiplier < 0.1f) moveMultiplier = 1f;
         _animator.SetFloat("AnimMoveSpeed", moveMultiplier);
 
@@ -328,7 +335,7 @@ public abstract class CharacterBase : MonoBehaviour
         // 공식: 현재공속 * 애니메이션길이
         // 설명: 1초짜리 애니를 공속 2.0(0.5초 쿨)에 맞추려면 2배속으로 재생해야 함.
         //       (1.0 * 2.0 = 2.0배속)
-        float attackMultiplier = attackSpeed * attackAnimLength;
+        float attackMultiplier = Stat.Value.attackSpeed * attackAnimLength;
 
         // 너무 느리게 재생되는 것 방지 (최소 1배속 유지 등 정책 결정 필요)
         if (attackMultiplier < 1.0f) attackMultiplier = 1.0f;
@@ -345,7 +352,7 @@ public abstract class CharacterBase : MonoBehaviour
         Vector2 origin = GetAttackOrigin();
 
         // 그 위치에 공격 반경만큼 원 그리기
-        Gizmos.DrawWireSphere(origin, attackRange * 0.5f);
+        Gizmos.DrawWireSphere(origin, Stat.Value.attackRange * 0.5f);
     }
 
 }

@@ -1,135 +1,324 @@
-#if !ODIN_INSPECTOR
+ï»¿#if !ODIN_INSPECTOR
+// Odinì´ ì¡´ì¬í•˜ë©´ ì•„ë¬´ê²ƒë„ ì •ì˜í•˜ì§€ ì•ŠìŒ
 using System;
-using System.Diagnostics;
-using UnityEngine;
 
 namespace Sirenix.OdinInspector
 {
-    // -------------------------------------------------------------------------
-    // params object[]¸¦ ½á¼­ ¾î¶² ÀÎÀÚ°¡ µé¾î¿Íµµ ¿¡·¯ ¾øÀÌ ¹Ş¾Æ³À´Ï´Ù.
-    // -------------------------------------------------------------------------
-    [Conditional("UNITY_EDITOR")]
-    public abstract class MockAttribute : Attribute
+
+
+    // ğŸ”¹ ì¸ìŠ¤í™í„° ë¹„í‘œì‹œ
+    public class ShowInInspector : Attribute { }
+
+    // ğŸ”¹ ë¼ë²¨ ì œì–´
+    public class HideLabel : Attribute { }
+    public class LabelText : Attribute
     {
-        public MockAttribute(params object[] args) { }
+        public LabelText(string label) { }
     }
 
-    // =========================================================================
-    // 1. ±×·ì (Groups) - ·¹ÀÌ¾Æ¿ô Á¤¸®¿ë
-    // =========================================================================
-    public class BoxGroupAttribute : MockAttribute { public BoxGroupAttribute(string group = "", bool showLabel = true, bool centerLabel = false, float order = 0) : base() { } }
-    public class FoldoutGroupAttribute : MockAttribute { public FoldoutGroupAttribute(string group, int order = 0) : base() { } public FoldoutGroupAttribute(string group, bool expanded, int order = 0) : base() { } }
-    public class TabGroupAttribute : MockAttribute { public TabGroupAttribute(string group, bool useFixedHeight = false, int order = 0) : base() { } }
-    public class TitleGroupAttribute : MockAttribute { public TitleGroupAttribute(string title, string subtitle = null, TitleAlignments alignment = TitleAlignments.Left, bool horizontalLine = true, bool bold = true, bool indent = false, float order = 0) : base() { } }
-    public class HorizontalGroupAttribute : MockAttribute { public HorizontalGroupAttribute(string group = "", float width = 0, int marginLeft = 0, int marginRight = 0, float order = 0) : base() { } }
-    public class VerticalGroupAttribute : MockAttribute { public VerticalGroupAttribute(string group = "", float order = 0) : base() { } }
-    public class ButtonGroupAttribute : MockAttribute { public ButtonGroupAttribute(string group = "") : base() { } }
-    public class ToggleGroupAttribute : MockAttribute { public ToggleGroupAttribute(string toggleMemberName, float order = 0, string groupTitle = null) : base() { } }
-
-    // =========================================================================
-    // 2. Çàµ¿ ¹× ¹öÆ° (Actions & Buttons)
-    // =========================================================================
-    public class ButtonAttribute : MockAttribute 
-    { 
-        public ButtonAttribute() : base() { }
-        public ButtonAttribute(ButtonSizes size) : base() { }
-        public ButtonAttribute(string name) : base() { }
-        public ButtonAttribute(string name, ButtonSizes size) : base() { }
-        public string Name { get; set; }
-        public ButtonSizes ButtonSize { get; set; }
-        public ButtonStyle ButtonStyle { get; set; }
+    // ğŸ”¹ ì¸ë¼ì¸ í‘œì‹œ
+    public class InlineProperty : Attribute { }
+    public class InlineEditor : Attribute
+    {
+        public InlineEditor() { }
+        public InlineEditor(InlineEditorObjectFieldModes mode) { }
     }
-    public class OnValueChangedAttribute : MockAttribute { public OnValueChangedAttribute(string action, bool includeChildren = false) : base() { } }
-    public class OnInspectorInitAttribute : MockAttribute { public OnInspectorInitAttribute(string action) : base() { } }
-    public class OnInspectorGUIAttribute : MockAttribute { public OnInspectorGUIAttribute() : base() { } }
 
-    // =========================================================================
-    // 3. »óÅÂ Á¦¾î (State & Visibility)
-    // =========================================================================
-    public class ShowIfAttribute : MockAttribute { public ShowIfAttribute(string condition, object optionalValue = null) : base() { } }
-    public class HideIfAttribute : MockAttribute { public HideIfAttribute(string condition, object optionalValue = null) : base() { } }
-    public class EnableIfAttribute : MockAttribute { public EnableIfAttribute(string condition, object optionalValue = null) : base() { } }
-    public class DisableIfAttribute : MockAttribute { public DisableIfAttribute(string condition, object optionalValue = null) : base() { } }
-    public class ReadOnlyAttribute : MockAttribute { public ReadOnlyAttribute() : base() { } }
-    public class ShowInInspectorAttribute : MockAttribute { public ShowInInspectorAttribute() : base() { } }
-    public class HideInInspectorAttribute : MockAttribute { public HideInInspectorAttribute() : base() { } }
-    public class HideInEditorModeAttribute : MockAttribute { public HideInEditorModeAttribute() : base() { } }
-    public class HideInPlayModeAttribute : MockAttribute { public HideInPlayModeAttribute() : base() { } }
-
-    // =========================================================================
-    // 4. ½Ã°¢Àû Ç¥Çö (Visuals)
-    // =========================================================================
-    public class LabelTextAttribute : MockAttribute { public LabelTextAttribute(string text) : base() { } }
-    public class LabelWidthAttribute : MockAttribute { public LabelWidthAttribute(float width) : base() { } }
-    public class TitleAttribute : MockAttribute { public TitleAttribute(string title, string subtitle = null, TitleAlignments titleAlignment = TitleAlignments.Left, bool horizontalLine = true, bool bold = true) : base() { } }
-    public class InfoBoxAttribute : MockAttribute { public InfoBoxAttribute(string message, InfoMessageType infoMessageType = InfoMessageType.Info, string visibleIfMemberName = null) : base() { } }
-    public class DisplayAsStringAttribute : MockAttribute { public DisplayAsStringAttribute(bool overflow = true) : base() { } }
-    public class PropertySpaceAttribute : MockAttribute { public PropertySpaceAttribute(float spaceBefore = 0, float spaceAfter = 0) : base() { } }
-    public class PropertyOrderAttribute : MockAttribute { public PropertyOrderAttribute(float order) : base() { } }
-    public class GUIColorAttribute : MockAttribute { public GUIColorAttribute(float r, float g, float b, float a = 1f) : base() { } }
-    public class ColorPaletteAttribute : MockAttribute { public ColorPaletteAttribute(string name = null) : base() { } }
-    public class PreviewFieldAttribute : MockAttribute { public PreviewFieldAttribute(float height = 0, ObjectFieldAlignment alignment = ObjectFieldAlignment.Left) : base() { } }
-    public class ProgressBarAttribute : MockAttribute { public ProgressBarAttribute(double min, string colorMemberName = null) : base() { } }
-
-    // =========================================================================
-    // 5. °ª ¹× À¯È¿¼º (Values & Validation)
-    // =========================================================================
-    public class ValueDropdownAttribute : MockAttribute 
-    { 
-        public ValueDropdownAttribute(string memberName) : base() { }
-        // µå·Ó´Ù¿îÀº ¿É¼ÇÀÌ ¸¹À¸¹Ç·Î ÇÊµåµµ ¸î °³ ´õ¹Ì·Î ¸¸µé¾îµÓ´Ï´Ù.
-        public bool AppendNextDrawer { get; set; }
-        public bool DisableGUIInAppendedDrawer { get; set; }
-        public bool DoubleClickToConfirm { get; set; }
-        public bool DropdownHeight { get; set; }
+    public enum InlineEditorObjectFieldModes
+    {
+        Hidden = 0,
+        Foldout = 1,
+        CompressedFoldout = 2,
+        Boxed = 3,
+        BoxedAndFoldout = 4,
     }
-    public class ValidateInputAttribute : MockAttribute { public ValidateInputAttribute(string condition, string message = null, InfoMessageType messageType = InfoMessageType.Error) : base() { } }
-    public class MinValueAttribute : MockAttribute { public MinValueAttribute(double minValue) : base() { } }
-    public class MaxValueAttribute : MockAttribute { public MaxValueAttribute(double maxValue) : base() { } }
-    public class RangeAttribute : MockAttribute { public RangeAttribute(double min, double max) : base() { } } // Unity Range¿Í °ãÄ¥ ¼ö ÀÖÀ¸³ª Odin ³×ÀÓ½ºÆäÀÌ½º ¾È¿¡ µÒ
-    public class PropertyRangeAttribute : MockAttribute { public PropertyRangeAttribute(double min, double max) : base() { } }
-    public class FilePathAttribute : MockAttribute { public FilePathAttribute() : base() { } }
-    public class FolderPathAttribute : MockAttribute { public FolderPathAttribute() : base() { } }
-    public class RequiredAttribute : MockAttribute { public RequiredAttribute(string errorMessage = null, InfoMessageType messageType = InfoMessageType.Error) : base() { } }
-    public class AssetsOnlyAttribute : MockAttribute { public AssetsOnlyAttribute() : base() { } }
-    public class SceneObjectsOnlyAttribute : MockAttribute { public SceneObjectsOnlyAttribute() : base() { } }
 
-    // =========================================================================
-    // 6. ¸®½ºÆ® (Collections)
-    // =========================================================================
-    public class TableListAttribute : MockAttribute 
-    { 
-        public TableListAttribute() : base() { }
+    // ğŸ”¹ ReadOnly
+    public class ReadOnlyAttribute : Attribute { public ReadOnlyAttribute() { } }
+
+    // ğŸ”¹ GUI ìƒ‰ìƒ
+    public class GUIColor : Attribute
+    {
+        public GUIColor(float r, float g, float b, float a = 1f) { }
+    }
+
+    // ğŸ”¹ InfoBox
+    public class InfoBox : Attribute
+    {
+        public InfoBox(string message) { }
+        public InfoBox(string message, InfoMessageType type) { }
+    }
+
+    public enum InfoMessageType
+    {
+        None = 0,
+        Info = 1,
+        Warning = 2,
+        Error = 3
+    }
+
+    // ğŸ”¹ Foldout, Box, Tab ê·¸ë£¹
+    public class FoldoutGroup : Attribute
+    {
+        public FoldoutGroup(string name) { }
+    }
+
+    public class BoxGroup : Attribute
+    {
+        public BoxGroup(string name) { }
+    }
+
+    public class TabGroup : Attribute
+    {
+        public TabGroup(string name) { }
+        public TabGroup(string group, string tab) { }
+    }
+
+
+    // ğŸ”¹ Horizontal, Vertical Group
+    public class HorizontalGroup : Attribute
+    {
+        public HorizontalGroup(string groupName) { }
+    }
+
+    public class VerticalGroup : Attribute
+    {
+        public VerticalGroup(string groupName) { }
+    }
+
+    // ğŸ”¹ Title
+    public class Title : Attribute
+    {
+        public Title(string title, string subtitle = null, TitleAlignments alignment = TitleAlignments.Left, bool bold = true, bool underline = false) { }
+    }
+
+    public enum TitleAlignments
+    {
+        Left = 0,
+        Center = 1
+    }
+
+    // ğŸ”¹ GUI Wrapper
+    public class PropertySpace : Attribute
+    {
+        public PropertySpace(float top = 0, float bottom = 0) { }
+    }
+
+    public class PropertyOrder : Attribute
+    {
+        public PropertyOrder(int order) { }
+    }
+
+    public class PropertyTooltip : Attribute
+    {
+        public PropertyTooltip(string tooltip) { }
+    }
+
+    public class Indent : Attribute
+    {
+        public Indent(int indentLevel = 1) { }
+    }
+    // ğŸ”¹ ì¡°ê±´ë¶€ ë…¸ì¶œ
+    public class ShowIf : Attribute
+    {
+        public ShowIf(string condition) { }
+        public ShowIf(string memberName, object optionalValue) { }
+    }
+
+    public class HideIf : Attribute
+    {
+        public HideIf(string condition) { }
+        public HideIf(string memberName, object optionalValue) { }
+    }
+
+    // ğŸ”¹ ì¡°ê±´ë¶€ í™œì„±í™”
+    public class EnableIf : Attribute
+    {
+        public EnableIf(string condition) { }
+        public EnableIf(string memberName, object optionalValue) { }
+    }
+
+    public class DisableIf : Attribute
+    {
+        public DisableIf(string condition) { }
+        public DisableIf(string memberName, object optionalValue) { }
+    }
+
+    // ğŸ”¹ ì¡°ê±´ë¶€ í•„ë“œ ìˆ¨ê¹€/ë¹„í™œì„±í™”
+    public class Required : Attribute
+    {
+        public Required(string errorMessage = null) { }
+    }
+
+    public class ValidateInput : Attribute
+    {
+        public ValidateInput(string condition) { }
+        public ValidateInput(string condition, string message) { }
+    }
+
+    public class OnValueChanged : Attribute
+    {
+        public OnValueChanged(string callbackName) { }
+    }
+    public class Button : Attribute
+    {
+        public Button() { }
+        public Button(ButtonSizes size) { }
+        public Button(string name) { }
+    }
+
+    public enum ButtonSizes
+    {
+        Small = 0,
+        Medium = 1,
+        Large = 2
+    }
+
+    // ğŸ”¹ íˆ´íŒ
+    public class Tooltip : Attribute
+    {
+        public Tooltip(string tooltip) { }
+    }
+
+    // ğŸ”¹ Enum ì„ íƒ
+    public class EnumToggleButtons : Attribute { }
+
+    public class EnumPagingAttribute : Attribute
+    {
+        public EnumPagingAttribute() { }
+    }
+
+    // ğŸ”¹ ë²”ìœ„ ì œí•œ
+    public class PropertyRange : Attribute
+    {
+        public PropertyRange(float min, float max) { }
+        public PropertyRange(int min, int max) { }
+    }
+    // ğŸ”¹ ë¦¬ìŠ¤íŠ¸ í‘œì‹œ ì„¤ì •
+    public class ListDrawerSettings : Attribute
+    {
+        public bool IsReadOnly { get; set; }
+        public bool HideAddButton { get; set; }
+        public bool HideRemoveButton { get; set; }
+        public bool DraggableItems { get; set; }
+        public bool Expanded { get; set; }
         public int NumberOfItemsPerPage { get; set; }
-        public bool ShowIndexLabels { get; set; }
-        public bool DrawScrollView { get; set; }
-        public int MinScrollViewHeight { get; set; }
-        public int MaxScrollViewHeight { get; set; }
-    }
-    public class ListDrawerSettingsAttribute : MockAttribute 
-    { 
-        public ListDrawerSettingsAttribute() : base() { }
-        public bool ShowIndexLabels { get; set; }
-        public string OnTitleBarGUI { get; set; }
-        public string ListElementLabelName { get; set; }
-    }
-    
-    // =========================================================================
-    // 7. Á÷·ÄÈ­ (Serialization) - ÁÖÀÇ: µ¥ÀÌÅÍ ÀúÀå ¹æ½ÄÀº Èä³»³¾ ¼ö ¾øÀ½
-    // =========================================================================
-    // OdinSerialize´Â ½Ã°¢Àû ¿ä¼Ò°¡ ¾Æ´Ï¶ó ½ÇÁ¦ µ¥ÀÌÅÍ ÀúÀå ·ÎÁ÷À» ¹Ù²Ù¹Ç·Î,
-    // ÀÌ ·¡ÆÛ¸¸À¸·Î´Â µ¥ÀÌÅÍ°¡ ³¯¾Æ°¥ ¼ö ÀÖ½À´Ï´Ù. 
-    // ÇÏÁö¸¸ ÄÄÆÄÀÏ ¿¡·¯¸¦ ¸·±â À§ÇØ Ãß°¡´Â ÇØµÓ´Ï´Ù.
-    public class OdinSerializeAttribute : MockAttribute { public OdinSerializeAttribute() : base() { } }
-    public class SerializedMonoBehaviour : MonoBehaviour { } // »ó¼Ó ¿¡·¯ ¹æÁö¿ë
 
-    // =========================================================================
-    // 8. ÇÊ¼ö Enums (²®µ¥±â)
-    // =========================================================================
-    public enum ButtonSizes { Small, Medium, Large, Gigantic }
-    public enum ButtonStyle { Box, Foldout }
-    public enum TitleAlignments { Left, Centered, Right, Split }
-    public enum InfoMessageType { None, Info, Warning, Error }
-    public enum ObjectFieldAlignment { Left, Center, Right }
+        public ListDrawerSettings() { }
+    }
+
+    // ğŸ”¹ ë”•ì…”ë„ˆë¦¬ í‘œì‹œ ì„¤ì •
+    public class DictionaryDrawerSettings : Attribute
+    {
+        public DictionaryDisplayOptions DisplayMode { get; set; }
+        public string KeyLabel { get; set; }
+        public string ValueLabel { get; set; }
+        public bool IsReadOnly { get; set; }
+        public bool ShowFoldout { get; set; }
+
+        public DictionaryDrawerSettings() { }
+    }
+
+    public enum DictionaryDisplayOptions
+    {
+        Foldout = 0,
+        OneLine = 1,
+        TwoLine = 2,
+        Tree = 3,
+        Grid = 4,
+        ExpandedFoldout = 5
+    }
+
+    // ğŸ”¹ í•„ë“œ ì´ë¦„ ì¬ì •ì˜
+    public class ValueDropdown : Attribute
+    {
+        public ValueDropdown(string methodName) { }
+    }
+
+    public class AssetsOnly : Attribute { }
+    public class SceneObjectsOnly : Attribute { }
+    // ğŸ”¹ ìƒíƒœ ë³€í™”ì— ëŒ€í•œ íŠ¸ë¦¬ê±°
+    public class OnInspectorInit : Attribute
+    {
+        public OnInspectorInit() { }
+    }
+
+    public class OnInspectorGUI : Attribute
+    {
+        public OnInspectorGUI(string methodName = null) { }
+    }
+
+    public class OnCollectionChanged : Attribute
+    {
+        public OnCollectionChanged(string methodName = null) { }
+    }
+
+    // ğŸ”¹ ì¸í¬ ë©”ì‹œì§€ ì œí•œ ì¡°ê±´
+    public class ShowIfGroup : Attribute
+    {
+        public ShowIfGroup(string condition) { }
+    }
+
+    public class HideIfGroup : Attribute
+    {
+        public HideIfGroup(string condition) { }
+    }
+
+    public class ToggleGroup : Attribute
+    {
+        public ToggleGroup(string toggleMemberName) { }
+    }
+
+    // ğŸ”¹ ì»¤ìŠ¤í…€ ì»¨íŠ¸ë¡¤ ê³„ì—´ (ë¹ˆ ì •ì˜ë§Œ)
+    public class CustomValueDrawer : Attribute
+    {
+        public CustomValueDrawer(string methodName) { }
+    }
+
+    public class CustomContextMenu : Attribute
+    {
+        public CustomContextMenu(string methodName, string displayName = null) { }
+    }
+
+    public class AssetList : Attribute
+    {
+        public AssetList() { }
+    }
+
+    public class AssetSelector : Attribute
+    {
+        public AssetSelector() { }
+        public AssetSelector(string path) { }
+    }
+
+    // ğŸ”¹ ì •ë ¬
+    public class TableList : Attribute
+    {
+        public TableList() { }
+    }
+
+    public class TableColumnWidth : Attribute
+    {
+        public TableColumnWidth(int width) { }
+    }
+
+    public class PreviewField : Attribute
+    {
+        public PreviewField() { }
+    }
+
+}
+
+namespace Sirenix.Serialization
+{
+    // ğŸ”¹ ì§ë ¬í™” ê´€ë ¨
+    public class OdinSerialize : Attribute { }
+
+    public class NonSerializedInInspector : Attribute { }
+
+    public class HideInInspector : Attribute { } // ì¶©ëŒ ë°©ì§€
+
+    // ShowInInspectorëŠ” Sirenix.OdinInspectorë§Œ ì •ì˜ (ì¶©ëŒ ë°©ì§€ ëª©ì )
+
 }
 #endif

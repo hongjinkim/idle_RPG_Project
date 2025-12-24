@@ -73,7 +73,7 @@ public class BattleManager : BaseManager
             var enemy = enemyList[i];
 
             // 1. 유효성 검사
-            if (enemy == null || !enemy.gameObject.activeInHierarchy || enemy.State == EntityState.Dead)
+            if (enemy == null || !enemy.gameObject.activeInHierarchy || enemy.Stat.State == ECharacterState.Dead)
                 continue;
 
             // 2. 거리 제곱 계산
@@ -102,7 +102,7 @@ public class BattleManager : BaseManager
         if (enemy == null) return;
 
         // 플레이어가 없거나 죽었으면 생성 중단
-        if (PlayerHero == null || PlayerHero.State == EntityState.Dead) return;
+        if (PlayerHero == null || PlayerHero.Stat.State == ECharacterState.Dead) return;
 
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
@@ -136,7 +136,7 @@ public class BattleManager : BaseManager
         {
             UnregisterEnemy(enemy);
             // 여기서 골드 획득, 점수 증가 로직 호출
-            MainSystem.Instance.Loot.SpawnLoot(ELootType.Gold,enemy.dropGold, enemy.transform.position, _heroTransform);
+            MainSystem.Loot.SpawnLoot(ELootType.Gold,enemy.dropGold, enemy.transform.position, _heroTransform);
         }
         else if (character is Hero)
         {
