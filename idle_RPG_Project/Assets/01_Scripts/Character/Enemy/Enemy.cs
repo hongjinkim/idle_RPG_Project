@@ -125,10 +125,10 @@ public class Enemy: CharacterBase
             Vector3 diff = Target.transform.position - transform.position;
 
             // 공격 사거리보다 멀면 추격
-            if (diff.sqrMagnitude > Stat.Value.attackRange * Stat.Value.attackRange)
+            if (diff.sqrMagnitude > Stat.Value.AtkRange * Stat.Value.AtkRange)
             {
                 moveDir = diff.normalized;
-                transform.Translate(moveDir * Stat.Value.moveSpeed * deltaTime); // 여기선 원래 속도(빠름) 사용
+                transform.Translate(moveDir * Stat.Value.MoveSpd * deltaTime); // 여기선 원래 속도(빠름) 사용
             }
         }
 

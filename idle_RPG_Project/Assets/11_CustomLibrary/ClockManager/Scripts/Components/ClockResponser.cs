@@ -11,7 +11,7 @@ public class ClockResponser : MonoBehaviour, IClockResponser
 
     private void Awake()
     {
-        var clock = FindObjectOfType<Clock>();
+        var clock = FindFirstObjectByType<Clock>();
 
         if (clock != null)
         {
@@ -19,7 +19,7 @@ public class ClockResponser : MonoBehaviour, IClockResponser
         }
         else
         {
-            Debug.LogError($"[!] <{GetType()}> 씬 안에 PoomClockManager가 존재해야 합니다.");
+            Debug.LogError($"[!] <{GetType()}> 씬 안에 ClockManager가 존재해야 합니다.");
         }
     }
 

@@ -6,13 +6,13 @@ using Cysharp.Threading.Tasks;
 public enum EEventType
 {
     // 플레이어 관련
-    PlayerHealthChanged,    // 체력 변경 
     PlayerExpChanged,       // 경험치 변경
     PlayerLevelUp,          // 레벨
+    PlayerPowerUpdated,     // 전투력 변경
 
     // 재화 관련
-    GoldUpdated,            // 골드 획득
-    GemUpdated,             // 보석 획득
+    GoldUpdated,            // 골드 변경
+    GemUpdated,             // 보석 변경
 
     // 게임 상태
     GameStateChanged,       // 게임 오버, 일시정지 등

@@ -133,9 +133,9 @@ public abstract class CharacterBase : MonoBehaviour
             distSqr = (Target.transform.position - transform.position).sqrMagnitude;
         }
 
-        float rangeSqr = Stat.Value.attackRange * Stat.Value.attackRange;
+        float rangeSqr = Stat.Value.AtkRange * Stat.Value.AtkRange;
 
-        float currentInterval = 1.0f / Mathf.Max(0.01f, Stat.Value.attackSpeed); // 0 나누기 방지
+        float currentInterval = 1.0f / Mathf.Max(0.01f, Stat.Value.AtkSpd); // 0 나누기 방지
         bool isCooldownReady = (Time.time - lastAttackTime >= currentInterval);
 
         // A. 사거리 안 -> 공격
@@ -146,7 +146,7 @@ public abstract class CharacterBase : MonoBehaviour
                 Stat.SetState(ECharacterState.Attack);
                 UpdateAnimation(Vector2.zero); // 멈춤
                 ProcessAttack();
-                _busyTimer = attackAnimLength / Stat.Value.attackSpeed;
+                _busyTimer = attackAnimLength / Stat.Value.AtkSpd;
             }
             else
             {
@@ -198,7 +198,7 @@ public abstract class CharacterBase : MonoBehaviour
         _lastHitEventTime = Time.time; // 시간 갱신
 
         Vector2 origin = GetAttackOrigin();
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(origin, Stat.Value.attackRange * 0.5f, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(origin, Stat.Value.AtkRange * 0.5f, enemyLayer);
 
         // 중복 방지용 리스트
         HashSet<CharacterBase> uniqueEnemies = new HashSet<CharacterBase>();
@@ -243,7 +243,7 @@ public abstract class CharacterBase : MonoBehaviour
     {
         if (_spriteRenderer == null)
             return (Vector2)transform.position;
-        return (Vector2)transform.position + targetDir * (Stat.Value.attackRange * 0.5f);
+        return (Vector2)transform.position + targetDir * (Stat.Value.AtkRange * 0.5f);
     }
 
     public virtual void TakeDamage(AttackInfo info)
@@ -327,7 +327,7 @@ public abstract class CharacterBase : MonoBehaviour
         if (_animator == null) return;
 
         // 1. 이동 속도 (변화 없음)
-        float moveMultiplier = Stat.Value.moveSpeed / baseMoveSpeed;
+        float moveMultiplier = Stat.Value.MoveSpd / baseMoveSpeed;
         if (moveMultiplier < 0.1f) moveMultiplier = 1f;
         _animator.SetFloat("AnimMoveSpeed", moveMultiplier);
 
@@ -335,7 +335,7 @@ public abstract class CharacterBase : MonoBehaviour
         // 공식: 현재공속 * 애니메이션길이
         // 설명: 1초짜리 애니를 공속 2.0(0.5초 쿨)에 맞추려면 2배속으로 재생해야 함.
         //       (1.0 * 2.0 = 2.0배속)
-        float attackMultiplier = Stat.Value.attackSpeed * attackAnimLength;
+        float attackMultiplier = Stat.Value.AtkSpd * attackAnimLength;
 
         // 너무 느리게 재생되는 것 방지 (최소 1배속 유지 등 정책 결정 필요)
         if (attackMultiplier < 1.0f) attackMultiplier = 1.0f;
@@ -352,7 +352,7 @@ public abstract class CharacterBase : MonoBehaviour
         Vector2 origin = GetAttackOrigin();
 
         // 그 위치에 공격 반경만큼 원 그리기
-        Gizmos.DrawWireSphere(origin, Stat.Value.attackRange * 0.5f);
+        Gizmos.DrawWireSphere(origin, Stat.Value.AtkRange * 0.5f);
     }
 
 }

@@ -2,12 +2,9 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.AdaptivePerformance.Provider.AdaptivePerformanceSubsystemDescriptor;
+
 
 [Serializable]
 public struct AttackCombo
@@ -28,7 +25,7 @@ public struct AttackCombo
 public class Hero: CharacterBase
 {
     // 적에게 너무 딱 붙지 않게 하는 거리 (사거리의 80% 정도까지만 접근)
-    private float StopDistance => Stat.Value.attackRange * 0.8f;
+    private float StopDistance => Stat.Value.AtkRange * 0.8f;
 
     [Title("Combo Settings")]
     [SerializeField] private List<AttackCombo> combo = new List<AttackCombo>();
@@ -58,7 +55,7 @@ public class Hero: CharacterBase
             if (distSqr > StopDistance * StopDistance)
             {
                 moveDir = diff.normalized;
-                transform.Translate(moveDir * Stat.Value.moveSpeed * deltaTime);
+                transform.Translate(moveDir * Stat.Value.MoveSpd * deltaTime);
             }
             else
             {
@@ -92,7 +89,7 @@ public class Hero: CharacterBase
         }
 
         // 쿨타임 계산
-        float cooldown = 1.0f / Mathf.Max(0.01f, Stat.Value.attackSpeed);
+        float cooldown = 1.0f / Mathf.Max(0.01f, Stat.Value.AtkSpd);
 
         // 쿨타임이 찼고, 공격할 준비가 되었을 때
         if (Time.time - lastAttackTime >= cooldown)
@@ -111,7 +108,7 @@ public class Hero: CharacterBase
                 UpdateAnimation(Vector3.zero);
 
                 // 락 걸기
-                _busyTimer = attackAnimLength / Stat.Value.attackSpeed;
+                _busyTimer = attackAnimLength / Stat.Value.AtkSpd;
 
                 // 공격 실행 (오버라이드한 함수 호출)
                 ProcessAttack();
@@ -216,6 +213,6 @@ public class Hero: CharacterBase
     private bool CheckEnemyInAttackRange()
     {
         Vector2 origin = GetAttackOrigin();
-        return Physics2D.OverlapCircle(origin, Stat.Value.attackRange, enemyLayer);
+        return Physics2D.OverlapCircle(origin, Stat.Value.AtkRange, enemyLayer);
     }
 }

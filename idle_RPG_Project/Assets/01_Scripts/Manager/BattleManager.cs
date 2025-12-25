@@ -36,7 +36,11 @@ public class BattleManager : BaseManager
             Debug.LogError("BattleManager: Player object not found in the scene!");
         }
         _repositionDistSqr = repositionDistance * repositionDistance;
-        
+        TestLoadHero(PlayerHero);
+    }
+    private void TestLoadHero(Hero hero)
+    {
+        hero.Stat.Value = MainSystem.Data.Hero.GetValue(1001);
     }
 
     private void Update()

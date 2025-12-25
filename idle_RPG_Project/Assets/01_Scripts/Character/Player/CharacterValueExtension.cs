@@ -10,7 +10,7 @@ public static class CharacterValueExtension
     /// 유닛의 종합 전투력을 계산해서 반환합니다. (보여주기용)
     /// 공식 예시: 공격력 * 1.5 + 체력 * 0.5 + 방어력 * 1.0 + (크리티컬 보정)
     /// </summary>
-    public static BigInteger GetCombatPower(this HeroValue unit)
+    public static BigInteger GetCombatPower(this CharacterValue unit)
     {
         BigInteger atkScore = unit.Atk * 15 / 10; // 1.5배
         BigInteger hpScore = unit.MaxHp * 5 / 10;    // 0.5배

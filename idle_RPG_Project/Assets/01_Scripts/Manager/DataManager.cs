@@ -4,6 +4,10 @@ using Cysharp.Threading.Tasks;
 
 public class DataManager:BaseManager
 {
+    public bool IsLoaded { get; private set; }
+
+    [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty] public HeroData Hero = new HeroData();
+
     protected override async UniTask OnInitialize()
     {
         Initialize();
@@ -11,6 +15,20 @@ public class DataManager:BaseManager
     }
     private void Initialize()
     {
-        // 데이터 매니저 초기화 로직 작성
+        LoadData();
+        IsLoaded = true;
+
+        Debug.Log("DataBase Initialized and Data Loaded Successfully.");
     }
+
+
+    [Button("Load Data", ButtonSizes.Large)]
+    private void LoadData()
+    {
+        // 각 데이터 클래스의 데이터를 로드
+        Hero.LoadData();
+        
+    }
+
+    
 }

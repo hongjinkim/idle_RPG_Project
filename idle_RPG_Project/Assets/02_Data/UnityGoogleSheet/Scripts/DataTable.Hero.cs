@@ -56,11 +56,16 @@ namespace DataTable
 
 /* Fields. */
 
-		public System.Int32 Key;
+		public System.Int32 ID;
 		public System.String Name;
-		public System.String PrefabName;
-		public System.Single HpStart;
-		public System.Single DmgStart;
+		public System.Numerics.BigInteger MaxHp;
+		public System.Numerics.BigInteger Atk;
+		public System.Numerics.BigInteger Def;
+		public System.Single CritRate;
+		public System.Single CritDmg;
+		public System.Single AtkRange;
+		public System.Single MoveSpd;
+		public System.Single AtkSpd;
   
 
 #region fuctions
@@ -178,7 +183,7 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.Key, instance);
+                            Map.Add(instance.ID, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 
