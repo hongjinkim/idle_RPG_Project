@@ -20,7 +20,7 @@ namespace DataTable
     public partial class Enemy : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Enemy> loadedList, Dictionary<int, Enemy> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Enemy> loadedList, Dictionary<string, Enemy> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1OYjZO-CwjWJVCVD2swTcPwPME5Rq2kB9Y7IFf8dB0Fk"; // it is file id
@@ -29,7 +29,7 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, Enemy> EnemyMap = new Dictionary<int, Enemy>();  
+        public static Dictionary<string, Enemy> EnemyMap = new Dictionary<string, Enemy>();  
         public static List<Enemy> EnemyList = new List<Enemy>();   
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace DataTable
         /// Get Enemy Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, Enemy>  GetDictionary()
+        public static Dictionary<string, Enemy>  GetDictionary()
         {{
            if (isLoaded == false) Load();
            return EnemyMap;
@@ -56,17 +56,15 @@ namespace DataTable
 
 /* Fields. */
 
-		public System.Int32 Key;
+		public System.String ID;
 		public System.String Name;
-		public System.String PrefabName;
-		public System.Single HpStart;
-		public System.Single HpConst;
-		public System.Single HpExp;
-		public System.Single DmgStart;
-		public System.Single DmgConst;
-		public System.Single DmgExp;
-		public System.Single GoldBase;
-		public System.Single GoldGrowth;
+		public System.Numerics.BigInteger Hp;
+		public System.Numerics.BigInteger Atk;
+		public System.Numerics.BigInteger Def;
+		public System.Single AtkRange;
+		public System.Single MoveSpd;
+		public System.Single AtkSpd;
+		public System.Numerics.BigInteger GoldDrop;
   
 
 #region fuctions
@@ -93,7 +91,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Enemy>, Dictionary<int, Enemy>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Enemy>, Dictionary<string, Enemy>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -121,8 +119,8 @@ namespace DataTable
                
 
 
-    public static (List<Enemy> list, Dictionary<int, Enemy> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, Enemy> Map = new Dictionary<int, Enemy>();
+    public static (List<Enemy> list, Dictionary<string, Enemy> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, Enemy> Map = new Dictionary<string, Enemy>();
             List<Enemy> List = new List<Enemy>();     
             TypeMap.Init();
             FieldInfo[] fields = typeof(Enemy).GetFields(BindingFlags.Public | BindingFlags.Instance);
@@ -184,7 +182,7 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.Key, instance);
+                            Map.Add(instance.ID, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 

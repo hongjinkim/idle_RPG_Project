@@ -20,7 +20,7 @@ namespace DataTable
     public partial class Upgrade : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Upgrade> loadedList, Dictionary<int, Upgrade> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Upgrade> loadedList, Dictionary<string, Upgrade> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1OYjZO-CwjWJVCVD2swTcPwPME5Rq2kB9Y7IFf8dB0Fk"; // it is file id
@@ -29,7 +29,7 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, Upgrade> UpgradeMap = new Dictionary<int, Upgrade>();  
+        public static Dictionary<string, Upgrade> UpgradeMap = new Dictionary<string, Upgrade>();  
         public static List<Upgrade> UpgradeList = new List<Upgrade>();   
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace DataTable
         /// Get Upgrade Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, Upgrade>  GetDictionary()
+        public static Dictionary<string, Upgrade>  GetDictionary()
         {{
            if (isLoaded == false) Load();
            return UpgradeMap;
@@ -56,7 +56,7 @@ namespace DataTable
 
 /* Fields. */
 
-		public System.Int32 Key;
+		public System.String ID;
 		public System.String Name;
 		public System.String StatType;
 		public System.Single CostBase;
@@ -91,7 +91,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Upgrade>, Dictionary<int, Upgrade>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Upgrade>, Dictionary<string, Upgrade>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -119,8 +119,8 @@ namespace DataTable
                
 
 
-    public static (List<Upgrade> list, Dictionary<int, Upgrade> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, Upgrade> Map = new Dictionary<int, Upgrade>();
+    public static (List<Upgrade> list, Dictionary<string, Upgrade> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, Upgrade> Map = new Dictionary<string, Upgrade>();
             List<Upgrade> List = new List<Upgrade>();     
             TypeMap.Init();
             FieldInfo[] fields = typeof(Upgrade).GetFields(BindingFlags.Public | BindingFlags.Instance);
@@ -182,7 +182,7 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.Key, instance);
+                            Map.Add(instance.ID, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 

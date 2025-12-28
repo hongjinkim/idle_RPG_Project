@@ -20,7 +20,7 @@ namespace DataTable
     public partial class GlobalConstant : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<GlobalConstant> loadedList, Dictionary<int, GlobalConstant> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<GlobalConstant> loadedList, Dictionary<string, GlobalConstant> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1OYjZO-CwjWJVCVD2swTcPwPME5Rq2kB9Y7IFf8dB0Fk"; // it is file id
@@ -29,7 +29,7 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, GlobalConstant> GlobalConstantMap = new Dictionary<int, GlobalConstant>();  
+        public static Dictionary<string, GlobalConstant> GlobalConstantMap = new Dictionary<string, GlobalConstant>();  
         public static List<GlobalConstant> GlobalConstantList = new List<GlobalConstant>();   
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace DataTable
         /// Get GlobalConstant Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, GlobalConstant>  GetDictionary()
+        public static Dictionary<string, GlobalConstant>  GetDictionary()
         {{
            if (isLoaded == false) Load();
            return GlobalConstantMap;
@@ -56,7 +56,7 @@ namespace DataTable
 
 /* Fields. */
 
-		public System.Int32 Key;
+		public System.String Key;
 		public System.Numerics.BigInteger InitGold;
 		public System.Single InitCritRate;
 		public System.Single InitCritDamage;
@@ -86,7 +86,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<GlobalConstant>, Dictionary<int, GlobalConstant>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<GlobalConstant>, Dictionary<string, GlobalConstant>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -114,8 +114,8 @@ namespace DataTable
                
 
 
-    public static (List<GlobalConstant> list, Dictionary<int, GlobalConstant> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, GlobalConstant> Map = new Dictionary<int, GlobalConstant>();
+    public static (List<GlobalConstant> list, Dictionary<string, GlobalConstant> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, GlobalConstant> Map = new Dictionary<string, GlobalConstant>();
             List<GlobalConstant> List = new List<GlobalConstant>();     
             TypeMap.Init();
             FieldInfo[] fields = typeof(GlobalConstant).GetFields(BindingFlags.Public | BindingFlags.Instance);

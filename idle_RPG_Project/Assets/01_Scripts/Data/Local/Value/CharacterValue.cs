@@ -6,13 +6,13 @@ using UnityEngine.Rendering;
 [System.Serializable]
 public class CharacterValue 
 {
-    public int Id;
+    public string ID;
     public string Name;
     public bool IsAlive;
-    [ShowInInspector] public BigInteger MaxHp;
+    [ShowInInspector] public virtual BigInteger MaxHp { get; set; }
     [ShowInInspector] public BigInteger CurrentHp;
-    [ShowInInspector] public BigInteger Atk;
-    [ShowInInspector] public BigInteger Def;
+    [ShowInInspector] public virtual BigInteger Atk { get; set; }
+    [ShowInInspector] public virtual BigInteger Def { get; set; }
 
     public BigInteger CombatPower => this.GetCombatPower();
     public float CritRate = 0f;

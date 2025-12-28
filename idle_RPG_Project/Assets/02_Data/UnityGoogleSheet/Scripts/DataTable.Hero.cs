@@ -20,7 +20,7 @@ namespace DataTable
     public partial class Hero : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Hero> loadedList, Dictionary<int, Hero> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Hero> loadedList, Dictionary<string, Hero> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1OYjZO-CwjWJVCVD2swTcPwPME5Rq2kB9Y7IFf8dB0Fk"; // it is file id
@@ -29,7 +29,7 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, Hero> HeroMap = new Dictionary<int, Hero>();  
+        public static Dictionary<string, Hero> HeroMap = new Dictionary<string, Hero>();  
         public static List<Hero> HeroList = new List<Hero>();   
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace DataTable
         /// Get Hero Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, Hero>  GetDictionary()
+        public static Dictionary<string, Hero>  GetDictionary()
         {{
            if (isLoaded == false) Load();
            return HeroMap;
@@ -56,7 +56,7 @@ namespace DataTable
 
 /* Fields. */
 
-		public System.Int32 ID;
+		public System.String ID;
 		public System.String Name;
 		public System.Numerics.BigInteger MaxHp;
 		public System.Numerics.BigInteger Atk;
@@ -92,7 +92,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Hero>, Dictionary<int, Hero>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Hero>, Dictionary<string, Hero>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -120,8 +120,8 @@ namespace DataTable
                
 
 
-    public static (List<Hero> list, Dictionary<int, Hero> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, Hero> Map = new Dictionary<int, Hero>();
+    public static (List<Hero> list, Dictionary<string, Hero> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, Hero> Map = new Dictionary<string, Hero>();
             List<Hero> List = new List<Hero>();     
             TypeMap.Init();
             FieldInfo[] fields = typeof(Hero).GetFields(BindingFlags.Public | BindingFlags.Instance);

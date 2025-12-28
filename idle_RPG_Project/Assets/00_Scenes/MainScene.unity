@@ -2677,6 +2677,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &797549349 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 889424302085190276, guid: fad53256d6218954aac0a935a9483485, type: 3}
+  m_PrefabInstance: {fileID: 849530712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &797549350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+  m_PrefabInstance: {fileID: 849530712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &797549354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797549349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931fdf6d16fa78245bcec7eee35b8dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewtonsoftJSONSerializer
 --- !u!1001 &813483586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2926,6 +2948,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8fdaa9e2207874194439eb81d6bee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: gpm_ui::Gpm.Ui.TabButton
+--- !u!1 &814213883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 814213884}
+  m_Layer: 0
+  m_Name: Library
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &814213884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814213883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 797549350}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &820677741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3117,6 +3171,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841428685}
   m_CullTransparentMesh: 1
+--- !u!1001 &849530712
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 814213884}
+    m_Modifications:
+    - target: {fileID: 889424302085190276, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_Name
+      value: ClientSaveManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673966970995426483, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 435238378249886313, guid: fad53256d6218954aac0a935a9483485, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 889424302085190276, guid: fad53256d6218954aac0a935a9483485, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 797549354}
+  m_SourcePrefab: {fileID: 100100000, guid: fad53256d6218954aac0a935a9483485, type: 3}
 --- !u!1 &857174902
 GameObject:
   m_ObjectHideFlags: 0
@@ -3262,7 +3377,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1915622316}
+    m_TransformParent: {fileID: 1217208979}
     m_Modifications:
     - target: {fileID: 6711304727946213634, guid: 6685bda04bcdbdf45ab6c40780e002a3, type: 3}
       propertyPath: m_Name
@@ -3820,6 +3935,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1198394559}
   - component: {fileID: 1198394560}
+  - component: {fileID: 1198394561}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -3854,6 +3970,1440 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132b49a08cb312e4fbdfd5b0f8c35758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataManager
+  Stage:
+    StageList:
+    - StageNum: 1
+      ID: STAGE_0001
+      Name: STAGE_0001
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 2
+      ID: STAGE_0002
+      Name: STAGE_0002
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 3
+      ID: STAGE_0003
+      Name: STAGE_0003
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 4
+      ID: STAGE_0004
+      Name: STAGE_0004
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 5
+      ID: STAGE_0005
+      Name: STAGE_0005
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 6
+      ID: STAGE_0006
+      Name: STAGE_0006
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 7
+      ID: STAGE_0007
+      Name: STAGE_0007
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 8
+      ID: STAGE_0008
+      Name: STAGE_0008
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 9
+      ID: STAGE_0009
+      Name: STAGE_0009
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 10
+      ID: STAGE_0010
+      Name: STAGE_0010
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 11
+      ID: STAGE_0011
+      Name: STAGE_0011
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 12
+      ID: STAGE_0012
+      Name: STAGE_0012
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 13
+      ID: STAGE_0013
+      Name: STAGE_0013
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 14
+      ID: STAGE_0014
+      Name: STAGE_0014
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 15
+      ID: STAGE_0015
+      Name: STAGE_0015
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 16
+      ID: STAGE_0016
+      Name: STAGE_0016
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 17
+      ID: STAGE_0017
+      Name: STAGE_0017
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 18
+      ID: STAGE_0018
+      Name: STAGE_0018
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 19
+      ID: STAGE_0019
+      Name: STAGE_0019
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+    - StageNum: 20
+      ID: STAGE_0020
+      Name: STAGE_0020
+      EnemyList:
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      - ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+      EnemyBoss:
+        ID: 
+        Name: 
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 0
+        MoveSpd: 0
+        AtkSpd: 0
+        EnemyHP:
+          Exponent: 0
+        EnemyAttack:
+          Exponent: 0
+        EnemyDefence:
+          Exponent: 0
+        EnemyGold:
+          Exponent: 0
+        BossAttackMultiplier:
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Exponent: 0
+          Stat: 0
+--- !u!114 &1198394561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198394558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97e431bb78374b4bac2fe3b6f6750c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DataTableInspector
 --- !u!1 &1211820052
 GameObject:
   m_ObjectHideFlags: 0
@@ -3947,6 +5497,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 903153174}
   - {fileID: 199372123}
   m_Father: {fileID: 336764545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5183,6 +6734,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1823244438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1823244440}
+  - component: {fileID: 1823244439}
+  m_Layer: 0
+  m_Name: UnityPlayerWebRequest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1823244439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823244438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3051841b81296429da2c86c8962c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CAH.UnityGoogleSheets::UGS.UnityPlayerWebRequest
+  reqProcessing: 0
+--- !u!4 &1823244440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823244438}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1841244671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5564,8 +7160,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 903153174}
+  m_Children: []
   m_Father: {fileID: 838270860}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1915622317
@@ -6283,5 +7878,7 @@ SceneRoots:
   - {fileID: 336764545}
   - {fileID: 619394802}
   - {fileID: 621371044}
+  - {fileID: 814213884}
   - {fileID: 934824119}
   - {fileID: 162711528}
+  - {fileID: 1823244440}

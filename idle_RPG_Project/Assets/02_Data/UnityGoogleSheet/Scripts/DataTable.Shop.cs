@@ -20,7 +20,7 @@ namespace DataTable
     public partial class Shop : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Shop> loadedList, Dictionary<int, Shop> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Shop> loadedList, Dictionary<string, Shop> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1OYjZO-CwjWJVCVD2swTcPwPME5Rq2kB9Y7IFf8dB0Fk"; // it is file id
@@ -29,7 +29,7 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, Shop> ShopMap = new Dictionary<int, Shop>();  
+        public static Dictionary<string, Shop> ShopMap = new Dictionary<string, Shop>();  
         public static List<Shop> ShopList = new List<Shop>();   
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace DataTable
         /// Get Shop Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, Shop>  GetDictionary()
+        public static Dictionary<string, Shop>  GetDictionary()
         {{
            if (isLoaded == false) Load();
            return ShopMap;
@@ -56,7 +56,7 @@ namespace DataTable
 
 /* Fields. */
 
-		public System.Int32 ID;
+		public System.String ID;
 		public System.String ProductID;
 		public System.String Type;
 		public System.String Name;
@@ -91,7 +91,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Shop>, Dictionary<int, Shop>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Shop>, Dictionary<string, Shop>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -119,8 +119,8 @@ namespace DataTable
                
 
 
-    public static (List<Shop> list, Dictionary<int, Shop> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, Shop> Map = new Dictionary<int, Shop>();
+    public static (List<Shop> list, Dictionary<string, Shop> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, Shop> Map = new Dictionary<string, Shop>();
             List<Shop> List = new List<Shop>();     
             TypeMap.Init();
             FieldInfo[] fields = typeof(Shop).GetFields(BindingFlags.Public | BindingFlags.Instance);

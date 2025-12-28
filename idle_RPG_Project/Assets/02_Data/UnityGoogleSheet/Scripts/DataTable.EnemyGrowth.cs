@@ -17,39 +17,39 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class Weapon : ITable
+    public partial class EnemyGrowth : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Weapon> loadedList, Dictionary<string, Weapon> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<EnemyGrowth> loadedList, Dictionary<string, EnemyGrowth> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1OYjZO-CwjWJVCVD2swTcPwPME5Rq2kB9Y7IFf8dB0Fk"; // it is file id
-        static string sheetID = "1354135500"; // it is sheet id
+        static string sheetID = "615286416"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<string, Weapon> WeaponMap = new Dictionary<string, Weapon>();  
-        public static List<Weapon> WeaponList = new List<Weapon>();   
+        public static Dictionary<string, EnemyGrowth> EnemyGrowthMap = new Dictionary<string, EnemyGrowth>();  
+        public static List<EnemyGrowth> EnemyGrowthList = new List<EnemyGrowth>();   
 
         /// <summary>
-        /// Get Weapon List 
+        /// Get EnemyGrowth List 
         /// Auto Load
         /// </summary>
-        public static List<Weapon> GetList()
+        public static List<EnemyGrowth> GetList()
         {{
            if (isLoaded == false) Load();
-           return WeaponList;
+           return EnemyGrowthList;
         }}
 
         /// <summary>
-        /// Get Weapon Dictionary, keyType is your sheet A1 field type.
+        /// Get EnemyGrowth Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<string, Weapon>  GetDictionary()
+        public static Dictionary<string, EnemyGrowth>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return WeaponMap;
+           return EnemyGrowthMap;
         }}
 
     
@@ -57,16 +57,12 @@ namespace DataTable
 /* Fields. */
 
 		public System.String ID;
-		public System.String Name;
-		public System.Int32 Grade;
-		public System.Single AtkStart;
-		public System.Single AtkConst;
-		public System.Single AtkExp;
-		public System.Single EquipEffect;
-		public System.String ResourcePath;
-		public System.Single DmgExp;
-		public System.Single GoldBase;
-		public System.Single GoldGrowth;
+		public System.Numerics.BigInteger Hp;
+		public System.Numerics.BigInteger Atk;
+		public System.Numerics.BigInteger Def;
+		public System.Numerics.BigInteger GoldDrop;
+		public System.Numerics.BigInteger Boss_HPMultiply;
+		public System.Numerics.BigInteger Boss_AttackMultiply;
   
 
 #region fuctions
@@ -77,7 +73,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("Weapon is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("EnemyGrowth is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -93,7 +89,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Weapon>, Dictionary<string, Weapon>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<EnemyGrowth>, Dictionary<string, EnemyGrowth>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -121,14 +117,14 @@ namespace DataTable
                
 
 
-    public static (List<Weapon> list, Dictionary<string, Weapon> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<string, Weapon> Map = new Dictionary<string, Weapon>();
-            List<Weapon> List = new List<Weapon>();     
+    public static (List<EnemyGrowth> list, Dictionary<string, EnemyGrowth> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, EnemyGrowth> Map = new Dictionary<string, EnemyGrowth>();
+            List<EnemyGrowth> List = new List<EnemyGrowth>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Weapon).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(EnemyGrowth).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["Weapon"];
+            var sheet = jsonObject["EnemyGrowth"];
 
             foreach (var column in sheet.Keys)
             {
@@ -147,7 +143,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            Weapon instance = new Weapon();
+                            EnemyGrowth instance = new EnemyGrowth();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -188,8 +184,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            WeaponList = List;
-                            WeaponMap = Map;
+                            EnemyGrowthList = List;
+                            EnemyGrowthMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -199,10 +195,10 @@ namespace DataTable
 
  
 
-        public static void Write(Weapon data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(EnemyGrowth data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Weapon).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(EnemyGrowth).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

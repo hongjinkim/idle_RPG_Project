@@ -79,4 +79,34 @@ public static class BigIntegerExtension
         decimal shortValue = (decimal)value / (decimal)divisor;
         return shortValue.ToString("F" + decimalPlaces) + KoreanUnits[unitIndex];
     }
+
+    public static BigInteger ExpGrowth(this BigInteger start, BigInteger constant, double exponent, int s)
+    {
+        // 1. 지수 함수 계산 (결과는 double)
+        // 식: e^(exponent * s) - 1.0
+        double expValue = Math.Exp(exponent * s);
+        double multiplier = expValue - 1.0;
+
+        // double 범위 초과 체크
+        if (double.IsInfinity(multiplier))
+        {
+
+            throw new OverflowException("지수 증가량이 너무 커서 계산할 수 없습니다 (double 범위 초과).");
+        }
+
+        // 2. BigInteger(Constant) * double(multiplier) 계산
+        // BigInteger는 소수점 곱셈이 안되므로 정밀도를 위해 값을 키워서 계산함.
+        // 예: 1.5를 곱해야 한다면, 15000을 곱하고 나중에 10000으로 나눔.
+
+        long precisionScale = 10000; // 소수점 4자리까지 정밀도 보장
+
+        // multiplier를 정수로 변환 (예: 1.5555 -> 15555)
+        BigInteger scaledMultiplier = (BigInteger)(multiplier * precisionScale);
+
+        // (Constant * ScaledMultiplier) / Scale
+        BigInteger calculatedVal = (constant * scaledMultiplier) / precisionScale;
+
+        // 3. 최종 합산
+        return start + calculatedVal;
+    }
 }

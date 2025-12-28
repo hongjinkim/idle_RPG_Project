@@ -11,7 +11,7 @@ using UnityEngine;
 public class HeroData
 {
     [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Hero ID", ValueLabel = "Info")]
-    public Dictionary<int, HeroValue> HeroDict = new Dictionary<int, HeroValue>();
+    public Dictionary<string, HeroValue> HeroDict = new Dictionary<string, HeroValue>();
 
     private int heroCount;
     public void LoadData()
@@ -23,7 +23,7 @@ public class HeroData
         {
            var hero = new HeroValue();
 
-            hero.Id = heroList[i].ID;
+            hero.ID = heroList[i].ID;
             hero.Name = heroList[i].Name;
             hero.MaxHp = heroList[i].MaxHp;
             hero.Atk = heroList[i].Atk;
@@ -34,13 +34,13 @@ public class HeroData
             hero.MoveSpd = heroList[i].MoveSpd;
             hero.AtkSpd = heroList[i].AtkSpd;
 
-            HeroDict[hero.Id] = hero;
+            HeroDict[hero.ID] = hero;
         }
 
         
     }
 
-    public HeroValue GetValue(int id)
+    public HeroValue GetValue(string id)
     {
         return HeroDict.TryGetValue(id, out var hero) ? hero : null;
     }

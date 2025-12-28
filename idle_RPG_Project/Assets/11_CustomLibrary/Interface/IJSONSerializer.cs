@@ -1,7 +1,8 @@
+using UnityEngine;
+
 public interface IJSONSerializer
 {
-    string Serialize<T>(T obj);
+    string Serialize<T>(T value);
 
-    T Deserialize<T>(string json);
-
+    T Deserialize<T>(string value);
 }
