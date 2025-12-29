@@ -3,6 +3,7 @@ using System.Numerics;
 
 public class PlayerValue : BaseSaveValue<PlayerValue>
 {
+    public int CurrentStage = 1; // 현재 스테이지
     public string NickName; // 닉네임
     public BigInteger Gold; // 골드
     public BigInteger Gem;    // 보석

@@ -8,13 +8,10 @@ public class CharacterValue
 {
     public string ID;
     public string Name;
-    public bool IsAlive;
     [ShowInInspector] public virtual BigInteger MaxHp { get; set; }
-    [ShowInInspector] public BigInteger CurrentHp;
     [ShowInInspector] public virtual BigInteger Atk { get; set; }
     [ShowInInspector] public virtual BigInteger Def { get; set; }
 
-    public BigInteger CombatPower => this.GetCombatPower();
     public float CritRate = 0f;
     public float CritDmg = 0f;
     public float AtkRange;

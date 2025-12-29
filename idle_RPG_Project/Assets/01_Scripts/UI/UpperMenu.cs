@@ -29,7 +29,7 @@ public class UpperMenu : UIBase
     {
         RefreshGoldText(MainSystem.Player.playerData.Value.Gold);
         RefreshGemText(MainSystem.Player.playerData.Value.Gem);
-        RefreshPowerText(MainSystem.Player.playerData.Hero.CombatPower);
+        RefreshPowerText(MainSystem.Battle.PlayerHero.CombatPower);
     }
 
     private void RefreshGoldText(object data)

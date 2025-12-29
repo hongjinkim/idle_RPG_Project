@@ -7,10 +7,12 @@ using System.Collections.Generic;
 public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
 {
     [Title("Settings")]
+    [SerializeField] private int currnetStage;
     [SerializeField] private float spawnInterval = 1.0f; // 젠 시간
     [SerializeField] private int maxEnemyCount = 100;
     [SerializeField] private int initialSpawnCount = 10;
-    public List<int> EnemyIDList = new List<int>(); // 스폰 가능한 적 ID 리스트
+    private List<EnemyValue> EnemyList = new List<EnemyValue>(); // 스폰 가능한 적 ID 리스트
+    private EnemyValue EnemyBoss;
 
     private float minSpawnRadius; // 화면 밖 (최소 거리)
     private float maxSpawnRadius; // 최대 거리
@@ -23,9 +25,13 @@ public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
     {
         await base.OnInitialize();
 
+        currnetStage = MainSystem.Battle.CurrentStage;
+
         // 배틀 매니저에서 반경 정보 가져오기
         minSpawnRadius = MainSystem.Battle.minSpawnRadius;
         maxSpawnRadius = MainSystem.Battle.maxSpawnRadius;
+
+        GetEnemyValue();
 
         if (initialSpawnCount > 0)
         {
@@ -36,9 +42,17 @@ public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
             Debug.Log($"Initial Spawn: {initialSpawnCount} enemies created.");
         }
 
+        
+
         // 2. 정기 스폰 시작
         StartSpawning();
         await UniTask.CompletedTask;
+    }
+
+    private void GetEnemyValue()
+    {
+        EnemyList = MainSystem.Data.Stage.GetEnemyListForStage(currnetStage);
+        EnemyBoss = MainSystem.Data.Stage.GetEnemyBossForStage(currnetStage);
     }
 
     public void StartSpawning()
@@ -69,7 +83,7 @@ public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
     private void SpawnEnemy()
     {
         // 플레이어가 없거나 죽었으면 생성 중단
-        if (MainSystem.Battle.PlayerHero == null || MainSystem.Battle.PlayerHero.Stat.State == ECharacterState.Dead) return;
+        if (MainSystem.Battle.PlayerHero == null || MainSystem.Battle.PlayerHero.State == ECharacterState.Dead) return;
 
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
@@ -84,9 +98,9 @@ public class EnemyPoolManager : PoolManager<EnemyPoolManager, EPoolType>
         {
             Enemy newEnemy = enemyObj.GetComponent<Enemy>();
 
-            var id = EnemyIDList[Random.Range(0, EnemyIDList.Count)];
+            var value = EnemyList[Random.Range(0, EnemyList.Count)];
 
-            newEnemy.Setup(id);
+            newEnemy.Setup(value);
 
             // 배틀 매니저에 등록 (카운팅용)
             MainSystem.Battle.RegisterEnemy(newEnemy);

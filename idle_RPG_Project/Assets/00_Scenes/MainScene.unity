@@ -3706,10 +3706,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   m_Pools: []
+  currnetStage: 0
   spawnInterval: 1
   maxEnemyCount: 100
   initialSpawnCount: 10
-  EnemyIDList: d1070000d2070000d3070000d4070000
 --- !u!1 &1009349295
 GameObject:
   m_ObjectHideFlags: 0
@@ -3981,7 +3981,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4011,7 +4010,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4042,7 +4040,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4076,7 +4073,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4106,7 +4102,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4137,7 +4132,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4171,7 +4165,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4201,7 +4194,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4232,7 +4224,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4266,7 +4257,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4296,7 +4286,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4327,7 +4316,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4361,7 +4349,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4391,7 +4378,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4422,7 +4408,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4456,7 +4441,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4486,7 +4470,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4517,7 +4500,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4551,7 +4533,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4581,7 +4562,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4612,7 +4592,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4646,7 +4625,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4676,7 +4654,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4707,7 +4684,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4741,7 +4717,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4771,7 +4746,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4802,7 +4776,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4836,7 +4809,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4866,7 +4838,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4897,7 +4868,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4931,7 +4901,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -4961,7 +4930,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -4992,7 +4960,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5026,7 +4993,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5056,7 +5022,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -5087,7 +5052,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5121,7 +5085,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5151,7 +5114,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -5182,7 +5144,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5216,7 +5177,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5246,7 +5206,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -5277,7 +5236,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5311,7 +5269,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5341,7 +5298,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -5372,7 +5328,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5406,7 +5361,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5436,7 +5390,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -5467,7 +5420,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5501,7 +5453,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5531,7 +5482,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -5562,7 +5512,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5596,7 +5545,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5626,7 +5574,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -5657,7 +5604,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5691,7 +5637,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5721,7 +5666,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -5752,7 +5696,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5786,7 +5729,6 @@ MonoBehaviour:
       EnemyList:
       - ID: ENEMY_001
         Name: "\uC2AC\uB77C\uC784"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -5816,7 +5758,6 @@ MonoBehaviour:
           Stat: 0
       - ID: 
         Name: 
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 0
@@ -5847,7 +5788,6 @@ MonoBehaviour:
       EnemyBoss:
         ID: ENEMY_004
         Name: "\uB4DC\uB798\uACE4"
-        IsAlive: 0
         CritRate: 0
         CritDmg: 0
         AtkRange: 1.5
@@ -7661,6 +7601,7 @@ MonoBehaviour:
   minSpawnRadius: 10
   maxSpawnRadius: 14
   repositionDistance: 20
+  CurrentStage: 0
 --- !u!1 &1962956052
 GameObject:
   m_ObjectHideFlags: 0

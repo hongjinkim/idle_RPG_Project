@@ -24,9 +24,9 @@ public class Enemy: CharacterBase
 
 
     // 초기화 시 배회 타이머 리셋
-    public override void Setup(int id)
+    public override void Setup(CharacterValue value)
     {
-        base.Setup(id);
+        base.Setup(value);
         _waitTimer = 0;
         SetNewWanderTarget(); // 태어나자마자 갈 곳 정하기
     }
@@ -47,7 +47,7 @@ public class Enemy: CharacterBase
     // Tick 오버라이드: 상태 결정 로직 (추격 vs 배회)
     public override void Tick(float deltaTime)
     {
-        if (Stat.State == ECharacterState.Dead) return;
+        if (State == ECharacterState.Dead) return;
 
         CheckTarget(); // 타겟 감지 시도
 
@@ -69,7 +69,7 @@ public class Enemy: CharacterBase
         // 대기 중이라면 시간만 깎음
         if (_isWaiting)
         {
-            Stat.SetState(ECharacterState.Idle);
+            State = ECharacterState.Idle;
             UpdateAnimation(Vector3.zero); // 멈춤 애니메이션
 
             _waitTimer -= deltaTime;
@@ -82,7 +82,7 @@ public class Enemy: CharacterBase
         }
 
         // 이동 중
-        Stat.SetState(ECharacterState.Move);
+        State = ECharacterState.Move;
         // 목표 지점까지 거리 계산
         Vector3 diff = _wanderTarget - transform.position;
 
@@ -125,10 +125,10 @@ public class Enemy: CharacterBase
             Vector3 diff = Target.transform.position - transform.position;
 
             // 공격 사거리보다 멀면 추격
-            if (diff.sqrMagnitude > Stat.Value.AtkRange * Stat.Value.AtkRange)
+            if (diff.sqrMagnitude > Stat.AtkRange * Stat.AtkRange)
             {
                 moveDir = diff.normalized;
-                transform.Translate(moveDir * Stat.Value.MoveSpd * deltaTime); // 여기선 원래 속도(빠름) 사용
+                transform.Translate(moveDir * Stat.MoveSpd * deltaTime); // 여기선 원래 속도(빠름) 사용
             }
         }
 
@@ -140,7 +140,7 @@ public class Enemy: CharacterBase
         base.TakeDamage(info);
 
         // 맞으면 배회 멈추고 즉시 플레이어 쳐다봄
-        if (Target == null && Stat.Value.CurrentHp > 0)
+        if (Target == null && Stat.CurrentHp > 0)
         {
             Target = MainSystem.Battle.PlayerHero;
             _isWaiting = false; // 대기 취소

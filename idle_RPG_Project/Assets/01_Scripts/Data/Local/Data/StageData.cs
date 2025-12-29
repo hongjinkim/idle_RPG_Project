@@ -149,5 +149,12 @@ public class StageData
     {
         return EnemyDict.TryGetValue(id, out var enemy) ? enemy : null;
     }
-
+    public EnemyValue GetEnemyBossForStage(int stageNum)
+    {
+        return GetStageValue(stageNum).EnemyBoss;
+    }
+    public List<EnemyValue> GetEnemyListForStage(int stageNum)
+    {
+        return GetStageValue(stageNum).EnemyList;
+    }
 }

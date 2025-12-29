@@ -3,25 +3,7 @@ using UnityEngine;
 
 public static class CharacterValueExtension
 {
-    // ========================================================================
-    // ⚔️ 1. 전투력 (Combat Power) 계산
-    // ========================================================================
-    /// <summary>
-    /// 유닛의 종합 전투력을 계산해서 반환합니다. (보여주기용)
-    /// 공식 예시: 공격력 * 1.5 + 체력 * 0.5 + 방어력 * 1.0 + (크리티컬 보정)
-    /// </summary>
-    public static BigInteger GetCombatPower(this CharacterValue unit)
-    {
-        BigInteger atkScore = unit.Atk * 15 / 10; // 1.5배
-        BigInteger hpScore = unit.MaxHp * 5 / 10;    // 0.5배
-        BigInteger defScore = unit.Def;           // 1.0배
-
-        // 크리티컬 점수: (공격력 * 확률 * 데미지배율) 등을 반영하기도 함
-        // 여기서는 단순 가산점으로 처리
-        BigInteger critScore = (BigInteger)(unit.CritRate * unit.CritDmg);
-
-        return atkScore + hpScore + defScore + critScore;
-    }
+   
 
     // ========================================================================
     // 💥 2. 실시간 데미지 계산 (공격 시 호출)
@@ -47,8 +29,8 @@ public static class CharacterValueExtension
         };
 
         // 데이터 편의 참조 (CharacterBase에 Data 프로퍼티가 있다고 가정)
-        var attackerValue = attacker.Stat.Value;
-        var targetValue = target.Stat.Value;
+        var attackerValue = attacker.Stat;
+        var targetValue = target.Stat;
 
         // ================================================================
         // 2. 회피(Miss) 판정

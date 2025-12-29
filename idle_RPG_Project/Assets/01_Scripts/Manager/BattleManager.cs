@@ -22,6 +22,8 @@ public class BattleManager : BaseManager
     [SerializeField] private float repositionDistance = 20.0f;
     private float _repositionDistSqr;
 
+    public int CurrentStage;
+
     protected override async UniTask OnInitialize()
     {
         Initialize();
@@ -37,10 +39,11 @@ public class BattleManager : BaseManager
         }
         _repositionDistSqr = repositionDistance * repositionDistance;
         TestLoadHero(PlayerHero);
+        CurrentStage = MainSystem.Player.playerData.Value.CurrentStage;
     }
     private void TestLoadHero(Hero hero)
     {
-        hero.Stat.Value = MainSystem.Data.Hero.GetClone("HERO_001");
+        hero.Setup(MainSystem.Data.Hero.GetClone("HERO_001"));
     }
 
     private void Update()
@@ -77,7 +80,7 @@ public class BattleManager : BaseManager
             var enemy = enemyList[i];
 
             // 1. 유효성 검사
-            if (enemy == null || !enemy.gameObject.activeInHierarchy || enemy.Stat.State == ECharacterState.Dead)
+            if (enemy == null || !enemy.gameObject.activeInHierarchy || enemy.State == ECharacterState.Dead)
                 continue;
 
             // 2. 거리 제곱 계산
@@ -106,7 +109,7 @@ public class BattleManager : BaseManager
         if (enemy == null) return;
 
         // 플레이어가 없거나 죽었으면 생성 중단
-        if (PlayerHero == null || PlayerHero.Stat.State == ECharacterState.Dead) return;
+        if (PlayerHero == null || PlayerHero.State == ECharacterState.Dead) return;
 
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
