@@ -18,7 +18,6 @@ public class StageData
     // 적 데이터
     [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Enemy ID", ValueLabel = "Info")]
     public Dictionary<string, EnemyValue> EnemyDict = new Dictionary<string, EnemyValue>();
-    
 
     private int enemyCount;
     
@@ -86,51 +85,51 @@ public class StageData
         var EnemyGrowthDict = DataTable.EnemyGrowth.GetDictionary();
         var newEnemy = new EnemyValue();
 
-        //newEnemy.ID = enemy.ID;
-        //newEnemy.Name = enemy.Name;
-        //newEnemy.AtkRange = enemy.AtkRange;
-        //newEnemy.MoveSpd = enemy.MoveSpd;
-        //newEnemy.AtkSpd = enemy.AtkSpd;
+        newEnemy.ID = enemy.ID;
+        newEnemy.Name = enemy.Name;
+        newEnemy.AtkRange = enemy.AtkRange;
+        newEnemy.MoveSpd = enemy.MoveSpd;
+        newEnemy.AtkSpd = enemy.AtkSpd;
 
-        //// 스테이지에 맞게 성장한 스탯
-        //// 체력
-        //newEnemy.EnemyHP.Start = enemy.BaseHp;
-        //newEnemy.EnemyHP.Constant = EnemyGrowthDict["Constant"].Hp;
-        //newEnemy.EnemyHP.Exponent = (double)EnemyGrowthDict["Exponent"].Hp;
-        //newEnemy.EnemyHP.SetEnemyStat(stage);
+        // 스테이지에 맞게 성장한 스탯
+        // 체력
+        newEnemy.EnemyHP.Start = enemy.BaseHp;
+        newEnemy.EnemyHP.Constant = EnemyGrowthDict["Constant"].Hp;
+        newEnemy.EnemyHP.Exponent = (double)EnemyGrowthDict["Exponent"].Hp;
+        newEnemy.EnemyHP.SetEnemyStat(stage);
 
-        ////공격력
-        //newEnemy.EnemyAttack.Start = enemy.BaseAtk;
-        //newEnemy.EnemyAttack.Constant = EnemyGrowthDict["Constant"].Atk;
-        //newEnemy.EnemyAttack.Exponent = (double)EnemyGrowthDict["Exponent"].Atk;
-        //newEnemy.EnemyAttack.SetEnemyStat(stage);
+        //공격력
+        newEnemy.EnemyAttack.Start = enemy.BaseAtk;
+        newEnemy.EnemyAttack.Constant = EnemyGrowthDict["Constant"].Atk;
+        newEnemy.EnemyAttack.Exponent = (double)EnemyGrowthDict["Exponent"].Atk;
+        newEnemy.EnemyAttack.SetEnemyStat(stage);
 
-        ////방어력
-        //newEnemy.EnemyDefence.Start = enemy.BaseDef;
-        //newEnemy.EnemyDefence.Constant = EnemyGrowthDict["Constant"].Def;
-        //newEnemy.EnemyDefence.Exponent = (double)EnemyGrowthDict["Exponent"].Def;
-        //newEnemy.EnemyDefence.SetEnemyStat(stage);
+        //방어력
+        newEnemy.EnemyDefence.Start = enemy.BaseDef;
+        newEnemy.EnemyDefence.Constant = EnemyGrowthDict["Constant"].Def;
+        newEnemy.EnemyDefence.Exponent = (double)EnemyGrowthDict["Exponent"].Def;
+        newEnemy.EnemyDefence.SetEnemyStat(stage);
 
-        ////골드
-        //newEnemy.EnemyGold.Start = enemy.BaseGold;
-        //newEnemy.EnemyGold.Constant = EnemyGrowthDict["Constant"].GoldDrop;
-        //newEnemy.EnemyGold.Exponent = (double)EnemyGrowthDict["Exponent"].GoldDrop;
-        //newEnemy.EnemyGold.SetEnemyStat(stage);
+        //골드
+        newEnemy.EnemyGold.Start = enemy.BaseGold;
+        newEnemy.EnemyGold.Constant = EnemyGrowthDict["Constant"].GoldDrop;
+        newEnemy.EnemyGold.Exponent = (double)EnemyGrowthDict["Exponent"].GoldDrop;
+        newEnemy.EnemyGold.SetEnemyStat(stage);
 
-        //if (isBoss)
-        //{
-        //    //보스 체력 배수
-        //    newEnemy.BossHPMultiplier.Start = EnemyGrowthDict["Start"].Boss_HPMultiply;
-        //    newEnemy.BossHPMultiplier.Constant = EnemyGrowthDict["Constant"].Boss_HPMultiply;
-        //    newEnemy.BossHPMultiplier.Exponent = (double)EnemyGrowthDict["Exponent"].Boss_HPMultiply;
-        //    newEnemy.BossHPMultiplier.SetEnemyStat(stage);
+        if (isBoss)
+        {
+            //보스 체력 배수
+            newEnemy.BossHPMultiplier.Start = EnemyGrowthDict["Start"].Boss_HPMultiply;
+            newEnemy.BossHPMultiplier.Constant = EnemyGrowthDict["Constant"].Boss_HPMultiply;
+            newEnemy.BossHPMultiplier.Exponent = (double)EnemyGrowthDict["Exponent"].Boss_HPMultiply;
+            newEnemy.BossHPMultiplier.SetEnemyStat(stage);
 
-        //    //보스 공격력 배수
-        //    newEnemy.BossAttackMultiplier.Start = EnemyGrowthDict["Start"].Boss_AttackMultiply;
-        //    newEnemy.BossAttackMultiplier.Constant = EnemyGrowthDict["Constant"].Boss_AttackMultiply;
-        //    newEnemy.BossAttackMultiplier.Exponent = (double)EnemyGrowthDict["Exponent"].Boss_AttackMultiply;
-        //    newEnemy.BossAttackMultiplier.SetEnemyStat(stage);
-        //}
+            //보스 공격력 배수
+            newEnemy.BossAttackMultiplier.Start = EnemyGrowthDict["Start"].Boss_AttackMultiply;
+            newEnemy.BossAttackMultiplier.Constant = EnemyGrowthDict["Constant"].Boss_AttackMultiply;
+            newEnemy.BossAttackMultiplier.Exponent = (double)EnemyGrowthDict["Exponent"].Boss_AttackMultiply;
+            newEnemy.BossAttackMultiplier.SetEnemyStat(stage);
+        }
 
 
         return newEnemy;

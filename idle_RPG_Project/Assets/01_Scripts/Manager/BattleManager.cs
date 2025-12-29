@@ -40,7 +40,7 @@ public class BattleManager : BaseManager
     }
     private void TestLoadHero(Hero hero)
     {
-        hero.Stat.Value = MainSystem.Data.Hero.GetValue("HERO_001");
+        hero.Stat.Value = MainSystem.Data.Hero.GetClone("HERO_001");
     }
 
     private void Update()

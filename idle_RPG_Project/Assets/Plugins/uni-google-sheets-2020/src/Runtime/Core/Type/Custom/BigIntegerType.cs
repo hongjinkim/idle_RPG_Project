@@ -10,11 +10,18 @@ namespace GoogleSheet
 
         public object Read(string value)
         {
-            return BigInteger.Parse(value);
+            if (string.IsNullOrWhiteSpace(value))
+                return BigInteger.Zero;
+
+            if (BigInteger.TryParse(value, out BigInteger result))
+            {
+                return result;
+            }
+            throw new UGSValueParseException($"Parse Failed => '{value}' To BigInteger");
         }
         public string Write(object value)
         {
-            return "";
+            return value.ToString();
         }
     }
 

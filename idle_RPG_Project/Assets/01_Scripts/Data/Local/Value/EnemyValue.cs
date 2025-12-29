@@ -6,17 +6,17 @@ using System.Numerics;
 [System.Serializable]
 public class EnemyValue : CharacterValue
 {
-    public EnemyStatValue EnemyHP = new EnemyStatValue();
-    public EnemyStatValue EnemyAttack = new EnemyStatValue();
-    public EnemyStatValue EnemyDefence = new EnemyStatValue();
-    public EnemyStatValue EnemyGold = new EnemyStatValue();
-    public DoubleEnemyStatValue BossAttackMultiplier = new DoubleEnemyStatValue();
-    public DoubleEnemyStatValue BossHPMultiplier = new DoubleEnemyStatValue();
+    [HideInInspector] public EnemyStatValue EnemyHP = new EnemyStatValue();
+    [HideInInspector] public EnemyStatValue EnemyAttack = new EnemyStatValue();
+    [HideInInspector] public EnemyStatValue EnemyDefence = new EnemyStatValue();
+    [HideInInspector] public EnemyStatValue EnemyGold = new EnemyStatValue();
+    [HideInInspector] public DoubleEnemyStatValue BossAttackMultiplier = new DoubleEnemyStatValue();
+    [HideInInspector] public DoubleEnemyStatValue BossHPMultiplier = new DoubleEnemyStatValue();
 
-    public BigInteger BaseHp;
-    public BigInteger BaseAtk;
-    public BigInteger BaseDef;
-    public BigInteger BaseGold;
+    [HideInInspector] public BigInteger BaseHp;
+    [HideInInspector] public BigInteger BaseAtk;
+    [HideInInspector] public BigInteger BaseDef;
+    [HideInInspector] public BigInteger BaseGold;
 
 
     public override BigInteger MaxHp => EnemyHP.Stat;
@@ -28,7 +28,7 @@ public class EnemyValue : CharacterValue
 public class EnemyStatValue
 {
     public BigInteger Start;
-    public BigInteger Constant; // 상수곱
+    public double Constant; // 상수곱
     public double Exponent;
     public BigInteger Stat;
 
@@ -42,15 +42,14 @@ public class EnemyStatValue
 [Serializable]
 public class DoubleEnemyStatValue
 {
-    public BigInteger Start;
-    public BigInteger Constant;   // 상수곱
+    public double Start;
+    public double Constant;   // 상수곱
     public double Exponent;
     public double Stat;
 
     public void SetEnemyStat(int stage)
     {
         int s = Math.Max(stage, 1);
-
-        Stat = (double)Start.ExpGrowth(Constant, Exponent, s);
+        Stat = Start.ExpGrowth(Constant, Exponent, s);
     }
 }

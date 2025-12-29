@@ -11,17 +11,13 @@ public class Constant
     public BigInteger InitGold;
     public float InitCritRate;
     public float InitCritDamage;
-    public BigInteger BossAttackMultiplier;
-    public BigInteger BossHPMultiplier;
 
     public void LoadData()
     {
-        //var constant = DataTable.GlobalConstant.GetList()[0];
-        //InitGold = constant.InitGold;
-        //InitCritRate = constant.InitCritRate;
-        //InitCritDamage = constant.InitCritDamage;
-        //BossAttackMultiplier = constant.BossAttackMultiplier;
-        //BossHPMultiplier = constant.BossHpMultiplier;
+        var constant = DataTable.GlobalConstant.GetList()[0];
+        InitGold = constant.InitGold;
+        InitCritRate = constant.InitCritRate;
+        InitCritDamage = constant.InitCritDamage;
     }
 }
 
@@ -32,7 +28,7 @@ public class DataManager:BaseManager
     public bool IsLoaded { get; private set; }
     public Constant Constants { get; private set; }
 
-    //[TabGroup("Tabs", "Constant"), HideLabel][InlineProperty] public Constant Constant = new Constant();
+    [TabGroup("Tabs", "Constant"), HideLabel][InlineProperty] public Constant Constant = new Constant();
     [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty] public HeroData Hero = new HeroData();
     //[TabGroup("Tabs", "Enemy"), HideLabel][InlineProperty] public EnemyData Enemy = new EnemyData();
     [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty] public StageData Stage = new StageData();
@@ -60,7 +56,7 @@ public class DataManager:BaseManager
             dataTable = GetComponent<DataTableInspector>();
         dataTable.LoadData();
         // 각 데이터 클래스의 데이터를 로드
-        //Constant.LoadData();
+        Constant.LoadData();
         Hero.LoadData();
         //Enemy.LoadData();
         Stage.LoadData();

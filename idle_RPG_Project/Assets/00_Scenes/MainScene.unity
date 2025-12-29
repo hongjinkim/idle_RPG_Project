@@ -3970,12 +3970,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132b49a08cb312e4fbdfd5b0f8c35758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataManager
+  Constant:
+    InitCritRate: 0
+    InitCritDamage: 125
   Stage:
     StageList:
     - StageNum: 1
       ID: STAGE_0001
       Name: STAGE_0001
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -3985,68 +4018,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2006402560682803
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4040050041692722
     - StageNum: 2
       ID: STAGE_0002
       Name: STAGE_0002
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4056,68 +4113,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2006402560682803
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4040050041692722
     - StageNum: 3
       ID: STAGE_0003
       Name: STAGE_0003
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4127,68 +4208,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2012810245463517
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4080200333750414
     - StageNum: 4
       ID: STAGE_0004
       Name: STAGE_0004
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4198,68 +4303,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2019223058443063
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.412045112711254
     - StageNum: 5
       ID: STAGE_0005
       Name: STAGE_0005
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4269,68 +4398,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2025641003725642
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4160802673346686
     - StageNum: 6
       ID: STAGE_0006
       Name: STAGE_0006
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4340,68 +4493,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2032064085418734
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4201255224650149
     - StageNum: 7
       ID: STAGE_0007
       Name: STAGE_0007
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4411,68 +4588,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2038492307633117
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4241809033851502
     - StageNum: 8
       ID: STAGE_0008
       Name: STAGE_0008
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4482,68 +4683,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2044925674482851
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4282464354412188
     - StageNum: 9
       ID: STAGE_0009
       Name: STAGE_0009
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4553,68 +4778,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.205136419008529
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.432322144042809
     - StageNum: 10
       ID: STAGE_0010
       Name: STAGE_0010
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4624,68 +4873,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2057807858561087
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4364080546631135
     - StageNum: 11
       ID: STAGE_0011
       Name: STAGE_0011
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4695,68 +4968,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2064256684034187
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.440504192839086
     - StageNum: 12
       ID: STAGE_0012
       Name: STAGE_0012
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4766,68 +5063,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2070710670631841
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4446105841716044
     - StageNum: 13
       ID: STAGE_0013
       Name: STAGE_0013
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4837,68 +5158,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.20771698224846
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.448727254325627
     - StageNum: 14
       ID: STAGE_0014
       Name: STAGE_0014
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4908,68 +5253,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2083634143726318
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.452854229030356
     - StageNum: 15
       ID: STAGE_0015
       Name: STAGE_0015
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -4979,68 +5348,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2090103638494167
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.456991534079397
     - StageNum: 16
       ID: STAGE_0016
       Name: STAGE_0016
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -5050,68 +5443,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2096578310928623
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.46113919533092
     - StageNum: 17
       ID: STAGE_0017
       Name: STAGE_0017
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -5121,68 +5538,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.210305816517347
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4652972387078211
     - StageNum: 18
       ID: STAGE_0018
       Name: STAGE_0018
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -5192,68 +5633,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2109543205375821
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4694656901978849
     - StageNum: 19
       ID: STAGE_0019
       Name: STAGE_0019
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -5263,68 +5728,92 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.21160334356861
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.473644575853947
     - StageNum: 20
       ID: STAGE_0020
       Name: STAGE_0020
       EnemyList:
+      - ID: ENEMY_001
+        Name: "\uC2AC\uB77C\uC784"
+        IsAlive: 0
+        CritRate: 0
+        CritDmg: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
+        EnemyHP:
+          Constant: 80
+          Exponent: 0.06
+        EnemyAttack:
+          Constant: 7
+          Exponent: 0.045
+        EnemyDefence:
+          Constant: 2
+          Exponent: 0.03
+        EnemyGold:
+          Constant: 0.001
+          Exponent: 0.12
+        BossAttackMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
+        BossHPMultiplier:
+          Start: 0
+          Constant: 0
+          Exponent: 0
+          Stat: 0
       - ID: 
         Name: 
         IsAlive: 0
@@ -5334,64 +5823,58 @@ MonoBehaviour:
         MoveSpd: 0
         AtkSpd: 0
         EnemyHP:
+          Constant: 0
           Exponent: 0
         EnemyAttack:
+          Constant: 0
           Exponent: 0
         EnemyDefence:
+          Constant: 0
           Exponent: 0
         EnemyGold:
+          Constant: 0
           Exponent: 0
         BossAttackMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
-      - ID: 
-        Name: 
-        IsAlive: 0
-        CritRate: 0
-        CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
-        EnemyHP:
-          Exponent: 0
-        EnemyAttack:
-          Exponent: 0
-        EnemyDefence:
-          Exponent: 0
-        EnemyGold:
-          Exponent: 0
-        BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
-        BossHPMultiplier:
+          Start: 0
+          Constant: 0
           Exponent: 0
           Stat: 0
       EnemyBoss:
-        ID: 
-        Name: 
+        ID: ENEMY_004
+        Name: "\uB4DC\uB798\uACE4"
         IsAlive: 0
         CritRate: 0
         CritDmg: 0
-        AtkRange: 0
-        MoveSpd: 0
-        AtkSpd: 0
+        AtkRange: 1.5
+        MoveSpd: 3
+        AtkSpd: 1
         EnemyHP:
-          Exponent: 0
+          Constant: 80
+          Exponent: 0.06
         EnemyAttack:
-          Exponent: 0
+          Constant: 7
+          Exponent: 0.045
         EnemyDefence:
-          Exponent: 0
+          Constant: 2
+          Exponent: 0.03
         EnemyGold:
-          Exponent: 0
+          Constant: 0.001
+          Exponent: 0.12
         BossAttackMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.2
+          Constant: 0.8
+          Exponent: 0.0008
+          Stat: 1.2122528860258055
         BossHPMultiplier:
-          Exponent: 0
-          Stat: 0
+          Start: 1.4
+          Constant: 1.6
+          Exponent: 0.0025
+          Stat: 1.4778339217940561
 --- !u!114 &1198394561
 MonoBehaviour:
   m_ObjectHideFlags: 0

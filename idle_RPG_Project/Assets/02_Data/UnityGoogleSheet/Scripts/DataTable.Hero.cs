@@ -24,7 +24,7 @@ namespace DataTable
 
         static bool isLoaded = false;
         static string spreadSheetID = "1OYjZO-CwjWJVCVD2swTcPwPME5Rq2kB9Y7IFf8dB0Fk"; // it is file id
-        static string sheetID = "1979486712"; // it is sheet id
+        static string sheetID = "2040278989"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
 /* Your Loaded Data Storage. */
@@ -58,7 +58,7 @@ namespace DataTable
 
 		public System.String ID;
 		public System.String Name;
-		public System.Numerics.BigInteger MaxHp;
+		public System.Numerics.BigInteger Hp;
 		public System.Numerics.BigInteger Atk;
 		public System.Numerics.BigInteger Def;
 		public System.Single CritRate;

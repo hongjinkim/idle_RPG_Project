@@ -18,14 +18,14 @@ public class HeroData
     {
         var heroList = DataTable.Hero.GetList();
         heroCount = heroList.Count;
-        
+
         for (int i = 0; i < heroCount; i++)
         {
-           var hero = new HeroValue();
+            var hero = new HeroValue();
 
             hero.ID = heroList[i].ID;
             hero.Name = heroList[i].Name;
-            hero.MaxHp = heroList[i].MaxHp;
+            hero.MaxHp = heroList[i].Hp;
             hero.Atk = heroList[i].Atk;
             hero.Def = heroList[i].Def;
             hero.CritRate = heroList[i].CritRate;
@@ -37,11 +37,32 @@ public class HeroData
             HeroDict[hero.ID] = hero;
         }
 
-        
+
     }
 
     public HeroValue GetValue(string id)
     {
         return HeroDict.TryGetValue(id, out var hero) ? hero : null;
+    }
+    public HeroValue GetClone(string id)
+    {
+        if(!HeroDict.TryGetValue(id, out var hero))
+        {
+            return null;
+        }
+        var clone = new HeroValue();
+
+        clone.ID = id;
+        clone.Name = hero.Name;
+        clone.MaxHp = hero.MaxHp;
+        clone.Atk = hero.Atk;
+        clone.Def = hero.Def;
+        clone.CritRate = hero.CritRate;
+        clone.CritDmg = hero.CritDmg;
+        clone.AtkSpd = hero.AtkSpd;
+        clone.MoveSpd = hero.MoveSpd;
+        clone.AtkRange = hero.AtkRange;
+
+        return clone;
     }
 }
