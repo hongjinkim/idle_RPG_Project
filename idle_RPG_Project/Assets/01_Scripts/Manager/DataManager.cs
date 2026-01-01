@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using System.Numerics;
 using System;
 using UGS;
+using DataTable;
 
 [Serializable]
 public class Constant
@@ -32,6 +33,9 @@ public class DataManager:BaseManager
     [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty] public HeroData Hero = new HeroData();
     //[TabGroup("Tabs", "Enemy"), HideLabel][InlineProperty] public EnemyData Enemy = new EnemyData();
     [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty] public StageData Stage = new StageData();
+    [TabGroup("Tabs", "Upgrade"), HideLabel][InlineProperty] public UpgradeData Upgrade = new UpgradeData();
+    //[TabGroup("Tabs", "Gear"), HideLabel][InlineProperty] public GearData Gear = new GearData();
+    //[TabGroup("Tabs", "Shop"), HideLabel][InlineProperty] public ShopData Shop = new ShopData();
 
     protected override async UniTask OnInitialize()
     {
@@ -60,6 +64,9 @@ public class DataManager:BaseManager
         Hero.LoadData();
         //Enemy.LoadData();
         Stage.LoadData();
+        Upgrade.LoadData();
+        //Gear.LoadData();
+        //Shop.LoadData();
 
 
 

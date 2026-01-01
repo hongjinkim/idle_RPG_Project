@@ -48,10 +48,10 @@
   <Project Path="Unity.InternalAPIEditorBridge.001.csproj" />
   <Project Path="Unity.Purchasing.AppleMacosStub.csproj" />
   <Project Path="Unity.Purchasing.Codeless.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="gpm_ui.csproj" />
   <Project Path="Unity.Services.Core.Configuration.Editor.csproj" />
   <Project Path="Unity.Services.Core.Configuration.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="DOTween.Modules.csproj" />
   <Project Path="Unity.Services.Core.Environments.Internal.csproj" />
   <Project Path="Unity.InputSystem.ForUI.csproj" />

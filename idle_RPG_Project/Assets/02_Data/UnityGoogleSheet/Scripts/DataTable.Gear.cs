@@ -17,10 +17,10 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class Weapon : ITable
+    public partial class Gear : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Weapon> loadedList, Dictionary<string, Weapon> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Gear> loadedList, Dictionary<string, Gear> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1OYjZO-CwjWJVCVD2swTcPwPME5Rq2kB9Y7IFf8dB0Fk"; // it is file id
@@ -29,27 +29,27 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<string, Weapon> WeaponMap = new Dictionary<string, Weapon>();  
-        public static List<Weapon> WeaponList = new List<Weapon>();   
+        public static Dictionary<string, Gear> GearMap = new Dictionary<string, Gear>();  
+        public static List<Gear> GearList = new List<Gear>();   
 
         /// <summary>
-        /// Get Weapon List 
+        /// Get Gear List 
         /// Auto Load
         /// </summary>
-        public static List<Weapon> GetList()
+        public static List<Gear> GetList()
         {{
            if (isLoaded == false) Load();
-           return WeaponList;
+           return GearList;
         }}
 
         /// <summary>
-        /// Get Weapon Dictionary, keyType is your sheet A1 field type.
+        /// Get Gear Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<string, Weapon>  GetDictionary()
+        public static Dictionary<string, Gear>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return WeaponMap;
+           return GearMap;
         }}
 
     
@@ -64,9 +64,6 @@ namespace DataTable
 		public System.Single AtkExp;
 		public System.Single EquipEffect;
 		public System.String ResourcePath;
-		public System.Single DmgExp;
-		public System.Single GoldBase;
-		public System.Single GoldGrowth;
   
 
 #region fuctions
@@ -77,7 +74,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("Weapon is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("Gear is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -93,7 +90,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Weapon>, Dictionary<string, Weapon>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Gear>, Dictionary<string, Gear>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -121,14 +118,14 @@ namespace DataTable
                
 
 
-    public static (List<Weapon> list, Dictionary<string, Weapon> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<string, Weapon> Map = new Dictionary<string, Weapon>();
-            List<Weapon> List = new List<Weapon>();     
+    public static (List<Gear> list, Dictionary<string, Gear> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, Gear> Map = new Dictionary<string, Gear>();
+            List<Gear> List = new List<Gear>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Weapon).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Gear).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["Weapon"];
+            var sheet = jsonObject["Gear"];
 
             foreach (var column in sheet.Keys)
             {
@@ -147,7 +144,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            Weapon instance = new Weapon();
+                            Gear instance = new Gear();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -188,8 +185,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            WeaponList = List;
-                            WeaponMap = Map;
+                            GearList = List;
+                            GearMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -199,10 +196,10 @@ namespace DataTable
 
  
 
-        public static void Write(Weapon data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(Gear data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Weapon).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Gear).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

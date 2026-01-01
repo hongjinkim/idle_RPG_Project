@@ -11,7 +11,7 @@ public class DataTableInspector : MonoBehaviour
     [TabGroup("Tabs", "Enemy")][ShowInInspector] public Dictionary<string, DataTable.Enemy> Enemy = new Dictionary<string, DataTable.Enemy>();
     [TabGroup("Tabs", "EnemyGrowth")][ShowInInspector] public Dictionary<string, DataTable.EnemyGrowth> EnemyGrowth = new Dictionary<string, DataTable.EnemyGrowth>();
     [TabGroup("Tabs", "Upgrade")][ShowInInspector] public Dictionary<string, DataTable.Upgrade> Upgrade = new Dictionary<string, DataTable.Upgrade>();
-    [TabGroup("Tabs", "Weapon")][ShowInInspector] public Dictionary<string, DataTable.Weapon> Weapon = new Dictionary<string, DataTable.Weapon>();
+    [TabGroup("Tabs", "Gear")][ShowInInspector] public Dictionary<string, DataTable.Gear> Gear = new Dictionary<string, DataTable.Gear>();
     [TabGroup("Tabs", "Shop")][ShowInInspector] public Dictionary<string, DataTable.Shop> Shop = new Dictionary<string, DataTable.Shop>();
     [TabGroup("Tabs", "Localization")][ShowInInspector] public Dictionary<string, DataTable.Localization> Localization = new Dictionary<string, DataTable.Localization>();
 
@@ -26,7 +26,7 @@ public class DataTableInspector : MonoBehaviour
         Enemy = DataTable.Enemy.GetDictionary();
         EnemyGrowth = DataTable.EnemyGrowth.GetDictionary();
         Upgrade = DataTable.Upgrade.GetDictionary();
-        Weapon = DataTable.Weapon.GetDictionary();
+        Gear = DataTable.Gear.GetDictionary();
         Shop = DataTable.Shop.GetDictionary();
         Localization = DataTable.Localization.GetDictionary();
 
