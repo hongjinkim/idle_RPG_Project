@@ -5,24 +5,18 @@ using System.Collections.Generic;
 
 public class BattleManager : BaseManager
 {
-    [Title("Main Character")]
-    [ShowInInspector] public Hero PlayerHero { get; private set; }
-    private Transform _heroTransform => PlayerHero != null ? PlayerHero.transform : null;
+    public int CurrentStage;
+    [HideInInspector] public Hero MainHero;
 
-    [Title("Radius Settings")]
+    [Title("Enemy Spawn Settings")]
     [InfoBox("최소 반경은 카메라 화면 대각선 길이보다 커야 화면 밖에서 생성됩니다.")]
     public float minSpawnRadius = 10.0f; // 화면 밖 (최소 거리)
     public float maxSpawnRadius = 14.0f; // 최대 거리
-
-    [ShowInInspector, ReadOnly]
-    private List<Enemy> _enemies = new();
-    [ShowInInspector]
-    public int EnemyCount => _enemies.Count;
+    [ShowInInspector] public int EnemyCount => _enemies.Count;
+    [ShowInInspector, ReadOnly] private List<Enemy> _enemies = new();
     // 리포지셔닝 거리 제한
     [SerializeField] private float repositionDistance = 20.0f;
     private float _repositionDistSqr;
-
-    public int CurrentStage;
 
     protected override async UniTask OnInitialize()
     {
@@ -31,30 +25,23 @@ public class BattleManager : BaseManager
     }
     private void Initialize()
     {
-        // 씬에서 Player 객체 찾기
-        PlayerHero = FindFirstObjectByType<Hero>();
-        if (PlayerHero == null)
-        {
-            Debug.LogError("BattleManager: Player object not found in the scene!");
-        }
+        
         _repositionDistSqr = repositionDistance * repositionDistance;
-        TestLoadHero(PlayerHero);
+        
         CurrentStage = MainSystem.Player.playerData.Value.CurrentStage;
+        MainHero = MainSystem.Hero.PlayerHero;
     }
-    private void TestLoadHero(Hero hero)
-    {
-        hero.Setup(MainSystem.Data.Hero.GetClone("HERO_001"));
-    }
-
+    
     private void Update()
     {
         if (!IsInitialized) return;
-        if (PlayerHero == null) return;
+
+        if (MainHero == null) return;
 
         float dt = Time.deltaTime;
 
         // 1. 플레이어 행동
-        PlayerHero.Tick(dt);
+        MainHero.Tick(dt);
 
         // 2. 몬스터들 행동 (역순 루프: 도중에 죽어서 리스트에서 빠질 수 있으므로)
         for (int i = _enemies.Count - 1; i >= 0; i--)
@@ -109,13 +96,13 @@ public class BattleManager : BaseManager
         if (enemy == null) return;
 
         // 플레이어가 없거나 죽었으면 생성 중단
-        if (PlayerHero == null || PlayerHero.State == ECharacterState.Dead) return;
+        if (MainHero == null || MainHero.State == ECharacterState.Dead) return;
 
         Vector2 randomDir = Random.insideUnitCircle.normalized;
 
         float randomDist = Random.Range(minSpawnRadius, maxSpawnRadius);
 
-        Vector2 playerPos = PlayerHero.transform.position;
+        Vector2 playerPos = MainHero.transform.position;
         Vector2 spawnPos = playerPos + (Vector2)(randomDir * randomDist);
 
         enemy.transform.position = spawnPos;
@@ -143,26 +130,12 @@ public class BattleManager : BaseManager
         {
             UnregisterEnemy(enemy);
             // 여기서 골드 획득, 점수 증가 로직 호출
-            MainSystem.Loot.SpawnLoot(ELootType.Gold,enemy.dropGold, enemy.transform.position, _heroTransform);
+            MainSystem.Loot.SpawnLoot(ELootType.Gold,enemy.dropGold, enemy.transform.position, MainHero.transform);
         }
         else if (character is Hero)
         {
             // 플레이어 사망 처리 로직
             Debug.Log("Player Defeated! Game Over.");
-        }
-    }
-    
-
-    private void OnDrawGizmosSelected()
-    {
-        if (Application.isPlaying && PlayerHero != null)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(PlayerHero.transform.position, minSpawnRadius);
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(PlayerHero.transform.position, maxSpawnRadius);
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(PlayerHero.transform.position, repositionDistance);
         }
     }
 }

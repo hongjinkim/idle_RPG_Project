@@ -5,7 +5,7 @@ using System.Numerics;
 
 public class PlayerManager : BaseManager
 {
-    [ShowInInspector]public PlayerData playerData { get; private set; }
+    public PlayerData playerData { get; private set; }
 
     protected override async UniTask OnInitialize()
     {

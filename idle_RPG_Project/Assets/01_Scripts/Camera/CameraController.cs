@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
     {
         if (target == null)
         {
-            target = MainSystem.Battle.PlayerHero.transform;
+            target = MainSystem.Battle.MainHero.transform;
         }
 
     }

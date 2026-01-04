@@ -13,6 +13,7 @@ public class MainSystem : MonoBehaviour
     public static DataManager Data { get; private set; }
     public static PlayerManager Player { get; private set; }
     public static BattleManager Battle { get; private set; }
+    public static HeroManager Hero { get; private set; }
     public static EnemyPoolManager Enemy { get; private set; }
     public static FXManager FX { get; private set; }
     public static UIManager UI { get; private set; }
@@ -42,6 +43,7 @@ public class MainSystem : MonoBehaviour
         Battle = GetManager<BattleManager>();
         Data = GetManager<DataManager>();
         Player = GetManager<PlayerManager>();
+        Hero = GetManager<HeroManager>();
         Enemy = GetManager<EnemyPoolManager>();
         FX = GetManager<FXManager>();
         UI = GetManager<UIManager>();
